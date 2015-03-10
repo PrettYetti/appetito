@@ -7,8 +7,8 @@ We are operating under the assumption that on a everyday basis people choose a r
 
 ## Team Members
 
-Eunice Kim, Product Manager
-Ciara Foran, Web Developer
-George Lu, Web Developer
-Remin Greenfield, Web Developer
-Scott Morgenthaler, UX Designer
+- Eunice Kim, Product Manager
+- Ciara Foran, Web Developer
+- George Lu, Web Developer
+- Remin Greenfield, Web Developer
+- Scott Morgenthaler, UX Designer

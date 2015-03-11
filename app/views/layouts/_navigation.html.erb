@@ -12,17 +12,25 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Userpage", user_path(current_user) if current_user %></li>
+
+        <% if current_user %>
+          <li>
+            <%= link_to user_path(current_user) do %>
+              Home <span class="badge"><%= current_user.notifications.where(notified: false).count %></span>
+            <% end %>
+          </li>
+        <% end %>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
-    <% if current_user %>
-     <li><%= button_to "Logout", logout_users_path , {class: "btn btn-default navbar-btn", method: :get} %><li>
-    </ul>
-    <% else %>
-      <li><%= button_to "Sign Up", new_user_path, {class: "btn btn-default navbar-btn"} %></li>
-    </ul>
+        <% if current_user %>
+        <li><%= button_to "Logout", logout_users_path , {class: "btn btn-default navbar-btn", method: :get} %><li>
+        </ul>
+        <% else %>
+        <li><%= button_to "Sign Up", new_user_path, {class: "btn btn-default navbar-btn"} %></li>
+      </ul>
       <%= render 'login' %>
-    <% end %>
+      <% end %>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

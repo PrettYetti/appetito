@@ -1,30 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Appetito</title>
+  <title>appetito</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<nav>
-		<ul>
-			<li><%= link_to "Home", root_path %></li>
-			<li><%= link_to "Userpage", user_path(current_user) if current_user %></li>
-		</ul>
-		<div>
-		<% if current_user %>
-			<b><%= current_user.name %> </b> <%= link_to "logout", logout_users_path %>
-		<% else %>
-			<%= form_tag login_users_path do %>
-			  <%= text_field_tag :email, params[:email] %>
-			  <%= password_field_tag :password %>
-		  <%= submit_tag "Login" %>
-		  <%= link_to "Sign Up", new_user_path %>
-			<% end %>
-		<% end %>
-		</div>
-	</nav>
+<%= render 'layouts/navigation' %>
 
 <%= yield %>
 

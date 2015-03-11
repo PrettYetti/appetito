@@ -1,0 +1,29 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "appetito", root_path, class: "navbar-brand" %>
+    </div><!-- /.navbar-header -->
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><%= link_to "Userpage", user_path(current_user) if current_user %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+    <% if current_user %>
+     <li><%= button_to "Logout", logout_users_path , {class: "btn btn-default navbar-btn", method: :get} %><li>
+    </ul>
+    <% else %>
+      <li><%= button_to "Sign Up", new_user_path, {class: "btn btn-default navbar-btn"} %></li>
+    </ul>
+      <%= render 'login' %>
+    <% end %>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+

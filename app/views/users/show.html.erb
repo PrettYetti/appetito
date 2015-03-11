@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<% if current_user && current_user.id == @user.id %>
+	<strong>Friends:</strong>
+	<ul>
+	<% current_user.friends.each do |friend| %>
+		<li>
+		<%= link_to friend.name, user_path(friend) %>
+		</li>
+	<% end %>
+	</ul>
+<% else %>
+	<% if current_user.friends.include?(@user)%>
+		<p>delete friend</p>
+	<% else %>
+		<p>add friend</p>
+	<% end %>
+<% end %>
+
+<strong>Events:</strong>
+<ul>
+<% @events.each do |event| %>
+	<li><%= link_to event.name, event_path(event) %></li>
+<% end %>
+</ul>
+
+<%= link_to 'Create an Event', new_event_path %>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

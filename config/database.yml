@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: appetito_development
+
+test:
+  <<: *default
+  database: appetito_test
+
+production:
+  <<: *default
+  database: appetito_production
+  username: appetito
+  password: <%= ENV['TODOAPP_DATABASE_PASSWORD'] %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  when: 2015-03-10 17:44:59
+  location: MyString
+  finalized: false
+  type: 
+
+two:
+  user_id: 
+  when: 2015-03-10 17:44:59
+  location: MyString
+  finalized: false
+  type: 

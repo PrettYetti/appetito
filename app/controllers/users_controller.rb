@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :add_friend, :remove_friend]
 
   # GET /users
   # GET /users.json
@@ -35,6 +35,16 @@ class UsersController < ApplicationController
   def logout
     reset_session
     redirect_to "/"
+  end
+
+  def add_friend
+    current_user.friendship.create(friend_user_id: @user.id)
+    render :show
+  end
+
+  def remove_friend
+    Friendship.find_by(user_id:current_user.id, friend_user_id: @user.id)
+    render :show
   end
 
   # POST /users

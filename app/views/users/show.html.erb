@@ -11,6 +11,14 @@
 </p>
 
 <% if current_user && current_user.id == @user.id %>
+	<strong>Notifications:</strong>
+	<ul>
+	<% current_user.notifications.each do |n| %>
+		<li>
+			<%= n.message %>
+		</li>
+	<% end %>
+	</ul>
 	<strong>Friends:</strong>
 	<ul>
 	<% current_user.friends.each do |friend| %>

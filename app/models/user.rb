@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 	has_many :events
-	has_many :friendships
+	has_many :notifications
 	has_and_belongs_to_many :friends, 
 	              class_name: "User", 
 	              join_table: :friendships, 
@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
 	              association_foreign_key: :friend_user_id
 	has_secure_password
 	validates :email, uniqueness: true
+	delegate :friend_requests, :event_invites, :event_updates, to: :notifications
 end

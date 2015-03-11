@@ -1,0 +1,2 @@
+class EventUpdate < Notification
+end

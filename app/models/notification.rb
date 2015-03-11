@@ -18,10 +18,8 @@ class Notification < ActiveRecord::Base
   		case type
   		when "FriendRequest"
   			sender = User.find(sender_id)
-  			message = "You are now friends with #{sender.name}"
   			sender.friend_ids=(sender.friend_ids).push(user.id)
   			user.friend_ids=user.friend_ids.push(sender.id)
-  			binding.pry
   		end
   	elsif accept == false
   		self.destroy

@@ -36,6 +36,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save
         invitees.each do |id| 
+          # binding.pry
           @event.event_invites.create(user_id: id, sender_id: current_user.id)
           @event.invites.create(user_id: id)
         end

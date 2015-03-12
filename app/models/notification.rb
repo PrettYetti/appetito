@@ -23,20 +23,24 @@ class Notification < ActiveRecord::Base
   scope :friend_requests, -> { where(type: 'FriendRequest')}
   scope :event_invites, -> { where(type: 'EventInvite')}
   scope :event_updates, -> { where(type: 'EventUpdates')}
+  scope :invite_rsvps, -> { where(type: 'InviteRSVPs')}
+
 
   def message
   	raise 'Abstract Method'
   end
 
   def check_accept_status
-  	if accept == true || accept == nil
+  	if accept == true
   		case type
   		when "FriendRequest"
   			sender = User.find(sender_id)
   			sender.friend_ids=(sender.friend_ids).push(user.id)
   			user.friend_ids=user.friend_ids.push(sender.id)
+  			binding.pry
   		end
   	elsif accept == false
+  		binding.pry
   		self.destroy
   	end
   end

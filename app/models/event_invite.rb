@@ -13,6 +13,8 @@
 #  notified   :boolean          default("false")
 #
 
+
+# This is a notification for the invite.
 class EventInvite < Notification
 	
 	def message
@@ -20,4 +22,6 @@ class EventInvite < Notification
 		event = Event.find(self.event_id).name
 		accept ? @message = "You accepted an invite from #{sender} for #{event}" : @message = "#{sender} invited you to #{event}!"
 	end
+
+	#this message is for event#show page
 end

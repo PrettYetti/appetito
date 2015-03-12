@@ -102,3 +102,55 @@ eunice.friend_ids=[2,3]
 		sender_id: 1
 	}
 ].each { |friend| FriendRequest.create(friend)}
+
+[
+	{
+		user_id: 1,
+		event_id: 1
+	},
+	{
+		user_id: 2,
+		event_id: 1
+	},
+	{
+		user_id: 3,
+		event_id: 1
+	},
+	{
+		user_id: 1,
+		event_id: 2
+	},
+	{
+		user_id: 2,
+		event_id: 2
+	},
+	{
+		user_id: 4,
+		event_id: 2
+	},
+	{
+		user_id: 1,
+		event_id: 3
+	},
+	{
+		user_id: 3,
+		event_id: 3
+	},
+	{
+		user_id: 4,
+		event_id: 3
+	},
+	{
+		user_id: 2,
+		event_id: 4
+	},
+	{
+		user_id: 3,
+		event_id: 4
+	},
+	{
+		user_id: 4,
+		event_id: 4
+	}
+
+].each { |friend| Invite.create(friend)}

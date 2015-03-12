@@ -30,25 +30,26 @@ eunice = User.create(
 	}
 )
 
-george.events.create({
+
+george.created_events.create({
 	name: "PartyHarty",
 	location: "someplace",
 	cuisine: "mexican"
 	})
 
-ciara.events.create({
+ciara.created_events.create({
 	name: "HangerMeats",
 	location: "someplace",
 	cuisine: "chinese"
 	})
 
-remina.events.create({
+remina.created_events.create({
 	name: "Chumba Wumba",
 	location: "someplace",
 	cuisine: "American"
 	})
 
-eunice.events.create({
+eunice.created_events.create({
 	name: "Tom's Bistro",
 	location: "someplace",
 	cuisine: "French"

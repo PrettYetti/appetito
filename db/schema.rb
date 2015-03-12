@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312032811) do
+ActiveRecord::Schema.define(version: 20150312165326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "creator_id"
     t.string   "name"
     t.datetime "when"
     t.string   "location"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20150312032811) do
     t.boolean  "finalized",  default: false
   end
 
-  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
+  add_index "events", ["creator_id"], name: "index_events_on_creator_id", using: :btree
 
   create_table "friendships", id: false, force: :cascade do |t|
     t.integer "user_id"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20150312032811) do
     t.datetime "updated_at",      null: false
   end
 
-  add_foreign_key "events", "users"
+  add_foreign_key "events", "users", column: "creator_id"
   add_foreign_key "invites", "events"
   add_foreign_key "invites", "users"
   add_foreign_key "notifications", "events"

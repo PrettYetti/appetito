@@ -1,7 +1,7 @@
 <h1>New Event</h1>
 
 <%= form_for(@event) do |form| %>
-	<h4>Host: <%= @event.user.name %></h4>
+	<h4>Host: <%= current_user.name %></h4>
 	<%= render form %>
 	<strong>Invite</strong><br>
 	<% @friends.each do |friend| %>
@@ -12,5 +12,5 @@
     <%= form.submit %>
   </div>
 <% end %>
+    <%= button_to 'Cancel', user_path(current_user.id), method: :get %>
 
-<%= link_to 'Back', events_path %>

@@ -107,51 +107,63 @@ eunice.friend_ids=[2,3]
 [
 	{
 		user_id: 1,
-		event_id: 1
+		event_id: 1,
+		rsvp: "Attending"
 	},
 	{
 		user_id: 2,
-		event_id: 1
+		event_id: 1,
+		rsvp: "Maybe"
 	},
 	{
 		user_id: 3,
-		event_id: 1
+		event_id: 1,
+		rsvp: "Not Attending"
 	},
 	{
 		user_id: 1,
-		event_id: 2
+		event_id: 2,
+		rsvp: "Maybe"
 	},
 	{
 		user_id: 2,
-		event_id: 2
+		event_id: 2,
+		rsvp: "Attending"
 	},
 	{
 		user_id: 4,
-		event_id: 2
+		event_id: 2,
+		rsvp: "Not Attending"
 	},
 	{
 		user_id: 1,
-		event_id: 3
+		event_id: 3,
+		rsvp: "Not Attending"
 	},
 	{
 		user_id: 3,
-		event_id: 3
+		event_id: 3,
+		rsvp: "Attending"
 	},
 	{
 		user_id: 4,
-		event_id: 3
+		event_id: 3,
+		rsvp: "Attending"
 	},
 	{
 		user_id: 2,
-		event_id: 4
+		event_id: 4,
+		rsvp: "Maybe"
 	},
 	{
 		user_id: 3,
-		event_id: 4
+		event_id: 4,
+		rsvp: "Maybe"
 	},
 	{
 		user_id: 4,
-		event_id: 4
+		event_id: 4,
+		rsvp: "Attending"
 	}
 
 ].each { |friend| Invite.create(friend)}

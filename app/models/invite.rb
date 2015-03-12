@@ -16,4 +16,6 @@
 class Invite < ActiveRecord::Base
   belongs_to :user
   belongs_to :event
+  validates :rsvp, inclusion: { in: %w(Attending Maybe Not\ Attending),
+      message: "%{value} is not a valid rsvp" }
 end

@@ -1,4 +1,10 @@
 <div>
-	<%= button_to "Accept", user_notification() %>
-	<%= button_to "Reject", user_notification() %>
+	<%= form_tag n, method: :put do %>
+		<%= hidden_field_tag(:"friend_request[accept]",true) %>
+		<%= button_tag "Accept" %>
+	<% end %>
+	<%= form_tag n, method: :put do %>
+	<%= hidden_field_tag(:"friend_request[accept]",false) %>
+		<%= button_tag "Reject" %>
+	<% end %>
 </div>

@@ -6,4 +6,7 @@ module UsersHelper
 			nil
 		end
 	end
+
+	def user_friend_request_path
+	end
 end

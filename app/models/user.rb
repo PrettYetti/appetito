@@ -13,6 +13,7 @@
 class User < ActiveRecord::Base
 	has_many :events
 	has_many :notifications
+	has_many :invites
 	has_and_belongs_to_many :friends, 
 	              class_name: "User", 
 	              join_table: :friendships, 

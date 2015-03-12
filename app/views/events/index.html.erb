@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>User</th>
+      <th>Creator</th>
       <th>Name</th>
       <th>When</th>
       <th>Location</th>
@@ -19,7 +19,7 @@
     <% if @events %>
       <% @events.each do |event| %>
         <tr>
-          <td><%= event.user.name %></td>
+          <td><%= event.creator.name %></td>
           <td><%= event.name %></td>
           <td><%= event.when %></td>
           <td><%= event.location %></td>

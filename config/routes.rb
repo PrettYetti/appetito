@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'invite/index'
+
+  get 'invite/show'
+
+  get 'invite/create'
+
+  get 'invite/update'
+
+  get 'invite/destroy'
+
   resources :events
 
   resources :users do

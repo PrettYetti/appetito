@@ -19,7 +19,7 @@
 		</p>
 		<% if current_user.friends && current_user.friends.include?(@user)%>
 			<p>delete friend</p>
-	<% else %>
+	<% elsif current_user.id != @user.id %>
 			<p>add friend</p>
 	<% end %>
 	</div>

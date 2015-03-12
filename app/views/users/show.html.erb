@@ -1,40 +1,75 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+<div class="row hidden-xs	">
+	<div class="col-xs-4 col-sm-3">
+		<a href="#" class="thumbnail">
+			<%= image_tag "users/default/default.png" %>
+		</a>
+	</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+	<div class="col-xs-6 col-md-3">
+		<p>
+			<strong>Name:</strong>
+			<%= @user.name %>
+		</p>
 
+		<p>
+			<strong>Email:</strong>
+			<%= @user.email %>
+		</p>
+	</div>
+</div>
+
+<div class="row">
 <% if current_user && current_user.id == @user.id %>
-	<strong>Friends:</strong>
+<div class="col-md-4">
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4 class="panel-title">Notifications</h4>
+	</div>
 	<ul>
-	<% current_user.friends.each do |friend| %>
+		<% current_user.notifications.each do |n| %>
 		<li>
-		<%= link_to friend.name, user_path(friend) %>
+			<%= n.message %> <%= render 'notification', :n => n if n.type == "FriendRequest" && n.accept == nil%>
 		</li>
-	<% end %>
+		<% end %>
 	</ul>
-<% else %>
-	<% if current_user.friends && current_user.friends.include?(@user)%>
-		<p>delete friend</p>
+</div>
+</div>
+<div class="col-md-4">
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4 class="panel-title">Events</h4>
+	</div>
+	<ul>
+		<% @events.each do |event| %>
+		<li><%= link_to event.name, event_path(event) %></li>
+		<% end %>
+	</ul>
+</div>
+</div>
+<div class="col-md-4">
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4 class="panel-title">Friends</h4>
+	</div>
+	<ul>
+		<% current_user.friends.each do |friend| %>
+		<li>
+			<%= link_to friend.name, user_path(friend) %>
+		</li>
+		<% end %>
+	</ul>
 	<% else %>
-		<p>add friend</p>
+	<% if current_user.friends && current_user.friends.include?(@user)%>
+	<p>delete friend</p>
+	<% else %>
+	<p>add friend</p>
 	<% end %>
-<% end %>
+	<% end %>
+</div>
+</div>
+</div>
 
-<strong>Events:</strong>
-<ul>
-<% @events.each do |event| %>
-	<li><%= link_to event.name, event_path(event) %></li>
-<% end %>
-</ul>
 
-<%= link_to 'Create an Event', new_event_path %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>

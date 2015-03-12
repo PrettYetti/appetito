@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: notifications
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  sender_id  :integer
+#  event_id   :integer
+#  accept     :boolean
+#  type       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  notified   :boolean          default("false")
+#
+
 class Notification < ActiveRecord::Base
 	attr_accessor :message
   belongs_to :user
@@ -8,22 +23,24 @@ class Notification < ActiveRecord::Base
   scope :friend_requests, -> { where(type: 'FriendRequest')}
   scope :event_invites, -> { where(type: 'EventInvite')}
   scope :event_updates, -> { where(type: 'EventUpdates')}
+  scope :invite_rsvps, -> { where(type: 'InviteRSVPs')}
+
 
   def message
   	raise 'Abstract Method'
   end
 
   def check_accept_status
-  	if accept == true || accept == nil
+  	if accept == true
   		case type
   		when "FriendRequest"
   			sender = User.find(sender_id)
-  			message = "You are now friends with #{sender.name}"
   			sender.friend_ids=(sender.friend_ids).push(user.id)
   			user.friend_ids=user.friend_ids.push(sender.id)
   			binding.pry
   		end
   	elsif accept == false
+  		binding.pry
   		self.destroy
   	end
   end

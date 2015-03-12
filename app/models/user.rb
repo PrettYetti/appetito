@@ -1,6 +1,19 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  email           :string
+#  password_digest :string
+#  name            :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 class User < ActiveRecord::Base
 	has_many :events
 	has_many :notifications
+	has_many :invites
 	has_and_belongs_to_many :friends, 
 	              class_name: "User", 
 	              join_table: :friendships, 

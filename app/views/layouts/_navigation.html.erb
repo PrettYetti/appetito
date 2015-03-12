@@ -25,13 +25,13 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-        <li><%= button_to 'Edit Profile', edit_user_path(@user), {class: "btn btn-default navbar-btn", method: :get} %></li> 
+        <li><%= button_to 'Edit Profile', edit_user_path(current_user), {class: "btn btn-default navbar-btn", method: :get} %></li> 
         <li><%= button_to "Logout", logout_users_path , {class: "btn btn-default navbar-btn", method: :get} %></li>
         </ul>
         <% else %>
         <li><%= button_to "Sign Up", new_user_path, {class: "btn btn-default navbar-btn"} %></li>
       </ul>
-      <%= render 'login' %>
+      <%= render 'events/login' %>
       <% end %>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

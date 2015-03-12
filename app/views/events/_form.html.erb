@@ -1,22 +1,36 @@
 <% if @event.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+<div id="error_explanation">
+  <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
-    <ul>
+  <ul>
     <% @event.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+    <li><%= message %></li>
     <% end %>
-    </ul>
-  </div>
+  </ul>
+</div>
 <% end %>
 
 <div class="field">
   <%= form.label :name %><br>
   <%= form.text_field :name %>
 </div>
+
+</div>
+</div>
 <div class="field">
+    <div class='col-sm-6'>
+      <div class="form-group">
   <%= form.label :when %><br>
-  <%= form.datetime_select :when %>
+        <div class='input-group date' id='datetimepicker1'>
+  <%= form.text_field :when, class: "form-control" %>
+          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+  <script type="text/javascript">
+  $(function () {
+    $('#datetimepicker1').datetimepicker();
+  });
+  </script>
 </div>
 <div class="field">
   <%= form.label :location %><br>
@@ -26,4 +40,4 @@
   <%= form.label :cuisine %><br>
   <%= form.text_field :cuisine %>
 </div>
-  
+

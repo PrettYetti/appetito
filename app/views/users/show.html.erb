@@ -32,9 +32,9 @@
 	<div class="panel-heading">
 		<h4 class="panel-title">Notifications</h4>
 	</div>
-	<ul>
+	<ul class="list-group">
 		<% current_user.notifications.each do |n| %>
-		<li>
+		<li class="list-group-item">
 			<%= n.message %> <%= render 'notification', :n => n if n.type == "FriendRequest" && n.accept == nil%>
 		</li>
 		<% end %>
@@ -46,9 +46,9 @@
 	<div class="panel-heading">
 		<h4 class="panel-title">Events</h4>
 	</div>
-	<ul>
+	<ul class="list-group">
 		<% @events.each do |event| %>
-		<li><%= link_to event.name, event_path(event) %></li>
+		<li class="list-group-item"><%= link_to event.name, event_path(event) %></li>
 		<% end %>
 	</ul>
 </div>
@@ -58,9 +58,9 @@
 	<div class="panel-heading">
 		<h4 class="panel-title">Friends</h4>
 	</div>
-	<ul>
+	<ul class="list-group">
 		<% current_user.friends.each do |friend| %>
-		<li>
+		<li class="list-group-item">
 			<%= link_to friend.name, user_path(friend) %>
 		</li>
 		<% end %>

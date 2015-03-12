@@ -30,11 +30,14 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    invite_notifications = params[:user_id]
+    invitees = params[:user_id]
     @event = current_user.events.new(event_params)
     respond_to do |format|
       if @event.save
-        invite_notifications.each { |id| @event.event_invites.create(user_id: id, sender_id: current_user.id)}
+        invitees.each do |id| 
+          @event.event_invites.create(user_id: id, sender_id: current_user.id)
+          @event.invites.create(user_id: id)
+        end
         @event.invites.create(user_id: current_user.id, rsvp: true)
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }

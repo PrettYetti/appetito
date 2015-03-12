@@ -12,9 +12,11 @@ class InviteController < ApplicationController
   end
 
   def create
+
   end
 
   def update
+
   end
 
   def destroy
@@ -23,6 +25,6 @@ class InviteController < ApplicationController
   private
 
   def invite_params
-    params.require(:invite).permit(:user_id, :event_id, :rsvp)
+    params.require(:invite).permit(:user_id, :event_id, :rsvp, :location)
   end
 end

@@ -3,7 +3,7 @@
 # Table name: events
 #
 #  id         :integer          not null, primary key
-#  user_id    :integer
+#  creator_id :integer
 #  name       :string
 #  when       :datetime
 #  location   :string

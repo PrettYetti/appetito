@@ -35,6 +35,11 @@
 
 <p>
   <strong>Invited</strong>
+  <ul>
+  <% @invitees.each do |invite| %>
+    <li><%= invite.user.name %></li>
+  <% end %>
+  </ul>
 </p>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |

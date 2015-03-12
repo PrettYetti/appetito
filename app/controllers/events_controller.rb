@@ -11,6 +11,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @notifications = @event.notifications
+    @invitees = @event.invites
   end
 
   # GET /events/new

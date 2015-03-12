@@ -17,6 +17,11 @@
 			<strong>Email:</strong>
 			<%= @user.email %>
 		</p>
+		<% if current_user.friends && current_user.friends.include?(@user)%>
+			<p>delete friend</p>
+	<% else %>
+			<p>add friend</p>
+	<% end %>
 	</div>
 </div>
 
@@ -60,12 +65,6 @@
 		</li>
 		<% end %>
 	</ul>
-	<% else %>
-	<% if current_user.friends && current_user.friends.include?(@user)%>
-	<p>delete friend</p>
-	<% else %>
-	<p>add friend</p>
-	<% end %>
 	<% end %>
 </div>
 </div>

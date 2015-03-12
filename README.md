@@ -1,4 +1,4 @@
-# APPetito
+# appetito
 
 
 ## About

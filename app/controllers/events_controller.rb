@@ -18,7 +18,7 @@ class EventsController < ApplicationController
   def new
     if current_user
       @friends = current_user.friends
-      @event = current_user.events.new
+      @event = current_user.created_events.new
     else
       @event = Event.new
     end
@@ -32,7 +32,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     invitees = params[:user_id]
-    @event = current_user.events.new(event_params)
+    @event = current_user.created_events.new(event_params)
     respond_to do |format|
       if @event.save
         invitees.each do |id| 

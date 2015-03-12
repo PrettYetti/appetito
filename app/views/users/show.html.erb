@@ -15,7 +15,7 @@
 	<ul>
 	<% current_user.notifications.each do |n| %>
 		<li>
-			<%= n.message %>
+			<%= n.message %> <%= render 'notification', :n => n if n.type == "FriendRequest" && n.accept == nil%>
 		</li>
 	<% end %>
 	</ul>

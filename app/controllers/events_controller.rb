@@ -4,17 +4,23 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = current_user.events
+    @events = current_user.events if current_user
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    @notifications = @event.notifications
   end
 
   # GET /events/new
   def new
-    @event = current_user.events.new
+    if current_user
+      @friends = current_user.friends
+      @event = current_user.events.new
+    else
+      @event = Event.new
+    end
   end
 
   # GET /events/1/edit
@@ -24,9 +30,12 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+    invite_notifications = params[:user_id]
     @event = current_user.events.new(event_params)
     respond_to do |format|
       if @event.save
+        invite_notifications.each { |id| @event.event_invites.create(user_id: id, sender_id: current_user.id)}
+        @event.invites.create(user_id: current_user.id, rsvp: true)
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else

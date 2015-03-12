@@ -3,6 +3,11 @@
 <%= form_for(@event) do |form| %>
 	<h4>Host: <%= @event.user.name %></h4>
 	<%= render form %>
+	<strong>Invite</strong><br>
+	<% @friends.each do |friend| %>
+		<%= check_box_tag "user_id[]", friend.id %>
+		<%= friend.name %><br>
+	<% end %>
   <div class="actions">
     <%= form.submit %>
   </div>

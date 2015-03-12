@@ -37,21 +37,21 @@ george.events.create({
 	})
 
 ciara.events.create({
-	name: "PartyHarty",
+	name: "HangerMeats",
 	location: "someplace",
-	cuisine: "mexican"
+	cuisine: "chinese"
 	})
 
 remina.events.create({
-	name: "PartyHarty",
+	name: "Chumba Wumba",
 	location: "someplace",
-	cuisine: "mexican"
+	cuisine: "American"
 	})
 
 eunice.events.create({
-	name: "PartyHarty",
+	name: "Tom's Bistro",
 	location: "someplace",
-	cuisine: "mexican"
+	cuisine: "French"
 	})
 
 george.friend_ids=[2,3]

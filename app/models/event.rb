@@ -16,5 +16,6 @@
 class Event < ActiveRecord::Base
   belongs_to :user
   has_many :notifications
+  has_many :invites
   delegate :event_invites, :event_updates, to: :notifications
 end

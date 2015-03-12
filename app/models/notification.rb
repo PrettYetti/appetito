@@ -37,10 +37,8 @@ class Notification < ActiveRecord::Base
   			sender = User.find(sender_id)
   			sender.friend_ids=(sender.friend_ids).push(user.id)
   			user.friend_ids=user.friend_ids.push(sender.id)
-  			binding.pry
   		end
   	elsif accept == false
-  		binding.pry
   		self.destroy
   	end
   end

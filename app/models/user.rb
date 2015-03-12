@@ -11,10 +11,10 @@
 #
 
 class User < ActiveRecord::Base
-	has_many :events
+	has_many :created_events, class_name: "Event", foreign_key: :creator_id
 	has_many :notifications
 	has_many :invites
-	has_many :jobs, :foreign_key => 'user_id', :class_name => "Task"
+	has_many :events, through: :invites
 	has_and_belongs_to_many :friends, 
 	              class_name: "User", 
 	              join_table: :friendships, 

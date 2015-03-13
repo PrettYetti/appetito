@@ -7,6 +7,17 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 @import 'bootstrap-datetimepicker';
+
+.media {
+  margin-top: 0;
+  > * {
+    display: inline-block;
+  }
+  &.list-group-item{
+    padding: 0 inherit;
+  }
+}
+
 .container-fluid {
   padding: 0;
 }

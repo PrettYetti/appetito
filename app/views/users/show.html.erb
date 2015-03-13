@@ -18,56 +18,61 @@
 			<%= @user.email %>
 		</p>
 		<% if current_user.friends && current_user.friends.include?(@user)%>
-			<p>delete friend</p>
-	<% elsif current_user.id != @user.id %>
-			<p>add friend</p>
-	<% end %>
+		<p>delete friend</p>
+		<% elsif current_user.id != @user.id %>
+		<p>add friend</p>
+		<% end %>
 	</div>
 </div>
 
 <div class="row">
-<% if current_user && current_user.id == @user.id %>
-<div class="col-md-4">
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h4 class="panel-title">Notifications</h4>
+	<% if current_user && current_user.id == @user.id %>
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">Notifications</h4>
+			</div>
+			<ul class="list-group">
+				<% current_user.notifications.each do |n| %>
+				<li class="list-group-item">
+					<%= n.message %> <%= render 'notification', :n => n if n.type == "FriendRequest" && n.accept == nil%>
+				</li>
+				<% end %>
+			</ul>
+		</div>
 	</div>
-	<ul class="list-group">
-		<% current_user.notifications.each do |n| %>
-		<li class="list-group-item">
-			<%= n.message %> <%= render 'notification', :n => n if n.type == "FriendRequest" && n.accept == nil%>
-		</li>
-		<% end %>
-	</ul>
-</div>
-</div>
-<div class="col-md-4">
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h4 class="panel-title">Events</h4>
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">Events</h4>
+			</div>
+			<ul class="list-group">
+				<% @events.each do |event| %>
+				<li class="list-group-item"><%= link_to event.name, event_path(event) %></li>
+				<% end %>
+			</ul>
+		</div>
 	</div>
-	<ul class="list-group">
-		<% @events.each do |event| %>
-		<li class="list-group-item"><%= link_to event.name, event_path(event) %></li>
-		<% end %>
-	</ul>
-</div>
-</div>
-<div class="col-md-4">
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h4 class="panel-title">Friends</h4>
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">Friends</h4>
+			</div>
+			<ul class="media-list list-group">
+					<% current_user.friends.each do |friend| %>
+					<li class="media list-group-item">
+					<div class="media-left">
+						<%= image_tag "users/default/default_thumb.gif", class: "avatar" %>
+					</div>
+					<div class="media-body">
+						<%= link_to friend.name, user_path(friend) %>
+					</div>
+				</li>
+				<% end %>
+			</ul>
+			<% end %>
+		</div>
 	</div>
-	<ul class="list-group">
-		<% current_user.friends.each do |friend| %>
-		<li class="list-group-item">
-			<%= link_to friend.name, user_path(friend) %>
-		</li>
-		<% end %>
-	</ul>
-	<% end %>
-</div>
-</div>
 </div>
 
 

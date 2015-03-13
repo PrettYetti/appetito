@@ -12,6 +12,7 @@ class EventsController < ApplicationController
   def show
     @notifications = @event.notifications
     @invitees = @event.invites
+    @chatlog = @event.chatlogs
   end
 
   # GET /events/new
@@ -30,9 +31,13 @@ class EventsController < ApplicationController
 
   def chatlog
     chatlog = @event.chatlogs
-    render_to do |format|
+    respond_to do |format|
       format.json { render json: chatlog }
     end
+  end
+
+  def logchat
+
   end
 
   # POST /events

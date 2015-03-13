@@ -1,3 +1,4 @@
+<div class=" col-sm-offset-4 col-sm-4">
 <h3><%= current_user == @user ? " Edit Your Profile" : "Edit User" %></h3>
 <%= form_for(@user) do |form| %>
 	<%= render form %>
@@ -5,5 +6,5 @@
 	    <%= form.submit "Update!" %>
 	  </div>
 <% end %>
-
+</div>
 

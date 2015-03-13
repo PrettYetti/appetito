@@ -12,32 +12,31 @@
 
 <div class="field">
   <%= form.label :name %><br>
-  <%= form.text_field :name %>
+  <%= form.text_field :name, class: "form-control"%>
 </div>
 
-</div>
-</div>
+
 <div class="field">
-    <div class='col-sm-6'>
-      <div class="form-group">
-  <%= form.label :when %><br>
-        <div class='input-group date' id='datetimepicker1'>
-  <%= form.text_field :when, class: "form-control" %>
-          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-        </span>
+    <div class="form-group">
+      <%= form.label :when %><br>
+      <div class='input-group date' id='datetimepicker1'>
+        <%= form.text_field :when, class: "form-control" %>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+      </span>
     </div>
-  <script type="text/javascript">
-  $(function () {
-    $('#datetimepicker1').datetimepicker();
-  });
-  </script>
-</div>
-<div class="field">
-  <%= form.label :location %><br>
-  <%= form.text_field :location %>
-</div>
-<div class="field">
-  <%= form.label :cuisine %><br>
-  <%= form.text_field :cuisine %>
+    <script type="text/javascript">
+    $(function () {
+      $('#datetimepicker1').datetimepicker();
+    });
+    </script>
+  </div>
+  <div class="field">
+    <%= form.label :location %><br>
+    <%= form.text_field :location, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= form.label :cuisine %><br>
+    <%= form.text_field :cuisine, class: "form-control" %>
+  </div>
 </div>
 

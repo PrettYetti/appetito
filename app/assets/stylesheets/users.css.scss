@@ -1,1 +1,12 @@
-
+.avatar {
+  height:50px;
+  width: 50px;
+  border-radius: 25%;
+  padding: 5px;
+}
+.media {
+  margin-top: 0;
+  > * {
+    display: inline-block;
+  }
+}

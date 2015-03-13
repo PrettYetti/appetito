@@ -34,5 +34,5 @@ Rails.application.routes.draw do
     get :chatlog, on: :member
   end
 
-  root to: 'users#index'
+  root to: 'layouts#index'
 end

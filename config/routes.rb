@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   resources :events do
     # get ':param' => :show, on: :member
     resources :invites
-    get :chatlog, on: :collection
+    get :chatlog, on: :member
   end
 
   root to: 'layouts#index'

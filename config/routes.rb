@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     
   end
 
+  resources :invites
+
   resources :notifications, only: [:index, :destroy, :update]
   resources :friend_requests, controller: 'notifications', type: 'FriendRequest', only: [:index, :destroy, :update]
   resources :event_invites, controller: 'notifications', type: 'EventeInvite', only: [:index, :destroy, :update]
@@ -29,6 +31,7 @@ Rails.application.routes.draw do
   resources :events do
     # get ':param' => :show, on: :member
     resources :invites
+    get :chatlog, on: :collection
   end
 
   root to: 'users#index'

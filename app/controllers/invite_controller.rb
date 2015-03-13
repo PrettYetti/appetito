@@ -1,4 +1,6 @@
 class InviteController < ApplicationController
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  
   def index
     @invites = current_user.invites
     respond_to do |format|
@@ -23,6 +25,10 @@ class InviteController < ApplicationController
   end
 
   private
+  
+  def set_invite
+    @invite = Invite.find(params[:id])
+  end
 
   def invite_params
     params.require(:invite).permit(:user_id, :event_id, :rsvp, :location)

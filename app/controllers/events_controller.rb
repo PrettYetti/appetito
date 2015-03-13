@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :chatlog]
 
   # GET /events
   # GET /events.json
@@ -26,6 +26,13 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+  end
+
+  def chatlog
+    chatlog = @event.chatlogs
+    render_to do |format|
+      format.json { render json: chatlog }
+    end
   end
 
   # POST /events

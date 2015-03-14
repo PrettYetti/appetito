@@ -2,7 +2,8 @@ george = User.create(
 	{
 		name: "George",
 		email: "george@email.com",
-		password: "password"
+		password: "password",
+		privacy: true
 	}
 )
 
@@ -18,7 +19,8 @@ remina = User.create(
 	{
 		name: "Remina",
 		email: "remina@email.com",
-		password: "password"
+		password: "password",
+		privacy: true
 	}
 )
 

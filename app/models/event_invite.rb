@@ -24,4 +24,5 @@ class EventInvite < Notification
 	end
 
 	#this message is for event#show page
+	
 end

@@ -9,12 +9,9 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
 
-    <div class="item active vertical-center">
+    <div class="item active">
       <%= image_tag "display/homepage_food1.jpg" %>
-      <div class="carousel-caption flex">
-        <%= link_to new_user_path, class: "col-xs-offset-4 col-xs-4" do %>
-          <button id="homepage-signup-button" class="btn btn-default btn-lg">Sign Up</button>
-        <% end %>
+      <div class="carousel-caption">
       </div>
     </div>
 
@@ -24,11 +21,12 @@
       </div>
     </div>
 
-    <div class="item active">
+    <div class="item">
       <%= image_tag "display/homepage_food3.jpg" %>
       <div class="carousel-caption">
       </div>
     </div>
+    
   </div>
 
   <!-- Controls -->
@@ -41,3 +39,14 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+<div class="row">
+  <%= link_to new_user_path, class: "col-sm-offset-4 col-sm-4" do %>
+    <button id="homepage-signup-button" class="btn btn-default btn-lg col-xs-8 col-xs-offset-2 col-sm-offset-0 col-sm-12">Sign Up</button>
+  <% end %>
+</div>
+
+<script>
+$('.carousel').carousel({
+  interval: false
+})
+</script>

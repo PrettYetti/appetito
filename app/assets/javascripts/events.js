@@ -1,4 +1,6 @@
 
+
+//JAVASCRIPT FOR CHAT WINDOW STYLING
 $(document).on('click', '.panel-heading span.icon_minim', function (e) {
     var $this = $(this);
     if (!$this.hasClass('panel-collapsed')) {

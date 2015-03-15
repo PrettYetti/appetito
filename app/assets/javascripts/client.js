@@ -6,15 +6,20 @@ jQuery(function() {
     console.log("you are connected!");
 
     //grab html elements
-    var $chatwindow = $("#chatwindow")[0];
+    var $chatwindow = $("#chatwindow");
     var $userInput = $("#textbox")[0];
     var $submit = $("#submitchat")[0];
 
     //listen for messages from the server
     client.addEventListener("message", function(msg) {
       var $serverMessage = JSON.parse(msg.data);
-      var $newMessage = $("p").append($serverMessage);
-      $(chatwindow).append($newMessage);
+      var $messageDiv = $("<div></div>", {class: "messages"});
+      $messageDiv.append($("<p>").text($serverMessage));
+      var dt = new Date();
+      var timeNow = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+      $messageDiv.append($("<time>").text(timeNow));
+      $colDiv = $("<div></div>", {class: "col-md-10 col-xs-10"});
+      $chatwindow.append($messageDiv);
     });
 
     //listen for input from user (submit button click)

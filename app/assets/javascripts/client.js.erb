@@ -13,13 +13,26 @@ jQuery(function() {
     //listen for messages from the server
     client.addEventListener("message", function(msg) {
       var $serverMessage = JSON.parse(msg.data);
+
       var $messageDiv = $("<div></div>", {class: "messages"});
       $messageDiv.append($("<p>").text($serverMessage));
+
       var dt = new Date();
       var timeNow = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
       $messageDiv.append($("<time>").text(timeNow));
+
       $colDiv = $("<div></div>", {class: "col-md-10 col-xs-10"});
-      $chatwindow.append($messageDiv);
+      $colDiv.append($messageDiv);
+
+      $avatarDiv = $("<div></div>", {class: "col-md-2 col-xs-2 avatar"});
+      $avatarImage = $("<img>").attr({ src: "<%= asset_path('users/default/default_thumb.gif') %>" });
+      $avatarDiv.append($avatarImage);
+
+
+      $wrapperDiv = $("<div></div>", {class: "row msg_container base_receive"});
+      $wrapperDiv.append($colDiv, $avatarDiv);
+
+      $chatwindow.append($wrapperDiv);
     });
 
     //listen for input from user (submit button click)

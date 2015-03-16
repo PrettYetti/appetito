@@ -17,4 +17,6 @@ class Invite < ActiveRecord::Base
   belongs_to :event
   validates :rsvp, inclusion: { in: %w(Attending Maybe Not\ Attending Undecided),
       message: "%{value} is not a valid rsvp" }
+  geocoded_by :location   # can also be an IP address
+  after_validation :geocode
 end

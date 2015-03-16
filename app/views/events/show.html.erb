@@ -35,7 +35,7 @@
   <strong>Invited</strong>
   <ul>
   <% @invitees.each do |invite| %>
-    <li><%= invite.user.name %> : <%= invite.rsvp %></li>
+    <li><%= invite.user.name %> : <%= invite.rsvp %> : <%= invite.location.capitalize %></li>
   <% end %>
   </ul>
 </p>
@@ -46,7 +46,7 @@
 
 <%= render "chat" %>
 
-<div id="map-canvas"></div>
+<%= render "map" %>
 
 
 

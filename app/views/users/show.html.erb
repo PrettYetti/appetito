@@ -3,7 +3,7 @@
 <div class="row hidden-xs	">
 	<div class="col-xs-4 col-sm-3">
 		<a href="#" class="thumbnail">
-			<%= image_tag "users/default/default.png" %>
+			<%= image_tag @user.avatar.url(:medium) %>
 		</a>
 	</div>
 
@@ -62,7 +62,7 @@
 					<% current_user.friends.each do |friend| %>
 					<li class="media list-group-item">
 					<div class="media-left">
-						<%= image_tag "users/default/default_thumb.gif", class: "avatar" %>
+						<%= image_tag friend.avatar.url(:thumb), class: "avatar" %>
 					</div>
 					<div class="media-body">
 						<%= link_to friend.name, user_path(friend) %>

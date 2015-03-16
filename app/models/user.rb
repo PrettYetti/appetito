@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
 	validates :email, uniqueness: true
 	delegate :friend_requests, :event_invites, :event_updates, to: :notifications
 
-	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>", :icon => "50x50>" }, :default_url => "users/default/default.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_size :avatar, :less_than => 1.megabytes
 end

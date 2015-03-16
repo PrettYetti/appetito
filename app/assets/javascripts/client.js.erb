@@ -14,15 +14,19 @@ jQuery(function() {
 
     //listen for messages from the server
     client.addEventListener("message", function(msg) {
+
       var $serverMessage = JSON.parse(msg.data);
+      var $timeofMessage = JSON.parse(msg.timeStamp);
+      
+      console.log($timeofMessage);
 
       var $messageDiv = $("<div></div>", {class: "messages"});
       $messageDiv.append($("<p>").text($serverMessage));
 
-      var dt = new Date();
+      var dt = new Date($timeofMessage);
       var timeNow = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-      $messageDiv.append($("<time>").append(timeNow));
-      
+      $messageDiv.append($("<time>").append().append(timeNow));
+
 
 
       $colDiv = $("<div></div>", {class: "col-md-8 col-xs-10"});

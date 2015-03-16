@@ -4,3 +4,13 @@
 require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
+
+namespace :reset do
+	desc "db:drop db:create db:migrate db:seed"
+	task :db => :environment do
+		Rake::Task['db:drop'].execute
+		Rake::Task['db:create'].execute
+		Rake::Task['db:migrate'].execute
+		Rake::Task['db:seed'].execute
+	end
+end

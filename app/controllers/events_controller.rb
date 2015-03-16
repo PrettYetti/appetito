@@ -40,8 +40,9 @@ class EventsController < ApplicationController
 
   def chatlog
     chatlog = @event.chatlogs
+    invitees = @event.users
     respond_to do |format|
-      format.json { render json: {chatlog: chatlog, current_user: current_user }}
+      format.json { render json: {chatlog: chatlog, current_user: current_user, invitees: invitees }}
     end
   end
 

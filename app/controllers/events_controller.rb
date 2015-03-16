@@ -13,6 +13,11 @@ class EventsController < ApplicationController
     @notifications = @event.notifications
     @invitees = @event.invites
     @chatlog = @event.chatlogs
+    @hash = Gmaps4rails.build_markers(@invitees) do |invitee, marker|
+      marker.lat invitee.latitude
+      marker.lng invitee.longitude
+      marker.infowindow invitee.user.name
+    end
   end
 
   # GET /events/new

@@ -34,6 +34,7 @@
     margin-right:0;
 }
 .messages {
+  position: relative;
   background: white;
   padding: 10px;
   border-radius: 2px;
@@ -44,7 +45,7 @@
     font-size: 13px;
     margin: 0 0 0.2rem 0;
   }
-.messages > time {
+.messages > time, .messages > .user_name {
     font-size: 11px;
     color: #ccc;
 }
@@ -57,10 +58,7 @@ img {
     display: block;
     width: 100%;
 }
-.avatar {
-    position: relative;
-}
-.base_receive > .avatar:after {
+.base_receive > .avatar_div:after {
     content: "";
     position: absolute;
     top: 0;
@@ -76,17 +74,21 @@ img {
   justify-content: flex-end;
   align-items: flex-end;
 }
-.base_sent > .avatar:after {
-    content: "";
+.messages:after {
+    background-color: white;
+    content:"\00a0";
+    display: block;
+    height: 8px;
+    width: 8px;
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    border: 5px solid white;
-    border-right-color: transparent;
-    border-top-color: transparent;
-    box-shadow: 1px 1px 2px rgba(black, 0.2); // not quite perfect but close
+    right: -4px;
+    bottom: 10px;
+    transform: rotate(-47deg) skew(-5deg);
+    -moz-transform: rotate(-47deg) skew(-5deg);
+    -ms-transform: rotate(-47deg) skew(-5deg);
+    -o-transform: rotate(-47deg) skew(-5deg);
+    -webkit-transform: rotate(-47deg) skew(-5deg);
+    box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .msg_sent > time{

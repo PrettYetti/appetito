@@ -8,6 +8,9 @@
 @import 'bootstrap';
 @import 'bootstrap-datetimepicker';
 
+body {
+  word-wrap: break-word;
+}
 .media {
   margin-top: 0;
   > * {
@@ -17,26 +20,10 @@
     padding: 0 inherit;
   }
 }
-
-
 .carousel-caption { 
     height: 400px;
     padding-left: 40px;
     padding-right: 40px;
-}
-
-.flex {
-        display: -webkit-box;   /* OLD: Safari,  iOS, Android browser, older WebKit browsers.  */
-     display: -moz-box;      /* OLD: Firefox (buggy) */ 
-     display: -ms-flexbox;   /* MID: IE 10 */
-     display: -webkit-flex;  /* NEW, Chrome 21+ */
-     display: flex;          /* NEW: Opera 12.1, Firefox 22+ */
-     -webkit-box-align: center; -moz-box-align: center; /* OLD… */
-     -ms-flex-align: center; /* You know the drill now… */
-     -webkit-align-items: center;
-     align-items: center;
-
-
 }
 a:hover {
   background-color: transparent;
@@ -47,4 +34,8 @@ a:hover {
   max-width: 100%;
   max-height: 350px;
   overflow: hidden;
+}
+.avatar_div {
+    position: relative;
+    padding-left: 0px;
 }

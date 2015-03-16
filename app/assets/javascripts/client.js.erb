@@ -1,3 +1,5 @@
+
+
 jQuery(function() {
   var client = new WebSocket("ws://localhost:2000");
 
@@ -19,17 +21,19 @@ jQuery(function() {
 
       var dt = new Date();
       var timeNow = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-      $messageDiv.append($("<time>").text(timeNow));
+      $messageDiv.append($("<time>").append(timeNow));
+      
 
-      $colDiv = $("<div></div>", {class: "col-md-10 col-xs-10"});
+
+      $colDiv = $("<div></div>", {class: "col-md-8 col-xs-10"});
       $colDiv.append($messageDiv);
 
-      $avatarDiv = $("<div></div>", {class: "col-md-2 col-xs-2 avatar"});
-      $avatarImage = $("<img>").attr({ src: "<%= asset_path('users/default/default_thumb.gif') %>" });
+      $avatarDiv = $("<div></div>", {class: "col-md-1 col-xs-2 avatar_div"});
+      $avatarImage = $("<img>").attr({ src: "<%= asset_path('users/default/default_thumb.gif') %>", class: "avatar" });
       $avatarDiv.append($avatarImage);
 
 
-      $wrapperDiv = $("<div></div>", {class: "row msg_container base_receive"});
+      $wrapperDiv = $("<div></div>", {class: "row msg_container base_sent"});
       $wrapperDiv.append($colDiv, $avatarDiv);
 
       $chatwindow.append($wrapperDiv);

@@ -15,3 +15,6 @@
 /log/*
 !/log/.keep
 /tmp
+
+secret.json
+app/assets/javascripts/foursquare.js

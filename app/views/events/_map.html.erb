@@ -20,9 +20,11 @@
 	  },
 	  function(){
 	    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+	    console.log(<%=raw @hash.to_json %>)
 	    handler.bounds.extendWith(markers);
 	    handler.fitMapToBounds();
 	    console.log(handler.map.serviceObject.center)
+	    //put ajax call here and access yelp API in ruby to hide secret
 	  }
 	);
 	// handler = Gmaps.build('Google');

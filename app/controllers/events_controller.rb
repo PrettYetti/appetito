@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  include EventsHelper
   before_action :set_event, only: [:show, :edit, :update, :destroy, :chatlog]
 
   # GET /events
@@ -12,11 +13,14 @@ class EventsController < ApplicationController
   def show
     @notifications = @event.notifications
     @invitees = @event.invites
+    located = @invitees.where("location IS NOT NULL AND rsvp = 'Attending' OR rsvp = 'Maybe'")
     @chatlog = @event.chatlogs
-    @hash = Gmaps4rails.build_markers(@invitees) do |invitee, marker|
+    @hash = Gmaps4rails.build_markers(located) do |invitee, marker|
       marker.lat invitee.latitude
       marker.lng invitee.longitude
-      marker.infowindow invitee.user.name
+      #info window settings accept html (using info_html helper)
+      marker.infowindow info_html(invitee.user.name)
+
     end
   end
 
@@ -42,6 +46,13 @@ class EventsController < ApplicationController
   end
 
   def logchat
+
+  end
+
+  def yelp
+    binding.pry
+    coordinates = params[:coordinates]
+    api(coordinates)
 
   end
 

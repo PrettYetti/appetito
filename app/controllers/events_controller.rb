@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   include EventsHelper
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :chatlog, :add_favorite]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :chatlog, :add_favorite, :logchat]
 
   # GET /events
   # GET /events.json
@@ -40,6 +40,7 @@ class EventsController < ApplicationController
 
   def chatlog
     chatlog = @event.chatlogs
+    #need to limit to 50
     invitees = @event.users
     respond_to do |format|
       format.json { render json: {chatlog: chatlog, current_user: current_user, invitees: invitees }}
@@ -47,8 +48,10 @@ class EventsController < ApplicationController
   end
 
   def logchat
-    
-
+    @event.chatlogs.create(message: params[:message], user_id: current_user.id)
+    respond_to do |format|
+      format.json { render json: {message: "message received"} }
+    end
   end
 
   def add_favorite

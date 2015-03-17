@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<ul class="media-list list-group col-xs-12">
+<ul class="media-list list-group col-xs-12 col-sm-offset-2 col-sm-8">
   <%= link_to new_event_path do %>
   <li class="media list-group-item">
     <h3> <button class="btn btn-default btn-circle"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
@@ -14,8 +14,10 @@
         <div class="media-left col-xs-2">
           <span class="glyphicon glyphicon-calendar large" aria-hidden="true"></span>
         </div>
-          <div class="media-body col-xs-10">
+          <div class="media-body col-xs-5">
+            <%= link_to event do %>
             <h4 class="inline-block"><%= event.name %></h4>
+            <% end %>
              <% if current_user.id == event.creator.id %>
               <%= link_to edit_event_path(event) do %>
                 <button class="btn btn-default btn-circle-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></button>
@@ -24,12 +26,17 @@
                 <button class="btn btn-default btn-circle-sm"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button>
               <% end %>
             <% end %>
-            <%= event.when %>
+            <p><%= event.when %></p>
             <%= event.location %>
             <%= event.finalized %>
-            <%= event.cuisine %>
-            <%= link_to 'Show', event %>
           </div>
+           <div class="media-body col-xs-5">
+              <ul>
+            <% event.invites.each do |invite| %>
+             <%= image_tag invite.user.avatar.url(:icon), class: "avatar avatar-mini" %>
+            <% end %>
+            </ul>
+           </div>
           <% end %>
         </li>
     <% end %>

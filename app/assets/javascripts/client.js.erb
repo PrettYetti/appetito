@@ -1,22 +1,36 @@
-$.ajax({
-  url: '/path/to/file',
-  type: 'default GET (Other values: POST)',
-  dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-  data: {param1: 'value1'},
-})
-.done(function() {
-  console.log("success");
-})
-.fail(function() {
-  console.log("error");
-})
-.always(function() {
-  console.log("complete");
-});
-
 
 jQuery(function() {
   var client = new WebSocket("ws://localhost:2000");
+
+  //ajax call for chatlog and current user
+  var pathname = window.location.pathname;
+  var $current_user;
+
+    $.ajax({
+        url: pathname+'/chatlog',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+            $current_user = data.current_user;
+          data.forEach(function(chatlog){
+            var storedMessage = chatlog.message;
+            var newMessage = document.createElement("p");
+            (chatlog.user_id == 1) ? newMessage.style.float = "left" : newMessage.style.float = "right"
+            newMessage.innerHTML = storedMessage;
+            chatwindow.appendChild(newMessage)
+          })
+        },
+      })
+      .done(function() {
+        console.log("success");
+      })
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+        console.log("complete");
+      });
 
   //listen for opening of client connection
   client.addEventListener("open", function(evt) {

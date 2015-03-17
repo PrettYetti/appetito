@@ -44,6 +44,12 @@
 <%= link_to 'Back', events_path %>
 </div>
 
+<div class="favorites"><ul>Favorites
+  <% @event.favorites.each do |place| %>
+    <li><%= place.restaurant %></li>
+  <% end %>
+</ul></div>
+
 <%= render "chat" %>
 
 <%= render "map" %>

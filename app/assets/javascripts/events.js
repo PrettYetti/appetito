@@ -5,7 +5,6 @@ $(function(){
         {
             var $button = $(this)
             var $target = $($button.data("target"));
-            console.log($button, $target);
             $target.removeClass("hidden");
             $target.siblings().addClass("hidden");
         });

@@ -47,7 +47,7 @@
     <%= render "chat" %>
     </div>
     
-    <div id="map-container" class="hidden">
+    <div id="map-container" class="">
       <div class="col-xs-12 col-sm-offset-1 col-sm-10">
       <%= render "map" %>
       <a href="event/show" class='fs'>Find Restaurants</a>
@@ -56,11 +56,11 @@
     </div>
 
     <div id="favorite-container" class="hidden">
-    <div class="col-xs-12 col-sm-offset-1 col-sm-10">
+    <ul id="favorite-wrapper" class="col-xs-12 col-sm-offset-1 col-sm-10">
       <% @event.favorites.each do |place| %>
       <%= render "favorite", :place => place %>
       <% end %>
-    </div>
+    </ul>
     </div>
 
   </div>

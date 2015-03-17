@@ -14,7 +14,8 @@ class InvitesController < ApplicationController
   end
 
   def update
-    binding.pry
+    @invite.update(invite_params)
+    redirect_to @invite.event
   end
 
   def destroy

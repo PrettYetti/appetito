@@ -1,4 +1,15 @@
+//JAVASCRIPT FOR DISPLAY AND HIDE ELEMENTS 'ON CLICK' ON EVENTS PAGE 
 
+$(function(){
+    $("#event-subnav").on("click", "button", function(e)
+        {
+            var $button = $(this)
+            var $target = $($button.data("target"));
+            console.log($button, $target);
+            $target.removeClass("hidden");
+            $target.siblings().addClass("hidden");
+        });
+});
 
 //JAVASCRIPT FOR CHAT WINDOW STYLING
 $(document).on('click', '.panel-heading span.icon_minim', function (e) {

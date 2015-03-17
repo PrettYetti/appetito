@@ -6,6 +6,7 @@ gem 'rails', '4.2.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use Bootstrap for SCSS stylsheets
+gem 'rails_12factor'
 gem 'bootstrap-sass', '~> 3.2.0'
 
 gem 'momentjs-rails', '>= 2.8.1'

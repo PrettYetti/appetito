@@ -1,0 +1,11 @@
+<div class="col-xs-12 col-sm-offset-1 col-sm-10">
+  <div class="col-xs-6">
+    <%= image_tag invite.user.avatar.url(:icon), class: "avatar" %>
+    <%= invite.user.name %>
+  </div>
+  <div class="col-xs-6">
+    <button id="rsvps" class="btn btn-default btn-circle"><span class="glyphicon glyphicon-ok" aria-hidden="true"></button>
+    <button id="rsvps" class="btn btn-default btn-circle maybe-button"><strong>?</strong></button>
+    <button id="rsvps" class="btn btn-default btn-circle"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button>
+  </div>
+</div>

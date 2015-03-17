@@ -1,5 +1,4 @@
 
-
 jQuery(function() {
   var client = new WebSocket("ws://localhost:2000");
 
@@ -18,6 +17,37 @@ jQuery(function() {
   .always(function() {
     console.log("complete");
   });
+
+  //ajax call for chatlog and current user
+  var pathname = window.location.pathname;
+  var $current_user;
+
+    $.ajax({
+        url: pathname+'/chatlog',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+            $current_user = data.current_user;
+          data.forEach(function(chatlog){
+            var storedMessage = chatlog.message;
+            var newMessage = document.createElement("p");
+            (chatlog.user_id == 1) ? newMessage.style.float = "left" : newMessage.style.float = "right"
+            newMessage.innerHTML = storedMessage;
+            chatwindow.appendChild(newMessage)
+          })
+        },
+      })
+      .done(function() {
+        console.log("success");
+      })
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+        console.log("complete");
+      });
+>>>>>>> a3baa502e67349d0acf2d9ba8c220924365f1571
 
   //listen for opening of client connection
   client.addEventListener("open", function(evt) {

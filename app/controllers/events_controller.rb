@@ -47,6 +47,7 @@ class EventsController < ApplicationController
   end
 
   def logchat
+    
 
   end
 

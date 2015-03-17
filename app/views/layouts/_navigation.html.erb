@@ -1,38 +1,29 @@
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
       <%= link_to "appetito", root_path, class: "navbar-brand" %>
     </div><!-- /.navbar-header -->
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-
-        <% if current_user %>
-          <li id="link_to_home">
-            <%= link_to user_path(current_user) do %>
-              Home <span class="badge"><%= current_user.notifications.where(notified: false).count %></span>
-            <% end %>
-          </li>
-        <li><%= link_to 'Add Event', new_event_path %></li>
-        <% end %>
-
-      </ul>
+   
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-        <li><%= link_to 'Edit Profile', edit_user_path(current_user), { method: :get} %></li> 
-        <li><%= link_to "Logout", logout_users_path , {method: :get} %></li>
+        <li class="dropdown" id="link_to_home">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              </span><%= current_user.name %>
+              <span class="caret"></span>
+              <%= image_tag current_user.avatar.url(:icon), class: "avatar avatar-nav" %>
+              <span class="badge notification-badge"><%= current_user.notifications.where(notified: false).count %>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+            <li><%= link_to "Homepage", user_path(current_user) %></li>
+            <li><%= link_to "Logout", logout_users_path %></li>
+          </ul>
+          </li>
         </ul>
         <% else %>
       </ul>
       <%= render 'events/login' %>
       <% end %>
-    </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 

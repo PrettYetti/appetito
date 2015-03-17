@@ -1,39 +1,40 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Events</h1>
+<ul class="media-list list-group col-xs-12">
+  <%= link_to new_event_path do %>
+  <li class="media list-group-item">
+    <h3> <button class="btn btn-default btn-circle"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
+      Add Event</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Creator</th>
-      <th>Name</th>
-      <th>When</th>
-      <th>Location</th>
-      <th>Finalized</th>
-      <th>Cuisine</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% if @events %>
-      <% @events.each do |event| %>
-        <tr>
-          <td><%= event.creator.name %></td>
-          <td><%= event.name %></td>
-          <td><%= event.when %></td>
-          <td><%= event.location %></td>
-          <td><%= event.finalized %></td>
-          <td><%= event.cuisine %></td>
-          <td><%= link_to 'Show', event %></td>
-          <td><%= link_to 'Edit', edit_event_path(event) %></td>
-          <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
+    </li>
     <% end %>
-  </tbody>
-</table>
+    <% if @events %>
+    <% @events.each do |event| %>
+      <li class="media list-group-item">
+        <div class="media-left col-xs-2">
+          <span class="glyphicon glyphicon-calendar large" aria-hidden="true"></span>
+        </div>
+          <div class="media-body col-xs-10">
+            <h4 class="inline-block"><%= event.name %></h4>
+             <% if current_user.id == event.creator.id %>
+              <%= link_to edit_event_path(event) do %>
+                <button class="btn btn-default btn-circle-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></button>
+              <% end %>
+              <%= link_to event, method: :delete do %>
+                <button class="btn btn-default btn-circle-sm"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button>
+              <% end %>
+            <% end %>
+            <%= event.when %>
+            <%= event.location %>
+            <%= event.finalized %>
+            <%= event.cuisine %>
+            <%= link_to 'Show', event %>
+          </div>
+          <% end %>
+        </li>
+    <% end %>
+    </ul>
 
-<br>
 
-<%= link_to 'New Event', new_event_path %>
+    <br>
+

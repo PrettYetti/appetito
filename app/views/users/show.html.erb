@@ -22,6 +22,9 @@
 		<% elsif current_user.id != @user.id %>
 		<p>add friend</p>
 		<% end %>
+		<% if current_user %>
+		<p><%= link_to 'Edit Profile', edit_user_path(current_user), { method: :get} %></p> 
+		<% end %>
 	</div>
 </div>
 

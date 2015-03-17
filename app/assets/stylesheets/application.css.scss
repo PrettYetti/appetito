@@ -11,6 +11,9 @@
 body {
   word-wrap: break-word;
 }
+.inline-block {
+  display: inline-block;
+}
 .media {
   margin-top: 0;
   > * {
@@ -38,4 +41,36 @@ a:hover {
 .avatar_div {
     position: relative;
     padding-left: 0px;
+}
+.notification-badge {
+   position:relative;
+   top: -20px;
+   left: -20px;
+   border: 1px solid white;
+   font-size: 0.8em;
+}
+.avatar-navlink {
+  paddding: 0;
+}
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.42;
+  border-radius: 15px;
+  position: relative;
+  bottom: 3px;
+}
+.btn-circle-sm {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  padding: 3px 0;
+  font-size: 9px;
+  line-height: 1.42;
+  border-radius: 15px;
+  position: relative;
+  bottom: 3px;
 }

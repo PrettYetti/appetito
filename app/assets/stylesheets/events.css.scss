@@ -94,9 +94,6 @@ img {
 .msg_sent > time{
     float: right;
 }
-
-
-
 .msg_container_base::-webkit-scrollbar-track
 {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -119,4 +116,12 @@ img {
     position:fixed;
     left:0px;
     bottom:0;
+}
+
+
+/* CALENDAR ICON */
+
+.glyphicon-calendar.large {
+  font-size: 48px;
+  display: inline-block;
 }

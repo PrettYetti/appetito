@@ -199,11 +199,6 @@ eunice.friend_ids=[2,3]
 		message: "What should we eat?"
 	},
 	{
-		event_id: 1,
-		user_id: 4,
-		message: "I don't like HangerMeats"
-	},
-	{
 		event_id: 2,
 		user_id: 1,
 		message: "Wassap?"
@@ -212,11 +207,6 @@ eunice.friend_ids=[2,3]
 		event_id: 2,
 		user_id: 2,
 		message: "I'm hungry guys..."
-	},
-	{
-		event_id: 2,
-		user_id: 3,
-		message: "What should we eat?"
 	},
 	{
 		event_id: 2,
@@ -235,18 +225,8 @@ eunice.friend_ids=[2,3]
 	},
 	{
 		event_id: 3,
-		user_id: 3,
-		message: "What should we eat?"
-	},
-	{
-		event_id: 3,
 		user_id: 4,
 		message: "I don't like HangerMeats"
-	},
-	{
-		event_id: 4,
-		user_id: 1,
-		message: "Wassap?"
 	},
 	{
 		event_id: 4,

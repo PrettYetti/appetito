@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     # get ':param' => :show, on: :member
     resources :invites
     get :chatlog, on: :member
+    post :logchat, on: :member
     post :add_favorite, on: :member
   end
 

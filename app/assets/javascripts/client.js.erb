@@ -2,81 +2,90 @@
 jQuery(function() {
   var client = new WebSocket("ws://localhost:2000");
 
-  //ajax call for chatlog and current user
+  //moved some needed variables to the top
+  var $chatwindow = $("#chatwindow");
+  var $submit = $("#submitchat")[0];
   var pathname = window.location.pathname;
-  var $current_user;
 
-    $.ajax({
-        url: pathname+'/chatlog',
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-          console.log(data);
-            $current_user = data.current_user;
-          data.forEach(function(chatlog){
-            var storedMessage = chatlog.message;
-            var newMessage = document.createElement("p");
-            (chatlog.user_id == 1) ? newMessage.style.float = "left" : newMessage.style.float = "right"
-            newMessage.innerHTML = storedMessage;
-            chatwindow.appendChild(newMessage)
+
+  //ajax call to get chatlog from database
+  $.ajax({
+      url: pathname+'/chatlog',
+      type: 'GET',
+      dataType: 'json',
+      success: function(data) {
+        window.current_user = data.current_user
+        data.chatlog.forEach(function (chat) {
+          var user
+          data.invitees.forEach(function (invitee) {
+            if (chat.user_id === invitee.id) {
+              //setting user by user_id found in chatlog
+              user = invitee
+              //this should be changed in the future because the password_digest is present
+            }
           })
-        },
-      })
-      .done(function() {
-        console.log("success");
-      })
-      .fail(function() {
-        console.log("error");
-      })
-      .always(function() {
-        console.log("complete");
-      });
+          appendChat(user, chat.message, chat.created_at)
+
+        })
+      },
+    })
+    .done(function() {
+      console.log("success");
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
 
   //listen for opening of client connection
   client.addEventListener("open", function(evt) {
     console.log("you are connected!");
 
     //grab html elements
-    var $chatwindow = $("#chatwindow");
+
     var $userInput = $("#textbox")[0];
-    var $submit = $("#submitchat")[0];
 
     //listen for messages from the server
     client.addEventListener("message", function(msg) {
 
       var $serverMessage = JSON.parse(msg.data);
       var $timeofMessage = JSON.parse(msg.timeStamp);
-      
       console.log($timeofMessage);
-
-      var $messageDiv = $("<div></div>", {class: "messages"});
-      $messageDiv.append($("<p>").text($serverMessage));
-
-      var dt = new Date($timeofMessage);
-      var timeNow = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-      $messageDiv.append($("<time>").append().append(timeNow));
-
-
-
-      $colDiv = $("<div></div>", {class: "col-md-8 col-xs-10"});
-      $colDiv.append($messageDiv);
-
-      $avatarDiv = $("<div></div>", {class: "col-md-1 col-xs-2 avatar_div"});
-      $avatarImage = $("<img>").attr({ src: "<%= asset_path('users/default/default_thumb.gif') %>", class: "avatar" });
-      $avatarDiv.append($avatarImage);
-
-
-      $wrapperDiv = $("<div></div>", {class: "row msg_container base_sent"});
-      $wrapperDiv.append($colDiv, $avatarDiv);
-
-      $chatwindow.append($wrapperDiv);
+      
+      //switched task with function here
+      appendChat($serverMessage.user, $serverMessage.msg, $timeofMessage)
     });
 
     //listen for input from user (submit button click)
     $submit.addEventListener("click", function() {
+      var pathname = window.location.pathname
       var $clientMessage = $userInput.value;
-      client.send(JSON.stringify($clientMessage));
-      $userInput.value = "";
+      //use new object to pair up with server
+      var connectionMessage = new message(current_user, $clientMessage, "clientMsg")
+      $.ajax({
+          url: pathname+'/logchat',
+          type: 'POST',
+          dataType: 'json',
+          data: {message: $clientMessage},
+          success: function (data) {
+            console.log(data.message)
+          }
+        })
+        .done(function() {
+          console.log("success");
+        })
+        .fail(function() {
+          console.log("error");
+        })
+        .always(function() {
+          console.log("complete");
+        });
+          console.log('im typing stuff')
+        // switched from $clientmessage to connectionMessage to work with server
+        client.send(JSON.stringify(connectionMessage));
+        $userInput.value = "";
     });
 
     //listen for input from user (enter keypress)
@@ -88,3 +97,40 @@ jQuery(function() {
 
   });
 });
+
+
+// moved function down here
+function appendChat (user, serverMessage, timeofMessage){
+  var $chatwindow = $("#chatwindow");
+  var $userInput = $("#textbox")[0];
+  var $submit = $("#submitchat")[0];
+  var $messageDiv = $("<div></div>", {class: "messages"});
+  $messageDiv.append($("<p>").text(user.name+":"+serverMessage));
+
+  var dt = new Date(timeofMessage);
+  var timeNow = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+  $messageDiv.append($("<time>").append().append(timeNow));
+
+
+
+  $colDiv = $("<div></div>", {class: "col-md-8 col-xs-10"});
+  $colDiv.append($messageDiv);
+
+  $avatarDiv = $("<div></div>", {class: "col-md-1 col-xs-2 avatar_div"});
+  $avatarImage = $("<img>").attr({ src: "<%= asset_path('users/default/default_thumb.gif') %>", class: "avatar" });
+  $avatarDiv.append($avatarImage);
+
+
+  $wrapperDiv = $("<div></div>", {class: "row msg_container base_sent"});
+  $wrapperDiv.append($colDiv, $avatarDiv);
+
+  $chatwindow.append($wrapperDiv);
+}
+
+
+//define new message object
+var message = function(user,msg,type) {
+  this.user = user;
+  this.msg = msg;
+  this.type = type;
+}

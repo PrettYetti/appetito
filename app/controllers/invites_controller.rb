@@ -1,5 +1,5 @@
-class InviteController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+class InvitesController < ApplicationController
+  before_action :set_invite, only: [:show, :edit, :update, :destroy]
   
   def index
     @invites = current_user.invites
@@ -13,12 +13,8 @@ class InviteController < ApplicationController
     @invite = Invite.find(params[:id])
   end
 
-  def create
-
-  end
-
   def update
-
+    binding.pry
   end
 
   def destroy

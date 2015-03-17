@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   include EventsHelper
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :chatlog]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :chatlog, :add_favorite]
 
   # GET /events
   # GET /events.json
@@ -47,6 +47,14 @@ class EventsController < ApplicationController
   end
 
   def logchat
+
+  end
+
+  def add_favorite
+    favorite = @event.favorites.create(user_id: current_user.id, restaurant: params[:restaurant])
+    respond_to do |format|
+      format.json { render json: {favorite: favorite, favorites: @event.favorites }}
+    end
 
   end
 

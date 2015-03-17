@@ -1,23 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'favorite/index'
-
-  get 'favorite/create'
-
-  get 'favorite/update'
-
-  get 'favorite/destroy'
-
-  get 'invite/index'
-
-  get 'invite/show'
-
-  get 'invite/create'
-
-  get 'invite/update'
-
-  get 'invite/destroy'
-
   resources :events
 
   resources :users do

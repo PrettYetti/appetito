@@ -16,5 +16,5 @@
 !/log/.keep
 /tmp
 
-secret.json
+/config/secrets.yml
 app/assets/javascripts/foursquare.js

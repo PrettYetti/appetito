@@ -26,7 +26,7 @@
                 <button class="btn btn-default btn-circle-sm"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button>
               <% end %>
             <% end %>
-            <p><%= event.when %></p>
+            <p><%= event.when.to_formatted_s(:long_ordinal) %></p>
             <%= event.location %>
             <%= event.finalized %>
           </div>

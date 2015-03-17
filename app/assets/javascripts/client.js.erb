@@ -104,12 +104,27 @@ function appendChat (user, serverMessage, timeofMessage){
   var $chatwindow = $("#chatwindow");
   var $userInput = $("#textbox")[0];
   var $submit = $("#submitchat")[0];
-  var $messageDiv = $("<div></div>", {class: "messages"});
-  $messageDiv.append($("<p>").text(user.name+":"+serverMessage));
 
   var dt = new Date(timeofMessage);
-  var timeNow = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-  $messageDiv.append($("<time>").append().append(timeNow));
+
+  function formatAMPM(date) {
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + ampm;
+  return strTime;
+  }
+  
+  var timeNow = formatAMPM(dt);
+
+  var $timeSpan = $("<time>").append(timeNow);
+  var $messageDiv = $("<div></div>", {class: "messages"});
+  var $chatID = $("<h5></h5>", {class: "inline-block"}).text(user.name);
+  $messageDiv.append($chatID, $timeSpan, $("<p>").text(serverMessage));
+
 
 
 

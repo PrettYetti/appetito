@@ -19,5 +19,6 @@ class Event < ActiveRecord::Base
   has_many :notifications
   has_many :invites
   has_many :chatlogs
+  has_many :favorites
   delegate :event_invites, :event_updates, to: :notifications
 end

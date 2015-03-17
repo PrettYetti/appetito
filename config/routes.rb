@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'favorite/index'
+
+  get 'favorite/create'
+
+  get 'favorite/update'
+
+  get 'favorite/destroy'
+
   get 'invite/index'
 
   get 'invite/show'
@@ -32,6 +40,7 @@ Rails.application.routes.draw do
     # get ':param' => :show, on: :member
     resources :invites
     get :chatlog, on: :member
+    post :add_favorite, on: :member
   end
 
   root to: 'layouts#index'

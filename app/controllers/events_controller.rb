@@ -13,7 +13,9 @@ class EventsController < ApplicationController
   def show
     @notifications = @event.notifications
     @invitees = @event.invites
-    located = @invitees.where("location IS NOT NULL AND rsvp = 'Attending' OR rsvp = 'Maybe'")
+    located = @invitees.where("location IS NOT NULL") 
+
+      # rsvp = 'Attending' OR rsvp = 'Maybe' OR rsvp = 'Undecided'"
     @chatlog = @event.chatlogs
     @hash = Gmaps4rails.build_markers(located) do |invitee, marker|
       marker.lat invitee.latitude

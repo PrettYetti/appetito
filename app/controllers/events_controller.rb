@@ -44,8 +44,9 @@ class EventsController < ApplicationController
     chatlog = @event.chatlogs
     #need to limit to 50
     invitees = @event.users
+    invitee_avatars = invitees.map { |invitee| {avatar_url: invitee.avatar.url(:icon), id: invitee.id}}
     respond_to do |format|
-      format.json { render json: {chatlog: chatlog, current_user: current_user, invitees: invitees }}
+      format.json { render json: {chatlog: chatlog, current_user: current_user, invitees: invitees, invitee_avatars: invitee_avatars, avatar_url: current_user.avatar.url(:icon)}}
     end
   end
 

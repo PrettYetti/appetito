@@ -21,7 +21,7 @@ class EventsController < ApplicationController
       marker.lat invitee.latitude
       marker.lng invitee.longitude
       #info window settings accept html (using info_html helper)
-      marker.json({:invitee => invitee.user.name})
+      marker.json({:id => invitee.user.id, :name => invitee.user.name})
     end
   end
 

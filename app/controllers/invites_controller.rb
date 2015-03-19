@@ -11,11 +11,14 @@ class InvitesController < ApplicationController
 
   def show
     @invite = Invite.find(params[:id])
+    
   end
 
   def update
     @invite.update(invite_params)
-    redirect_to @invite.event
+    respond_to do |format|
+      format.json { render json: @invite }
+    end
   end
 
   def destroy

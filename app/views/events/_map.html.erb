@@ -35,8 +35,7 @@
 	    var bounds = new google.maps.LatLngBounds();
 	    json.forEach(function (obj) {
 	    	var myLatlng = new google.maps.LatLng(obj.lat, obj.lng)
-	    	bounds.extend(myLatlng)
-	    	var contentString = obj.invitee
+	    	var contentString = obj.name
 	    	var infowindow = new google.maps.InfoWindow({
 	    		content: contentString
 	    	})
@@ -44,7 +43,7 @@
 	    	var marker =  new google.maps.Marker({
 	    		position: myLatlng,
 	    		map: map,
-	    		title: obj.invitee
+	    		title: ""+obj.id
 	    	})
 
 	    	google.maps.event.addListener(marker, 'mouseover',function () {
@@ -55,6 +54,9 @@
 	    		infowindow.close();
 	    	})
 	    	markers.push(marker)
+	    	
+	    	bounds.extend(myLatlng)
+
 	    	maxlat = Math.max(maxlat, obj.lat) || obj.lat
 	    	minlat = Math.min(minlat, obj.lat) || obj.lat
 	    	maxlng = Math.max(maxlng, obj.lng) || obj.lng
@@ -91,6 +93,10 @@
 		bounds.va.j -= calibration
 		bounds.va.k += calibration
 		return bounds
+	}
+
+	function buildMarker() {
+
 	}
 	
 </script>

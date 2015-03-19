@@ -4,12 +4,61 @@
 $(function(){
     $("#add-location").on("submit", function(e){
         e.preventDefault();
-        markers.forEach( function (marker) {
-            debugger
-            if (marker.infowindow.content.indexOf(current_user.name) >= 0) {
-                marker.setMap(null);
+        // markers.forEach( function (marker) )
+        var input  = $('#add-location').find('input:text').val()
+        $.ajax({
+            url: $('#add-location')[0].action,
+            type: 'PUT',
+            dataType: 'json',
+            data: {invite: {location: input}},
+            success: function (data) {
+                var map = handler.map.serviceObject;
+                var bounds = new google.maps.LatLngBounds();
+                //remove previous marker
+                var replaceMarker = markers.filter(function (marker, i, a) {
+                    return marker.title == current_user.id
+                })[0];
+                replaceMarker.setMap(null);
+                markers.splice(markers.indexOf(replaceMarker), 1);
+
+                var myLatlng = new google.maps.LatLng(data.latitude, data.longitude);
+                var contentString = current_user.name;
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                })
+                var marker =  new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: ""+current_user.id
+                })
+                google.maps.event.addListener(marker, 'mouseover',function () {
+                    infowindow.open(map, marker);
+                })
+
+                google.maps.event.addListener(marker, 'mouseout', function () {
+                    infowindow.close();
+                })
+                bounds.extend(myLatlng)
+                markers.forEach(function (marker) {
+                    var latlng = new google.maps.LatLng(marker.Kf.Ca.k, marker.Kf.Ca.B);
+                    bounds.extend(latlng);
+                })
+                markers.push(marker)
+
+                map.fitBounds(calibrate(bounds));
             }
         })
+        .done(function() {
+            console.log("success");
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        
+        
     })
 
     $("#event-subnav").on("click", "button", function(e)

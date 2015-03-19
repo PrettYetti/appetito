@@ -3,7 +3,7 @@
 
 <div class="row">
 <div class="col-xs-4">
-	<%= form_tag current_user.invites.find_by(event_id: @event.id), {method: :put} do %>
+	<%= form_tag current_user.invites.find_by(event_id: @event.id), {method: :put, id: "add-location"} do %>
 		<%= text_field_tag(:'invite[location]',value =nil, options={placeholder: "Insert location here."}) %> 
 		<%= button_tag %>
 	<% end %>
@@ -18,11 +18,11 @@
 
 <script type="text/javascript">
 	handler = Gmaps.build('Google');
-	handler.buildMap({
+	map = handler.buildMap({
 	    provider: {
 	      disableDefaultUI: true,
 	      draggable: false,
-	      scrollwheel: false,
+	      // scrollwheel: false,
 	      panControl: false
 	      // pass in other Google Maps API options here
 	    },

@@ -30,38 +30,15 @@
 	  },
 	  function(){
 	  	json = <%=raw @hash.to_json %>
-    	var map = handler.map.serviceObject
+    	map = handler.map.serviceObject
 	    markers = [];
-	    var maxlat, maxlng, minlat, minlng
-	    var bounds = new google.maps.LatLngBounds();
+	    searchMarkers = [];
+	    bounds = new google.maps.LatLngBounds();
+	    maxlat = maxlng = minlat = minlng = undefined
 	    json.forEach(function (obj) {
-	    	var myLatlng = new google.maps.LatLng(obj.lat, obj.lng)
-	    	var contentString = obj.name
-	    	var infowindow = new google.maps.InfoWindow({
-	    		content: contentString
-	    	})
-
-	    	var marker =  new google.maps.Marker({
-	    		position: myLatlng,
-	    		map: map,
-	    		title: ""+obj.id
-	    	})
-
-	    	google.maps.event.addListener(marker, 'mouseover',function () {
-	    		infowindow.open(map, marker);
-	    	})
-
-	    	google.maps.event.addListener(marker, 'mouseout', function () {
-	    		infowindow.close();
-	    	})
-	    	markers.push(marker)
 	    	
-	    	bounds.extend(myLatlng)
-
-	    	maxlat = Math.max(maxlat, obj.lat) || obj.lat
-	    	minlat = Math.min(minlat, obj.lat) || obj.lat
-	    	maxlng = Math.max(maxlng, obj.lng) || obj.lng
-	    	minlng = Math.min(minlng, obj.lng) || obj.lng
+	    	buildMarker(obj);
+	    	setRadius(obj.lat, obj.lng);
 	    });
 	    // debugger
 	    
@@ -70,8 +47,6 @@
 	    console.log(radius)
 
 	    // window.radius = measure(bounds.Ea.k, bounds.va.k, bounds.Ea.j, bounds.va.j)
-	    // console.log( radius )
-	    console.log(map.center)
 	    //put ajax call here and access yelp API in ruby to hide secret
 	  }
 	);
@@ -96,8 +71,42 @@
 		return bounds
 	}
 
-	function buildMarker() {
 
+
+	function buildMarker(obj) {
+		var myLatlng = new google.maps.LatLng(obj.lat, obj.lng)
+		var contentString = obj.name
+		var infowindow = new google.maps.InfoWindow({
+			content: contentString
+		})
+		var marker =  new google.maps.Marker({
+			position: myLatlng,
+			map: handler.map.serviceObject,
+			title: ""+obj.id
+		})
+		google.maps.event.addListener(marker, 'mouseover',function () {
+			infowindow.open(map, marker);
+		})
+
+		google.maps.event.addListener(marker, 'mouseout', function () {
+			infowindow.close();
+		})
+		bounds.extend(myLatlng)
+		markers.push(marker)
+	}
+
+	function setRadius(lat,lng) {
+		maxlat = Math.max(maxlat, lat) || lat
+		minlat = Math.min(minlat, lat) || lat
+		maxlng = Math.max(maxlng, lng) || lng
+		minlng = Math.min(minlng, lng) || lng
+	}
+
+	function objectToMarker(object) {
+		this.lat = object.latitude
+		this.lng = object.longitude
+		this.id = object.user_id
+		this.name
 	}
 	
 </script>

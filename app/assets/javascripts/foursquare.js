@@ -74,7 +74,7 @@ function getResults(lat, lng){
 			google.maps.event.addListener(marker, 'mouseout', function () {
 				infowindow.close();
 			})
-			markers.push(marker)
+			searchMarkers.push(marker)
 		});
 
 		// handler.addMarkers(markers).forEach(function(marker){
@@ -91,6 +91,10 @@ function getResults(lat, lng){
 		url: baseURL + compile,
 		dataType: 'json',
 		success: function(data) {
+			searchMarkers.forEach( function (marker) {
+				marker.setMap(null)
+			})
+			searchMarkers = []
 			renderResults(data);
 			$('ul').find($('button')).on('click', function (event) {
 				event.preventDefault();

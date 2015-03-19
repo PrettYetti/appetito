@@ -8,13 +8,10 @@
 		<%= button_tag %>
 	<% end %>
 </div>
-<div class="col-xs-3">
-	<a href="event/show" class='fs'>Find Restaurants</a>
-</div>
-</div>
 
-  <div id="map" class="col-xs-6" style='height: 400px;'></div>
+<a class="fs" href="#">Find Restaurant</a>
 
+<div id="map" style='width: 800px; height: 400px; margin: 0 auto;'></div>
 
 <script type="text/javascript">
 	handler = Gmaps.build('Google');
@@ -31,29 +28,68 @@
 	    }
 	  },
 	  function(){
-	    markers = handler.addMarkers(<%=raw @hash.to_json %>);
-	    console.log(<%=raw @hash.to_json %>)
-	    handler.bounds.extendWith(markers);
-	    handler.fitMapToBounds();
-	    console.log(handler.map.serviceObject.center)
+	  	json = <%=raw @hash.to_json %>
+    	var map = handler.map.serviceObject
+	    markers = [];
+	    var maxlat, maxlng, minlat, minlng
+	    var bounds = new google.maps.LatLngBounds();
+	    json.forEach(function (obj) {
+	    	var myLatlng = new google.maps.LatLng(obj.lat, obj.lng)
+	    	bounds.extend(myLatlng)
+	    	var contentString = obj.invitee
+	    	var infowindow = new google.maps.InfoWindow({
+	    		content: contentString
+	    	})
+
+	    	var marker =  new google.maps.Marker({
+	    		position: myLatlng,
+	    		map: map,
+	    		title: obj.invitee
+	    	})
+
+	    	google.maps.event.addListener(marker, 'mouseover',function () {
+	    		infowindow.open(map, marker);
+	    	})
+
+	    	google.maps.event.addListener(marker, 'mouseout', function () {
+	    		infowindow.close();
+	    	})
+	    	markers.push(marker)
+	    	maxlat = Math.max(maxlat, obj.lat) || obj.lat
+	    	minlat = Math.min(minlat, obj.lat) || obj.lat
+	    	maxlng = Math.max(maxlng, obj.lng) || obj.lng
+	    	minlng = Math.min(minlng, obj.lng) || obj.lng
+	    });
+	    // debugger
+	    
+	    map.fitBounds(bounds);
+	    window.radius = measure (maxlat, maxlng, minlat, minlng)/1.5
+	    console.log(radius)
+
+	    // window.radius = measure(bounds.Ea.k, bounds.va.k, bounds.Ea.j, bounds.va.j)
+	    // console.log( radius )
+	    console.log(map.center)
 	    //put ajax call here and access yelp API in ruby to hide secret
 	  }
 	);
-	// handler = Gmaps.build('Google');
-	// handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-	//   markers = handler.addMarkers([
-	//     {
-	//       "lat": 0,
-	//       "lng": 0,
-	//       "picture": {
-	//         "url": "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
-	//         "width":  36,
-	//         "height": 36
-	//       },
-	//       "infowindow": "hello!"
-	//     }
-	//   ]);
-	//   handler.bounds.extendWith(markers);
-	//   handler.fitMapToBounds();
-	// });
+	function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
+	    var R = 6378.137; // Radius of earth in KM
+	    var dLat = (lat2 - lat1) * Math.PI / 180;
+	    var dLon = (lon2 - lon1) * Math.PI / 180;
+	    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+	    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+	    Math.sin(dLon/2) * Math.sin(dLon/2);
+	    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	    var d = R * c;
+	    return d * 1000; // meters
+	}
+
+	function calibrate(bounds) {
+		var calibration =0.0007
+		bounds.Ea.k -= calibration
+		bounds.Ea.j += calibration
+		bounds.va.j -= calibration
+		bounds.va.k += calibration
+	}
+	
 </script>

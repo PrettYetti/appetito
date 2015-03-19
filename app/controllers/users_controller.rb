@@ -4,7 +4,18 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    input = params[:search]
+    if input.length > 2
+      sql = "name LIKE '%#{input}%' OR email LIKE '%#{input}%'"
+    else
+      sql = "name LIKE '#{input.titleize}%' OR email LIKE '#{input}%'"
+    end
+    @users = User.where(sql)
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @users}
+    end
+
   end
 
   # GET /users/1

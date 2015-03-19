@@ -16,8 +16,12 @@ $(function(){
         {   
             setTimeout(function() {
             google.maps.event.trigger(map.serviceObject, "resize");
-            handler.bounds.extendWith(markers);
-            handler.fitMapToBounds();
+            var bounds = new google.maps.LatLngBounds();
+            markers.forEach(function (marker) {
+                var myLatlng = new google.maps.LatLng(marker.Kf.Ca.k, marker.Kf.Ca.B);
+                bounds.extend(myLatlng);
+            })
+            handler.map.serviceObject.fitBounds(bounds);
             }, 1);
             var $button = $(this)
             var $target = $($button.data("target"));

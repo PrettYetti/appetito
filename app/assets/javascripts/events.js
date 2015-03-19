@@ -6,46 +6,29 @@ $(function(){
         e.preventDefault();
         // markers.forEach( function (marker) )
         var input  = $('#add-location').find('input:text').val()
+        var form = this
         $.ajax({
             url: $('#add-location')[0].action,
             type: 'PUT',
             dataType: 'json',
             data: {invite: {location: input}},
             success: function (data) {
-                var map = handler.map.serviceObject;
-                var bounds = new google.maps.LatLngBounds();
-                //remove previous marker
-                var replaceMarker = markers.filter(function (marker, i, a) {
-                    return marker.title == current_user.id
-                })[0];
-                replaceMarker.setMap(null);
-                markers.splice(markers.indexOf(replaceMarker), 1);
-
-                var myLatlng = new google.maps.LatLng(data.latitude, data.longitude);
-                var contentString = current_user.name;
-                var infowindow = new google.maps.InfoWindow({
-                    content: contentString
+                markers.forEach( function (marker) {
+                    marker.setMap(null);
                 })
-                var marker =  new google.maps.Marker({
-                    position: myLatlng,
-                    map: map,
-                    title: ""+current_user.id
+                searchMarkers.forEach( function (marker) {
+                    marker.setMap(null);
                 })
-                google.maps.event.addListener(marker, 'mouseover',function () {
-                    infowindow.open(map, marker);
+                markers = []
+                bounds = new google.maps.LatLngBounds()
+                data.forEach( function (invitee) {
+                    buildMarker(invitee)
+                    setRadius(invitee.lat, invitee.lng)
                 })
-
-                google.maps.event.addListener(marker, 'mouseout', function () {
-                    infowindow.close();
-                })
-                bounds.extend(myLatlng)
-                markers.forEach(function (marker) {
-                    var latlng = new google.maps.LatLng(marker.Kf.Ca.k, marker.Kf.Ca.B);
-                    bounds.extend(latlng);
-                })
-                markers.push(marker)
-
                 map.fitBounds(calibrate(bounds));
+                window.radius = measure (maxlat, maxlng, minlat, minlng)/1.5
+                console.log(radius)
+                form.reset();
             }
         })
         .done(function() {
@@ -64,8 +47,8 @@ $(function(){
     $("#event-subnav").on("click", "button", function(e)
         {   
             setTimeout(function() {
-            google.maps.event.trigger(map.serviceObject, "resize");
-            var bounds = new google.maps.LatLngBounds();
+            google.maps.event.trigger(map, "resize");
+            bounds = new google.maps.LatLngBounds();
             markers.forEach(function (marker) {
                 var myLatlng = new google.maps.LatLng(marker.Kf.Ca.k, marker.Kf.Ca.B);
                 bounds.extend(myLatlng);

@@ -132,6 +132,8 @@ $('.fs').on('click', function(event){
   var lng = Math.round(handler.map.serviceObject.center.B*searchDegree)/searchDegree
   console.log(lat,lng)
 
+
+  //fix this to grab lat,lng once map is generated
   getResults( lat, lng );
 });	
 

@@ -62,7 +62,7 @@
 	    });
 	    // debugger
 	    
-	    map.fitBounds(bounds);
+	    map.fitBounds(calibrate(bounds));
 	    window.radius = measure (maxlat, maxlng, minlat, minlng)/1.5
 	    console.log(radius)
 
@@ -90,6 +90,7 @@
 		bounds.Ea.j += calibration
 		bounds.va.j -= calibration
 		bounds.va.k += calibration
+		return bounds
 	}
 	
 </script>

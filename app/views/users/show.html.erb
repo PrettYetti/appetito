@@ -89,23 +89,14 @@
 			<div class="modal-body">
 				<form class= "search" action = "/users" method= 'GET'>
 					<div class="form-group">
-						<input type="text" name="search" class="search-bar form-control" id="recipient-name" placeholder="Search..." data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+						<input type="text" name="search" class="search-bar form-control" id="recipient-name" placeholder="Search..." data-toggle="collapse" href="#newfriend-panel" aria-expanded="false" aria-controls="newfriend-panel">
 						<span class="glyphicon glyphicon-search"></span>
 					</div>
 				</form>
-			<div class="panel panel-default">
-				<ul class="media-list list-group">
-				<% current_user.friends.each do |friend| %>
-				<li class="media list-group-item">
-					<div class="media-left">
-						<%= image_tag friend.avatar.url(:thumb), class: "avatar" %>
-					</div>
-					<div class="media-body">
-						<%= link_to friend.name, user_path(friend) %>
-					</div>
-				</li>
-				<% end %>
-			</ul>
+			<div id="newfriend-panel" class="collapse panel panel-default">
+				<ul id="newfriend-list" class="media-list list-group">
+
+				</ul>
 			</div>
 			</div>
 		</div>

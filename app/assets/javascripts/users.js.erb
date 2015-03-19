@@ -1,0 +1,39 @@
+
+
+var searchForFriends = function () {
+  $('.search').find($('input')).on('keyup', function (event) {
+    var input = $(this).val()
+    if ( input.length > 0) {
+      $.ajax({
+        url: '/users',
+        type: 'GET',
+        dataType: 'json',
+        data: {search: input},
+        success: function (data) {
+          // loadArray.forEach( function (user) {
+          //   data.splice(data.indexOf(user), 1)
+          // })
+          $("#newfriend-list").children().empty();
+          data.users.forEach(function( user ) {
+            $addFriend = $('<li>').text(user["name"]);            
+            if ($("#newfriend-list").find("li:contains(" + $addFriend.html() + ")").length === 0) {
+              $("#newfriend-list").append($addFriend);
+            };
+          });
+        } 
+      })
+      .done(function() {
+        console.log("success");
+      })
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+        console.log("complete");
+      });
+    }
+  });  
+};
+
+
+

@@ -11,9 +11,10 @@ class UsersController < ApplicationController
       sql = "name LIKE '#{input.titleize}%' OR email LIKE '#{input}%'"
     end
     @users = User.where(sql)
+    @users_avatars = @users.map { |user| {avatar_url: user.avatar.url(:icon), id: user.id}}
     respond_to do |format|
       format.html { render :index }
-      format.json { render json: @users}
+      format.json { render json: {users: @users, user_avatars: @users_avatars}}
     end
 
   end

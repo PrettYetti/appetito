@@ -78,6 +78,14 @@ a:hover {
 .hidden {
   display:none;
 }
-.margin-10 {
-  
+.form-control {
+  padding-right: 30px;
+}
+.form-control + .glyphicon {
+  position: absolute;
+  left: 0;
+  padding: 24px 24px;
+}
+.search-bar{
+  padding-left: 30px;
 }

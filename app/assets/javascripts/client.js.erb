@@ -115,8 +115,8 @@ jQuery(function() {
 
 
 // moved function down here
-function appendChat (user, serverMessage, timeofMessage, avatar_url){
-  var avatar_url = avatar_url || "<%= asset_path('users/default/default_thumb.gif') %>";
+function appendChat (user, serverMessage, timeofMessage, url){
+  var avatar_url = url || "<%= asset_path('users/default/default_thumb.gif') %>";
   var $chatwindow = $("#chatwindow");
   var $userInput = $("#textbox")[0];
   var $submit = $("#submitchat")[0];
@@ -148,7 +148,8 @@ function appendChat (user, serverMessage, timeofMessage, avatar_url){
   $colDiv.append($messageDiv);
 
   $avatarDiv = $("<div></div>", {class: "col-md-1 col-xs-2 avatar_div"});
-  $avatarImage = $("<img>").attr({ src: "<%= asset_path('users/default/default_thumb.gif') %>", class: "avatar" });
+
+  $avatarImage = $("<img>").attr({ src: avatar_url, class: "avatar" });
   $avatarDiv.append($avatarImage);
 
 

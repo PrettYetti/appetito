@@ -1,13 +1,33 @@
 //JAVASCRIPT FOR DISPLAY AND HIDE ELEMENTS 'ON CLICK' ON EVENTS PAGE 
 
+
 $(function(){
+    $("#add-location").on("submit", function(e){
+        e.preventDefault();
+        markers.forEach( function (marker) {
+            debugger
+            if (marker.infowindow.content.indexOf(current_user.name) >= 0) {
+                marker.setMap(null);
+            }
+        })
+    })
+
     $("#event-subnav").on("click", "button", function(e)
-        {
+        {   
+            setTimeout(function() {
+            google.maps.event.trigger(map.serviceObject, "resize");
+            var bounds = new google.maps.LatLngBounds();
+            markers.forEach(function (marker) {
+                var myLatlng = new google.maps.LatLng(marker.Kf.Ca.k, marker.Kf.Ca.B);
+                bounds.extend(myLatlng);
+            })
+            handler.map.serviceObject.fitBounds(bounds);
+            }, 1);
             var $button = $(this)
             var $target = $($button.data("target"));
             $target.removeClass("hidden");
             $target.siblings().addClass("hidden");
-        });
+    });
 });
 
 //JAVASCRIPT FOR CHAT WINDOW STYLING

@@ -74,7 +74,7 @@ function getResults(lat, lng){
 			google.maps.event.addListener(marker, 'mouseout', function () {
 				infowindow.close();
 			})
-			window.markers.push(marker)
+			markers.push(marker)
 		});
 
 		// handler.addMarkers(markers).forEach(function(marker){

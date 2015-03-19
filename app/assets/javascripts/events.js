@@ -21,7 +21,7 @@ $(function(){
                 var myLatlng = new google.maps.LatLng(marker.Kf.Ca.k, marker.Kf.Ca.B);
                 bounds.extend(myLatlng);
             })
-            handler.map.serviceObject.fitBounds(bounds);
+            handler.map.serviceObject.fitBounds(calibrate(bounds));
             }, 1);
             var $button = $(this)
             var $target = $($button.data("target"));

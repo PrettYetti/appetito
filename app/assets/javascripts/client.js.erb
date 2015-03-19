@@ -148,7 +148,7 @@ function appendChat (user, serverMessage, timeofMessage, avatar_url){
   $colDiv.append($messageDiv);
 
   $avatarDiv = $("<div></div>", {class: "col-md-1 col-xs-2 avatar_div"});
-  $avatarImage = $("<img>").attr({ src: avatar_url, class: "avatar" });
+  $avatarImage = $("<img>").attr({ src: "<%= asset_path('users/default/default_thumb.gif') %>", class: "avatar" });
   $avatarDiv.append($avatarImage);
 
 

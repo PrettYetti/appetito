@@ -36,7 +36,7 @@ var searchForFriends = function () {
               var $addFriendButton = $('<button>', {class: "btn btn-default"}).text("Friends");
             } else {  
               var $addFriendButton = $('<button>', {action: 'users/'+user.id+'/add_friend', class: "btn btn-default", method: 'POST'}).text("Add Friend");
-              friendo($addFriendButton);
+              friendRequest($addFriendButton);
             }
             $("#newfriend-list").append(($addFriend.append($addFriendButton)))
           });
@@ -55,13 +55,13 @@ var searchForFriends = function () {
   });  
 };
 
-function friendo($dom) {
+function friendRequest($dom) {
   var that = $dom
   $dom.on('click', function (e) {
     e.preventDefault();
     var action = that.attr('action')
     $.ajax({
-      url: action,
+      url: "" + action,
       type: 'POST',
       dataType: 'json',
       success: function (data) {

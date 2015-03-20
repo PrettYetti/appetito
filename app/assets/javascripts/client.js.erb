@@ -116,7 +116,7 @@ jQuery(function() {
 
 // moved function down here
 function appendChat (user, serverMessage, timeofMessage, url){
-  var avatar_url = url || "<%= asset_path('users/default/default_thumb.gif') %>";
+  var avatar_url = url || "http://localhost:3000/assets/users/default/default-b29b8be84633d061610458246d97fe53.png";
   var $chatwindow = $("#chatwindow");
   var $userInput = $("#textbox")[0];
   var $submit = $("#submitchat")[0];

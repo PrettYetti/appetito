@@ -105,8 +105,12 @@ function getResults(lat, lng){
 					dataType: 'json',
 					data: {restaurant: name},
 					success: function(data){
-							if ($( ".favorites:contains('"+data.favorite.restaurant+"')" )[0] === undefined) {
-							$('.favorites').find($('ul')).append($('<li>').text(data.favorite.restaurant))
+							if ($( "#favorites-wrapper:contains('"+data.favorite.restaurant+"')" )[0] === undefined) {
+							var $newFavoriteH4 = $('<h4>').text(data.favorite.restaurant);
+							var $confirmFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-ok"></span>')
+							var $voteFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-heart"></span>')
+							var $newFavoriteLi = $('<li>', {class: "col-xs-6 col-sm-3"}).append($newFavoriteH4, $voteFavorite, $confirmFavorite)
+							$('#favorite-wrapper').append($newFavoriteLi)
 							console.log('trying to add stuff')
 						}
 					}

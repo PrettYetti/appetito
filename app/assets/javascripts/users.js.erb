@@ -35,7 +35,7 @@ var searchForFriends = function () {
             if (user.type === "friend") {
               var $addFriendButton = $('<button>', {class: "btn btn-default"}).text("Friends");
             } else {  
-              var $addFriendButton = $('<button>', {action: 'users/'+user.id+'/add_friend', class: "btn btn-default", method: 'POST'}).text("Add Friend");
+              var $addFriendButton = $('<button>', {action: user.id+'/add_friend', class: "btn btn-default", method: 'POST'}).text("Add Friend");
               friendRequest($addFriendButton);
             }
             $("#newfriend-list").append(($addFriend.append($addFriendButton)))
@@ -61,7 +61,7 @@ function friendRequest($dom) {
     e.preventDefault();
     var action = that.attr('action')
     $.ajax({
-      url: "" + action,
+      url: action,
       type: 'POST',
       dataType: 'json',
       success: function (data) {

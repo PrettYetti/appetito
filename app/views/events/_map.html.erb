@@ -44,6 +44,7 @@
 	    
 	    map.fitBounds(calibrate(bounds));
 	    window.radius = measure (maxlat, maxlng, minlat, minlng)/1.5
+	    window.center = map.getCenter();
 	    console.log(radius)
 
 	    // window.radius = measure(bounds.Ea.k, bounds.va.k, bounds.Ea.j, bounds.va.j)

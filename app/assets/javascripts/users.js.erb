@@ -13,14 +13,32 @@ var searchForFriends = function () {
           // loadArray.forEach( function (user) {
           //   data.splice(data.indexOf(user), 1)
           // })
+          console.log(data)
+
+          data.users.forEach(function (user) {
+            user.type = "person";
+            if (data.current_user_id == user.id) {
+              data.users.splice(data.users.indexOf(user), 1)
+            }
+            data.friends.forEach(function (friend) {
+              if (friend.id == user.id) {
+                user.type = "friend";
+              }
+            })
+          })
+
+          console.log(data)
+          // debugger
           $("#newfriend-list").children().remove();
-          data.users.forEach(function( user ) {
-            var $addFriend = $('<li>').text(user["name"]);   
-            var $addFriendButton = $('<button>', {action: '../users/add_friend', class: "btn btn-default"}).text("Add Friend");         
-            if ($("#newfriend-list").find("li:contains(" + $addFriend.html() + ")").length === 0) {
-              $("#newfriend-list").append(($addFriend.append($addFriendButton));
-              debugger;
-            };
+          data.users.forEach( function( user ) {
+            var $addFriend = $('<li>').text(user["name"]);
+            if (user.type === "friend") {
+              var $addFriendButton = $('<button>', {class: "btn btn-default"}).text("Friends");
+            } else {  
+              var $addFriendButton = $('<button>', {action: 'users/'+user.id+'/add_friend', class: "btn btn-default", method: 'POST'}).text("Add Friend");
+              friendo($addFriendButton);
+            }
+            $("#newfriend-list").append(($addFriend.append($addFriendButton)))
           });
         } 
       })
@@ -37,5 +55,30 @@ var searchForFriends = function () {
   });  
 };
 
-
+function friendo($dom) {
+  var that = $dom
+  $dom.on('click', function (e) {
+    e.preventDefault();
+    var action = that.attr('action')
+    $.ajax({
+      url: "http://localhost:3000/"+action,
+      type: 'POST',
+      dataType: 'json',
+      success: function (data) {
+        if (data.privacy) {
+          that.text("Request Sent")
+        } else { that.text("Friend")}
+      }
+    })
+    .done(function() {
+      console.log("success");
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    })
+  });
+};
 

@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   resources :users do
     get :logout, on: :collection
     post :login, on: :collection
-    post :add_friend, on: :collection
-    delete :remove_friend, on: :collection    
+    post :add_friend, on: :member
+    delete :remove_friend, on: :member    
   end
 
   resources :invites

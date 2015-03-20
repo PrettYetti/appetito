@@ -13,11 +13,13 @@ var searchForFriends = function () {
           // loadArray.forEach( function (user) {
           //   data.splice(data.indexOf(user), 1)
           // })
-          $("#newfriend-list").children().empty();
+          $("#newfriend-list").children().remove();
           data.users.forEach(function( user ) {
-            $addFriend = $('<li>').text(user["name"]);            
+            var $addFriend = $('<li>').text(user["name"]);   
+            var $addFriendButton = $('<button>', {action: '../users/add_friend', class: "btn btn-default"}).text("Add Friend");         
             if ($("#newfriend-list").find("li:contains(" + $addFriend.html() + ")").length === 0) {
-              $("#newfriend-list").append($addFriend);
+              $("#newfriend-list").append(($addFriend.append($addFriendButton));
+              debugger;
             };
           });
         } 

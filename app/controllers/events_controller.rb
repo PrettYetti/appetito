@@ -70,13 +70,13 @@ class EventsController < ApplicationController
   #   api(coordinates)
   # end
 
-  # def foursquare
-  #   baseURL = "https://api.foursquare.com/v2/venues/explore"
-  #   clientID = "?client_id=CSXMPXYF20VXWMX4Z0BTKHVT5VGRKA1E3ZAPKCE04ELOMX3W"
-  #   clientSecret = "&client_secret=LQ2UIGEDAP0O5CFMQEMEYEM1KORYH4ISVPXLRSHGYNU1LMOZ"
+  def foursquare
+    baseURL = "https://api.foursquare.com/v2/venues/explore"
+    clientID = "?client_id=CSXMPXYF20VXWMX4Z0BTKHVT5VGRKA1E3ZAPKCE04ELOMX3W"
+    clientSecret = "&client_secret=LQ2UIGEDAP0O5CFMQEMEYEM1KORYH4ISVPXLRSHGYNU1LMOZ"
 
-  #   render text: Net::HTTP.get baseURL + clientID + clientSecret + '&' + params[:foursquare].to_param
-  # end
+    render text: Net::HTTP.get baseURL + clientID + clientSecret + '&' + params[:foursquare].to_param
+  end
 
   # POST /events
   # POST /events.json

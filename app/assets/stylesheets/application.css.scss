@@ -8,8 +8,37 @@
 @import 'bootstrap';
 @import 'bootstrap-datetimepicker';
 
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400|Slabo+13px);
+
+$primary: #219AB3 !default;
+$dark: #520602 !default;
+$light: #ea5000 !default;
+
+$body-font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+$headline-font-family: "Slabo 13px","Helvetica Neue",Helvetica,Arial,sans-serif;
+
 body {
+  width: 100%;
+  height: 100%;
+  font-family: $body-font-family;
+  color: $light;
+  background-color: $dark;
+  -webkit-tap-highlight-color: transparentize($light, 0.8);
   word-wrap: break-word;
+  padding-top: 100px;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  margin: 0 0 35px;
+  font-family: $headline-font-family;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 .inline-block {
   display: inline-block;
@@ -23,30 +52,22 @@ body {
     padding: 0 inherit;
   }
 }
-.carousel-caption { 
-    height: 400px;
-    padding-left: 40px;
-    padding-right: 40px;
-}
-a:hover {
-  background-color: transparent;
-}
-#homepage-carousel {
-  margin-top: -20px;
-  margin-bottom: 2%;
-  max-width: 100%;
-  max-height: 350px;
-  overflow: hidden;
+a {
+  &:hover {
+    background-color: transparent;
+  }
 }
 .avatar_div {
     position: relative;
     padding-left: 0px;
 }
 .notification-badge {
+   color: $light;
+   background-color: $dark;
    position:relative;
    top: -15px;
    left: -15px;
-   border: 1px solid white;
+   border: 1px solid $light;
    font-size: 0.6em;
 }
 .btn-circle {

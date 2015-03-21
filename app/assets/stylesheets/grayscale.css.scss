@@ -1,0 +1,295 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400|Slabo+13px);
+
+$primary: #219AB3 !default;
+$dark: #520602 !default;
+$light: #ea5000 !default;
+
+$body-font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+$headline-font-family: "Slabo 13px","Helvetica Neue",Helvetica,Arial,sans-serif;
+
+$screen-md-max: 1200px;
+$screen-xs-max: 768px;
+
+html {
+  width: 100%;
+  height: 100%;
+}
+p {
+  margin: 0 0 25px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+@media(min-width:$screen-xs-max) {
+
+  p {
+    margin: 0 0 35px;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+}
+
+a {
+  color: $primary;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: darken($primary,0.2);
+  }
+}
+
+.light {
+  font-weight: 400;
+}
+
+.navbar-custom {
+  margin-bottom: 0;
+  border-bottom: 1px solid transparentize($light, 0.7);
+  font-family: $headline-font-family;
+  background-color: $dark;
+
+  .navbar-brand {
+    font-weight: 700;
+
+    &:focus {
+      outline: none;
+    }
+
+    .navbar-toggle {
+      padding: 4px 6px;
+      font-size: 16px;
+      color: $light;
+
+      &:focus,
+      &:active {
+        outline: none;
+      }
+    }
+  }
+
+  a {
+    color: $light;
+  }
+
+  .nav {
+
+    li {
+
+      &.active {
+        outline: none;
+        background-color: transparentize($light, 0.7);
+      }
+
+      a {
+        -webkit-transition: background .3s ease-in-out;
+        -moz-transition: background .3s ease-in-out;
+        transition: background .3s ease-in-out;
+
+        &:hover,
+        &:focus,
+        &.active {
+          outline: none;
+          background-color: transparentize($light, 1.0);
+          color: $light;
+        }
+      }
+    }
+  }
+}
+
+@media(min-width:$screen-xs-max) {
+
+
+  .navbar {
+    padding: 20px 0;
+    border-bottom: none;
+    letter-spacing: 1px;
+    background: transparent;
+    -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+    -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+    transition: background .5s ease-in-out,padding .5s ease-in-out;
+  }
+
+  .top-nav-collapse {
+    padding: 0;
+    background-color: $dark;
+  }
+
+  .navbar-custom.top-nav-collapse {
+    border-bottom: 1px solid transparentize($light, 0.7);
+  }
+}
+
+.intro {
+  margin-top: -100px;
+  display: table;
+  width: 100%;
+  height: auto;
+  padding: 100px 0;
+  text-align: center;
+  color: $light;
+  background: $dark url(image-path("display/bg-intro.jpg")) no-repeat scroll center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+
+  .intro-body {
+    display: table-cell;
+    vertical-align: middle;
+
+    .brand-heading {
+      font-size: 3em;
+      background-color: $dark;
+      display: inline-block;
+      padding: 0.2em 0.5em 0.3em 0.5em;
+      border: solid 3px $light;
+      margin-top: 20%;
+      margin-bottom: 5%;
+    }
+
+    .intro-text {
+      font-size: 1.2em;
+      line-height: 1.6em;
+      margin-bottom: 20%;
+    }
+  }
+}
+
+@media(max-width:$screen-xs-max) {
+  .intro {
+    height: 100%;
+    padding: 0;
+
+    .intro-body {
+
+      .brand-heading {
+        font-size: 100px;
+      }
+
+      .intro-text {
+        font-size: 25px;
+      }
+    }
+  }
+}
+
+.btn-circle {
+  width: 70px;
+  height: 70px;
+  margin-top: 15px;
+  padding: 7px 16px;
+  border: 2px solid $light;
+  border-radius: 35px;
+  font-size: 40px;
+  color: $light;
+  background: transparent;
+  -webkit-transition: background .3s ease-in-out;
+  -moz-transition: background .3s ease-in-out;
+  transition: background .3s ease-in-out;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    color: $light;
+    background: transparentize($light, 0.9);
+  }
+}
+
+.content-section {
+  padding-top: 100px;
+}
+
+.download-section {
+  width: 100%;
+  padding: 50px 0;
+  color: $light;
+  background: $dark url(../../images/downloads-bg.jpg) no-repeat scroll center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+@media(min-width:$screen-xs-max) {
+
+  .download-section {
+    padding: 100px 0;
+  }
+
+}
+
+.btn {
+  text-transform: uppercase;
+  font-family: $headline-font-family,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 400;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+.btn-default {
+
+  &:hover,
+  &:focus {
+    border: 1px solid $primary;
+    outline: none;
+    color: $dark;
+    background-color: $primary;
+  }
+}
+
+ul.banner-social-buttons {
+  margin-top: 0;
+}
+
+@media(max-width:$screen-md-max) {
+
+  ul.banner-social-buttons {
+    margin-top: 15px;
+  }
+}
+
+@media(max-width:$screen-xs-max) {
+
+  ul.banner-social-buttons {
+
+    li {
+      display: block;
+      margin-bottom: 20px;
+      padding: 0;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+footer {
+  padding: 50px 0;
+
+  p {
+    margin: 0;
+  }
+}
+
+::-moz-selection, ::selection  {
+  text-shadow: none;
+  background: #fcfcfc;
+  background: transparentize($light, 0.8);
+}
+
+img {
+  &::selection {
+    background: transparent;
+  }
+  
+  &::-moz-selection {
+    background: transparent;
+  }
+}

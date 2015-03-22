@@ -16,6 +16,7 @@
 //= require bootstrap-sprockets
 //= require moment
 //= require bootstrap-datetimepicker
+//= require jquery.easing
 //= require underscore
 //= require gmaps/google
 //= require_tree .

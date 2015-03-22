@@ -124,7 +124,14 @@ a {
     border-bottom: 1px solid transparentize($accent, 0.7);
   }
 }
-
+#bg2-intro{
+  background: $dark url(image-path("display/bg2-intro.jpg")) no-repeat scroll center center;
+  min-height: 400px;
+}
+#bg3-intro{
+  background: $dark url(image-path("display/bg3-intro.jpg")) no-repeat scroll center center;
+  min-height: 400px;
+}
 .intro {
   margin-top: -100px;
   display: table;

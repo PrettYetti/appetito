@@ -13,14 +13,15 @@ class EventsController < ApplicationController
   def show
     @notifications = @event.notifications
     @invitees = @event.invites
-    located = @invitees.where("location IS NOT NULL AND rsvp = 'Attending' OR rsvp = 'Maybe'")
+    located = @invitees.where("location IS NOT NULL") 
+
+      # rsvp = 'Attending' OR rsvp = 'Maybe' OR rsvp = 'Undecided'"
     @chatlog = @event.chatlogs
     @hash = Gmaps4rails.build_markers(located) do |invitee, marker|
       marker.lat invitee.latitude
       marker.lng invitee.longitude
       #info window settings accept html (using info_html helper)
-      marker.infowindow info_html(invitee.user.name)
-
+      marker.json({:id => invitee.user.id, :name => invitee.user.name})
     end
   end
 
@@ -42,8 +43,9 @@ class EventsController < ApplicationController
     chatlog = @event.chatlogs
     #need to limit to 50
     invitees = @event.users
+    invitee_avatars = invitees.map { |invitee| {avatar_url: invitee.avatar.url(:icon), id: invitee.id}}
     respond_to do |format|
-      format.json { render json: {chatlog: chatlog, current_user: current_user, invitees: invitees }}
+      format.json { render json: {chatlog: chatlog, current_user: current_user, invitees: invitees, invitee_avatars: invitee_avatars, avatar_url: current_user.avatar.url(:icon)}}
     end
   end
 
@@ -62,11 +64,18 @@ class EventsController < ApplicationController
 
   end
 
-  def yelp
-    binding.pry
-    coordinates = params[:coordinates]
-    api(coordinates)
+  # def yelp
+  #   binding.pry
+  #   coordinates = params[:coordinates]
+  #   api(coordinates)
+  # end
 
+  def foursquare
+    baseURL = "https://api.foursquare.com/v2/venues/explore"
+    clientID = "?client_id=CSXMPXYF20VXWMX4Z0BTKHVT5VGRKA1E3ZAPKCE04ELOMX3W"
+    clientSecret = "&client_secret=LQ2UIGEDAP0O5CFMQEMEYEM1KORYH4ISVPXLRSHGYNU1LMOZ"
+
+    render text: Net::HTTP.get(baseURL + clientID + clientSecret + '&' + params[:foursquare].to_param)
   end
 
   # POST /events

@@ -4,7 +4,20 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    input = params[:search]
+    if input.length > 2
+      sql = "name LIKE '%#{input}%' OR email LIKE '%#{input}%'"
+    else
+      sql = "name LIKE '#{input.titleize}%' OR email LIKE '#{input}%'"
+    end
+    @users = User.where(sql)
+    @users_avatars = @users.map { |user| {avatar_url: user.avatar.url(:icon), id: user.id}}
+    @friends = current_user.friends
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: {users: @users, user_avatars: @users_avatars, friends: @friends, current_user_id: current_user.id}}
+    end
+
   end
 
   # GET /users/1
@@ -38,8 +51,14 @@ class UsersController < ApplicationController
   end
 
   def add_friend
-    current_user.friendship.create(friend_user_id: @user.id)
-    render :show
+    if @user.privacy
+      @user.friend_requests.create(sender_id: current_user.id)
+    else
+      current_user.friend_ids=current_user.friend_ids.push(@user.id)
+    end
+    respond_to do |format|
+      format.json { render json: {name: @user.name, id: @user.id, privacy: @user.privacy}}
+    end
   end
 
   def remove_friend

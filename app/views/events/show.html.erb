@@ -1,3 +1,4 @@
+
 <div class="col-xs-12 col-sm-offset-1 col-sm-10">
   <div class="col-xs-6">
     <%= link_to events_path do %>
@@ -20,6 +21,7 @@
       </div>
     </div>
 
+
     <div id="event-subnav" class="col-xs-12 col-sm-offset-1 col-sm-10">
       <div class="col-xs-3">
         <button id="rsvp-button" class="btn btn-default btn-circle" data-target="#rsvp-container"><span class="glyphicon glyphicon-user" aria-hidden="true"></button>
@@ -36,7 +38,7 @@
     </div>
 
     <div id="toggle-container">
-
+      
     <div id="rsvp-container">
     <% @invitees.each do |invite| %>
     <%= render "rsvp", :invite => invite %>
@@ -47,12 +49,33 @@
     <%= render "chat" %>
     </div>
     
-    <div id="map-container" class="">
+    <div id="map-container" class="hidden">
+      
       <div class="col-xs-12 col-sm-offset-1 col-sm-10">
       <%= render "map" %>
-      <a href="event/show" class='fs'>Find Restaurants</a>
-      <div id='results'></div>
+      <div class="col-xs-6">
+
+
+      <%= form_tag do %>
+      <h4>Cuisine</h4>
+      <%= select_tag "cuisine", options_for_select([['Thai','Thai'], ['Mexican','Mexican'],['Italian','Italian']]) %>
+      <h4>Price</h4>
+      <%= radio_button_tag(:price, "1") %>
+      <%= label_tag(:price_tier1, "$") %>
+      <%= radio_button_tag(:price, "2") %>
+      <%= label_tag(:price_tier, "$$") %>
+      <%= radio_button_tag(:price, "3") %>
+      <%= label_tag(:price_tier3, "$$$") %>
+      <h4>Reservations?</h4>
+      <%= check_box_tag(:reservation, "true") %>
+      <%= label_tag(:reservation_yes, "Yes") %>
+      <% end %>
+      <button class="fs btn btn-default">Find Restaurants</button>
+
       </div>
+      <div id='results' class="col-xs-6"></div>
+      </div>
+      
     </div>
 
     <div id="favorite-container" class="hidden">

@@ -1,6 +1,8 @@
 
 jQuery(function() {
-  var client = new WebSocket("ws://localhost:2000");
+  
+  var hostname = "<%= ENV['RAILS_ENV'] == 'production' ? '104.236.59.10:2000' : 'localhost:2000' %>"
+  var client = new WebSocket("ws://" + hostname);
 
   //moved some needed variables to the top
   var $chatwindow = $("#chatwindow");
@@ -14,17 +16,24 @@ jQuery(function() {
       type: 'GET',
       dataType: 'json',
       success: function(data) {
+        console.log(data);
         window.current_user = data.current_user
+        window.avatars = data.invitee_avatars
         data.chatlog.forEach(function (chat) {
-          var user
-          data.invitees.forEach(function (invitee) {
+
+          var user, avatar_url
+          $(data.invitees).each(function(index, invitee){
             if (chat.user_id === invitee.id) {
-              //setting user by user_id found in chatlog
               user = invitee
-              //this should be changed in the future because the password_digest is present
+            }
+            
+          })
+          $(data.invitee_avatars).each(function (index, avatar) {
+            if (chat.user_id === avatar.id) {
+              avatar_url = avatar.avatar_url;
             }
           })
-          appendChat(user, chat.message, chat.created_at)
+          appendChat(user, chat.message, chat.created_at, avatar_url)
 
         })
       },
@@ -52,10 +61,17 @@ jQuery(function() {
 
       var $serverMessage = JSON.parse(msg.data);
       var $timeofMessage = JSON.parse(msg.timeStamp);
+      var avatar_url
       console.log($timeofMessage);
+
+      window.avatars.forEach(function (avatar) {
+        if ($serverMessage.user.id === avatar.id) {
+          avatar_url = avatar.avatar_url
+        }
+      })
       
       //switched task with function here
-      appendChat($serverMessage.user, $serverMessage.msg, $timeofMessage)
+      appendChat($serverMessage.user, $serverMessage.msg, $timeofMessage, avatar_url)
     });
 
     //listen for input from user (submit button click)
@@ -100,7 +116,8 @@ jQuery(function() {
 
 
 // moved function down here
-function appendChat (user, serverMessage, timeofMessage){
+function appendChat (user, serverMessage, timeofMessage, url){
+  var avatar_url = url || "http://localhost:3000/assets/users/default/default-b29b8be84633d061610458246d97fe53.png";
   var $chatwindow = $("#chatwindow");
   var $userInput = $("#textbox")[0];
   var $submit = $("#submitchat")[0];
@@ -132,7 +149,8 @@ function appendChat (user, serverMessage, timeofMessage){
   $colDiv.append($messageDiv);
 
   $avatarDiv = $("<div></div>", {class: "col-md-1 col-xs-2 avatar_div"});
-  $avatarImage = $("<img>").attr({ src: "<%= asset_path('users/default/default_thumb.gif') %>", class: "avatar" });
+
+  $avatarImage = $("<img>").attr({ src: avatar_url, class: "avatar" });
   $avatarDiv.append($avatarImage);
 
 

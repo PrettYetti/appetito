@@ -59,11 +59,12 @@
 	<div class="col-md-4">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h4 class="panel-title">Friends</h4>
+				<h4 class="panel-title inline-block">Friends</h4>
+				<button class="pull-right btn btn-default btn-circle" data-toggle="modal" data-target="#friend-search-modal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
 			</div>
 			<ul class="media-list list-group">
-					<% current_user.friends.each do |friend| %>
-					<li class="media list-group-item">
+				<% current_user.friends.each do |friend| %>
+				<li class="media list-group-item">
 					<div class="media-left">
 						<%= image_tag friend.avatar.url(:thumb), class: "avatar" %>
 					</div>
@@ -74,6 +75,30 @@
 				<% end %>
 			</ul>
 			<% end %>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="friend-search-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="exampleModalLabel">Find New Friends</h4>
+			</div>
+			<div class="modal-body">
+				<form class= "search" action = "/users" method= 'GET'>
+					<div class="form-group">
+						<input type="text" name="search" class="search-bar form-control" id="recipient-name" placeholder="Search..." data-toggle="collapse" href="#newfriend-panel" aria-expanded="false" aria-controls="newfriend-panel">
+						<span class="glyphicon glyphicon-search"></span>
+					</div>
+				</form>
+			<div id="newfriend-panel" class="collapse panel panel-default">
+				<ul id="newfriend-list" class="media-list list-group">
+
+				</ul>
+			</div>
+			</div>
 		</div>
 	</div>
 </div>

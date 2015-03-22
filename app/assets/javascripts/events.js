@@ -1,13 +1,65 @@
 //JAVASCRIPT FOR DISPLAY AND HIDE ELEMENTS 'ON CLICK' ON EVENTS PAGE 
 
+
 $(function(){
+    $("#add-location").on("submit", function(e){
+        e.preventDefault();
+        // markers.forEach( function (marker) )
+        var input  = $('#add-location').find('input:text').val()
+        var form = this
+        $.ajax({
+            url: $('#add-location')[0].action,
+            type: 'PUT',
+            dataType: 'json',
+            data: {invite: {location: input}},
+            success: function (data) {
+                markers.forEach( function (marker) {
+                    marker.setMap(null);
+                })
+                searchMarkers.forEach( function (marker) {
+                    marker.setMap(null);
+                })
+                markers = []
+                bounds = new google.maps.LatLngBounds()
+                data.forEach( function (invitee) {
+                    buildMarker(invitee)
+                    setRadius(invitee.lat, invitee.lng)
+                })
+                map.fitBounds(calibrate(bounds));
+                window.radius = measure (maxlat, maxlng, minlat, minlng)/1.5
+                console.log(radius)
+                form.reset();
+            }
+        })
+        .done(function() {
+            console.log("success");
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        
+        
+    })
+
     $("#event-subnav").on("click", "button", function(e)
-        {
+        {   
+            setTimeout(function() {
+            google.maps.event.trigger(map, "resize");
+            bounds = new google.maps.LatLngBounds();
+            markers.forEach(function (marker) {
+                var myLatlng = new google.maps.LatLng(marker.Kf.Ca.k, marker.Kf.Ca.B);
+                bounds.extend(myLatlng);
+            })
+            handler.map.serviceObject.fitBounds(calibrate(bounds));
+            }, 1);
             var $button = $(this)
             var $target = $($button.data("target"));
             $target.removeClass("hidden");
             $target.siblings().addClass("hidden");
-        });
+    });
 });
 
 //JAVASCRIPT FOR CHAT WINDOW STYLING

@@ -3,7 +3,7 @@
 <ul class="margin-10 media-list list-group col-xs-12 col-sm-offset-1 col-sm-10">
   <%= link_to new_event_path do %>
   <li class="media list-group-item">
-    <h3> <button class="btn btn-default btn-circle"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
+    <h3> <button class="btn btn-default btn-circle" onclick="_gaq.push(['_trackEvent', 'button3', 'clicked'])"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
       Add Event</h3>
 
     </li>
@@ -40,5 +40,3 @@
         </li>
     <% end %>
     </ul>
-
-

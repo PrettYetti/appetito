@@ -16,40 +16,56 @@
     </header>
 
     <!-- Invite Section -->
-    <div class="light">
-    <section id="invite" class="container content-section">
+    <div class="paper accent-frame">
+    <section id="about" class="container content-section">
         <div class="row">
-            <div class="col-lg-7">
-                <h2>Invite Friends</h2>
-                <p>Grayscale is a free Bootstrap 3 theme created by Start Bootstrap. It can be yours right now, simply download the template on <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
-                <p>This theme features stock photos by <a href="http://gratisography.com/">Gratisography</a> along with a custom Google Maps skin courtesy of <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
-                <p>This version of Grayscale includes full HTML, CSS, and custom JavaScript files along with SASS files and bower for an even easier customization.</p>
+            <div class="col-lg-4 text-center">
+                <%= image_tag "display/icons/chat.svg", class: "intro-icon" %><h2 class="inline-block">Invite Friends</h2>
+                <p>Create a plan to dine out and invite your friends to a group chat.</p>
+            </div>
+            <div class="col-lg-4 text-center">
+                <%= image_tag "display/icons/utensils.svg", class: "intro-icon" %><h2 class="inline-block">Find Restaurants</h2>
+                <p>Appetito locates restaurants based on you and your friends' locations. Narrow down choices with price, cuisine, and reservation filters.</p>
+            </div>
+            <div class="col-lg-4 text-center">
+                <%= image_tag "display/icons/check.svg", class: "intro-icon" %><h2 class="inline-block">Vote and Confirm</h2>
+                <p>Vote on your favorites as a group and confirm the restaurant to dine together.</p>
             </div>
         </div>
     </section>
 </div>
 
     <!-- Find Restaurants -->
-    <section id="find" class="container content-section">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-4">
-                <h2>Find Restaurants</h2>
-                <p>Grayscale is a free Bootstrap 3 theme created by Start Bootstrap. It can be yours right now, simply download the template on <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
-                <p>This theme features stock photos by <a href="http://gratisography.com/">Gratisography</a> along with a custom Google Maps skin courtesy of <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
-                <p>This version of Grayscale includes full HTML, CSS, and custom JavaScript files along with SASS files and bower for an even easier customization.</p>
+    <section id="creators" class="container content-section">
+        <div class="row text-center">
+            <div class="col-lg-offset-1 col-lg-5">
+                <h3 class="margin-10 inline-block">Eunice Kim</h3>
+                <strong>Project Manager</strong>
+            </div>
+            <div class="col-lg-5">
+                <h3 class="margin-10 inline-block">Ciara Foran</h3>
+                <strong>Web Developer</strong>
+            </div>
+        </div> 
+        <div class="row text-center">
+            <div class="col-lg-offset-1 col-lg-5">
+                <h3 class="margin-10 inline-block">Remina Greenfield</h3>
+                <strong>Web Developer</strong>
+            </div>
+            <div class="col-lg-5">
+                <h3 class="margin-10 inline-block">George Lu</h3>
+                <strong>Web Developer</strong>
             </div>
         </div>
     </section>
 
     <!-- Vote and  Decide -->
-    <div class="light">
-    <section id="vote" class="container content-section">
+    <div class="paper accent-frame">
+    <section id="signup" class="container content-section">
         <div class="row">
-            <div class="col-lg-7">
-                <h2>Vote and Decide</h2>
-                <p>Grayscale is a free Bootstrap 3 theme created by Start Bootstrap. It can be yours right now, simply download the template on <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
-                <p>This theme features stock photos by <a href="http://gratisography.com/">Gratisography</a> along with a custom Google Maps skin courtesy of <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
-                <p>This version of Grayscale includes full HTML, CSS, and custom JavaScript files along with SASS files and bower for an even easier customization.</p>
+            <div class="col-lg-offset-4 col-lg-4">
+                <%= button_to "Sign Up", new_user_path, {:class => "btn btn-default btn-lg btn-block margin-10", :method => :get}  %>
+                <%= button_to "Guest Log In", new_user_path, {:class => "btn btn-default btn-lg btn-block margin-10", :method => :get}  %>
             </div>
         </div>
     </section>
@@ -60,7 +76,7 @@
     <!-- Footer -->
     <footer>
         <div class="container text-center">
-            <p>Copyright &copy; Your Website 2014</p>
+            <p>Copyright &copy; PrettYetti 2015</p>
         </div>
     </footer>
 

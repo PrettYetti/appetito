@@ -2,7 +2,7 @@
 
 $primary: #219AB3 !default;
 $dark: #520602 !default;
-$pop: #ea5000 !default;
+$accent: #ea5000 !default;
 
 $body-font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
 $headline-font-family: "Slabo 13px","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -49,7 +49,7 @@ a {
 
 .navbar-custom {
   margin-bottom: 0;
-  border-bottom: 1px solid transparentize($pop, 0.7);
+  border-bottom: 1px solid transparentize($accent, 0.7);
   font-family: $headline-font-family;
   background-color: $dark;
 
@@ -63,7 +63,7 @@ a {
     .navbar-toggle {
       padding: 4px 6px;
       font-size: 16px;
-      color: $pop;
+      color: $accent;
 
       &:focus,
       &:active {
@@ -73,7 +73,7 @@ a {
   }
 
   a {
-    color: $pop;
+    color: $accent;
   }
 
   .nav {
@@ -82,7 +82,7 @@ a {
 
       &.active {
         outline: none;
-        background-color: transparentize($pop, 0.7);
+        background-color: transparentize($accent, 0.7);
       }
 
       a {
@@ -94,8 +94,8 @@ a {
         &:focus,
         &.active {
           outline: none;
-          background-color: transparentize($pop, 1.0);
-          color: $pop;
+          background-color: transparentize($accent, 1.0);
+          color: $accent;
         }
       }
     }
@@ -121,7 +121,7 @@ a {
   }
 
   .navbar-custom.top-nav-collapse {
-    border-bottom: 1px solid transparentize($pop, 0.7);
+    border-bottom: 1px solid transparentize($accent, 0.7);
   }
 }
 
@@ -132,13 +132,12 @@ a {
   height: auto;
   padding: 100px 0;
   text-align: center;
-  color: $pop;
+  color: $accent;
   background: $dark url(image-path("display/bg-intro.jpg")) no-repeat scroll center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
-
   .intro-body {
     display: table-cell;
     vertical-align: middle;
@@ -148,7 +147,7 @@ a {
       background-color: $dark;
       display: inline-block;
       padding: 0.2em 0.5em 0.3em 0.5em;
-      border: solid 3px $pop;
+      border: solid 3px $accent;
       margin-top: 20%;
       margin-bottom: 5%;
     }
@@ -184,10 +183,10 @@ a {
   height: 70px;
   margin-top: 15px;
   padding: 7px 16px;
-  border: 2px solid $pop;
+  border: 2px solid $accent;
   border-radius: 35px;
   font-size: 40px;
-  color: $pop;
+  color: $accent;
   background: transparent;
   -webkit-transition: background .3s ease-in-out;
   -moz-transition: background .3s ease-in-out;
@@ -196,8 +195,8 @@ a {
   &:hover,
   &:focus {
     outline: none;
-    color: $pop;
-    background: transparentize($pop, 0.9);
+    color: $accent;
+    background: transparentize($accent, 0.9);
   }
 }
 
@@ -209,7 +208,7 @@ a {
 .download-section {
   width: 100%;
   padding: 50px 0;
-  color: $pop;
+  color: $accent;
   background: $dark url(../../images/downloads-bg.jpg) no-repeat scroll center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -282,7 +281,7 @@ footer {
 ::-moz-selection, ::selection  {
   text-shadow: none;
   background: #fcfcfc;
-  background: transparentize($pop, 0.8);
+  background: transparentize($accent, 0.8);
 }
 
 img {

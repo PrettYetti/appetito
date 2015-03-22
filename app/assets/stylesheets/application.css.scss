@@ -13,7 +13,8 @@
 
 $primary: #219AB3 !default;
 $dark: #520602 !default;
-$light: #ea5000 !default;
+$light: white !default;
+$pop: #ea5000 !default;
 
 $body-font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
 $headline-font-family: "Slabo 13px","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -22,9 +23,9 @@ body {
   width: 100%;
   height: 100%;
   font-family: $body-font-family;
-  color: $light;
+  color: $pop;
   background-color: $dark;
-  -webkit-tap-highlight-color: transparentize($light, 0.8);
+  -webkit-tap-highlight-color: transparentize($pop, 0.8);
   word-wrap: break-word;
   padding-top: 100px;
 }
@@ -57,17 +58,20 @@ a {
     background-color: transparent;
   }
 }
+.light {
+  background-color: $light;
+}
 .avatar_div {
     position: relative;
     padding-left: 0px;
 }
 .notification-badge {
-   color: $light;
+   color: $pop;
    background-color: $dark;
    position:relative;
    top: -15px;
    left: -15px;
-   border: 1px solid $light;
+   border: 1px solid $pop;
    font-size: 0.6em;
 }
 .btn-circle {
@@ -114,3 +118,11 @@ a {
   position: relative;
   bottom: 8px;
 }
+#login-form{
+  input{
+  border-color: $pop;
+  color: $dark;
+  font-size: 13px;
+  }
+}
+

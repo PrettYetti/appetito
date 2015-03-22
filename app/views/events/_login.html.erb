@@ -1,5 +1,5 @@
 
-<%= form_tag login_users_path, :class => "navbar-form navbar-right" do %>
+<%= form_tag login_users_path, {:class => "navbar-form navbar-right", :id => "login-form"} do %>
  <div class="form-group">
   <%= text_field_tag :email, params[:email], placeholder: "Email", class: "form-control" %>
 </div>

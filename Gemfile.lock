@@ -76,10 +76,8 @@ GEM
     debugger-linecache (1.2.0)
     erubis (2.7.0)
     execjs (2.4.0)
-    faraday (0.9.1)
-      multipart-post (>= 1.2, < 3)
-    faraday_middleware (0.9.1)
-      faraday (>= 0.7.4, < 0.10)
+    faker (1.4.3)
+      i18n (~> 0.5)
     geocoder (1.2.7)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
@@ -111,7 +109,6 @@ GEM
     momentjs-rails (2.9.0)
       railties (>= 3.1)
     multi_json (1.11.0)
-    multipart-post (2.0.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     paperclip (4.2.1)
@@ -171,7 +168,6 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    simple_oauth (0.2.0)
     slop (3.6.0)
     spring (1.3.3)
     sprockets (2.12.3)
@@ -193,10 +189,6 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    yelp (2.0.5)
-      faraday (~> 0.8, >= 0.8.0)
-      faraday_middleware (~> 0.8, >= 0.8.0)
-      simple_oauth (~> 0.2, >= 0.2.0, < 0.3.0)
 
 PLATFORMS
   ruby
@@ -211,6 +203,7 @@ DEPENDENCIES
   bootstrap3-datetimepicker-rails (~> 4.0.0)
   byebug
   coffee-rails (~> 4.1.0)
+  faker
   geocoder
   gmaps4rails
   jbuilder (~> 2.0)
@@ -229,4 +222,3 @@ DEPENDENCIES
   spring
   turbolinks
   uglifier (>= 1.3.0)
-  yelp

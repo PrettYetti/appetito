@@ -170,23 +170,23 @@ function toggleFavorite($dom) {
 toggleFavorite($('#favorite'))
 toggleFavorite($('#favorited'))
 
-// $('.fs').on('click', function(event){
+$('.fs').on('click', function(event){
 
-//   event.preventDefault();
-//   var searchDegree = 1000
-//   var lat = Math.round(handler.map.serviceObject.center.k*searchDegree)/searchDegree
-//   var lng = Math.round(handler.map.serviceObject.center.B*searchDegree)/searchDegree
-//   console.log(lat,lng)
+  event.preventDefault();
+  var searchDegree = 1000
+  var lat = Math.round(handler.map.serviceObject.center.k*searchDegree)/searchDegree
+  var lng = Math.round(handler.map.serviceObject.center.B*searchDegree)/searchDegree
+  console.log(lat,lng)
 
 
-//   //fix this to grab lat,lng once map is generated
-//   getResults( lat, lng );
-// });	
+  //fix this to grab lat,lng once map is generated
+  getResults( lat, lng );
+});	
 
-$('#search').on('submit', function (event) {
-	event.preventDefault();
-	debugger
-})
+// $('#search').on('submit', function (event) {
+// 	event.preventDefault();
+// 	debugger
+// })
 
 
 searchForFriends();

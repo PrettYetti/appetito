@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316232152) do
+ActiveRecord::Schema.define(version: 20150323144202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,14 +38,13 @@ ActiveRecord::Schema.define(version: 20150316232152) do
   add_index "events", ["creator_id"], name: "index_events_on_creator_id", using: :btree
 
   create_table "favorites", force: :cascade do |t|
-    t.integer  "event_id"
     t.integer  "user_id"
-    t.string   "restaurant"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "restaurant_id", null: false
   end
 
-  add_index "favorites", ["event_id"], name: "index_favorites_on_event_id", using: :btree
+  add_index "favorites", ["restaurant_id"], name: "index_favorites_on_restaurant_id", using: :btree
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
   create_table "friendships", id: false, force: :cascade do |t|
@@ -84,6 +83,20 @@ ActiveRecord::Schema.define(version: 20150316232152) do
   add_index "notifications", ["event_id"], name: "index_notifications_on_event_id", using: :btree
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
+  create_table "restaurants", force: :cascade do |t|
+    t.string   "name"
+    t.string   "cuisine"
+    t.string   "phone"
+    t.string   "address"
+    t.float    "rating"
+    t.integer  "price"
+    t.integer  "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "restaurants", ["event_id"], name: "index_restaurants_on_event_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "password_digest"
@@ -98,7 +111,6 @@ ActiveRecord::Schema.define(version: 20150316232152) do
   end
 
   add_foreign_key "events", "users", column: "creator_id"
-  add_foreign_key "favorites", "events"
   add_foreign_key "favorites", "users"
   add_foreign_key "invites", "events"
   add_foreign_key "invites", "users"

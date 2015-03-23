@@ -9,6 +9,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  location   :string
+#  latitude   :float
+#  longitude  :float
 #
 
 #This class is a join table for events and users

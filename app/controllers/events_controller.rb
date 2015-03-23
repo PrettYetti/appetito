@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   include EventsHelper
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :chatlog, :add_favorite, :logchat]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :chatlog, :add_favorite, :logchat, :add_restaurant]
 
   # GET /events
   # GET /events.json
@@ -56,10 +56,26 @@ class EventsController < ApplicationController
     end
   end
 
-  def add_favorite
-    favorite = @event.favorites.create(user_id: current_user.id, restaurant: params[:restaurant])
+  def toggle_favorite
+    restaurant = Restaurant.find(params[:restaurant])
+    if favorited = restaurant.favorites.find_by(user_id: current_user.id)
+      favorited.destroy
+      puts "destroyed"
+    else
+      favorite = restaurant.favorites.create(user_id: current_user.id)
+      puts "created"
+    end
+    favorite_count = restaurant.favorites.count
     respond_to do |format|
-      format.json { render json: {favorite: favorite, favorites: @event.favorites }}
+      format.json { render json: {count: favorite_count} }
+    end
+
+  end
+
+  def add_restaurant
+    restaurant = @event.restaurants.create(restaurant_params)
+    respond_to do |format|
+      format.json { render json: restaurant }
     end
 
   end
@@ -133,5 +149,9 @@ class EventsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       params.require(:event).permit(:user_id, :name, :when, :location, :finalized, :cuisine)
+    end
+
+    def restaurant_params
+      params.require(:restaurant).permit(:name, :cuisine, :phone, :address, :rating, :price, :event_id)
     end
 end

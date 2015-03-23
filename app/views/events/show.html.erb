@@ -56,7 +56,7 @@
       <div class="col-xs-6">
 
 
-      <%= form_tag do %>
+      <%= form_tag foursquare_event_path, id: "search" do %>
       <h4>Cuisine</h4>
       <%= select_tag "cuisine", options_for_select([['Thai','Thai'], ['Mexican','Mexican'],['Italian','Italian']]) %>
       <h4>Price</h4>
@@ -69,8 +69,8 @@
       <h4>Reservations?</h4>
       <%= check_box_tag(:reservation, "true") %>
       <%= label_tag(:reservation_yes, "Yes") %>
+      <button type='submit' class="fs btn btn-default">Find Restaurants</button>
       <% end %>
-      <button class="fs btn btn-default">Find Restaurants</button>
 
       </div>
       <div id='results' class="col-xs-6"></div>
@@ -80,8 +80,10 @@
 
     <div id="favorite-container" class="hidden">
     <ul id="favorite-wrapper" class="col-xs-12 col-sm-offset-1 col-sm-10">
-      <% @event.favorites.each do |place| %>
-      <%= render "favorite", :place => place %>
+      <% @event.restaurants.each do |restaurant| %>
+      
+      <%= render "favorite", {:restaurant => restaurant} %>
+
       <% end %>
     </ul>
     </div>

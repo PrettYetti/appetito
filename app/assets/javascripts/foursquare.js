@@ -1,6 +1,7 @@
 window.onload = function () {
 
 console.log("fivesquare loaded")
+
 var pathname = window.location.pathname;
 function getResults(lat, lng){
 	var baseURL = "https://api.foursquare.com/v2/venues/explore";
@@ -12,23 +13,25 @@ function getResults(lat, lng){
 	var compile = clientID + clientSecret + version + locale + cuisine;
 	var map = handler.map.serviceObject;
 
+	function parseVenue (venue) {
+		var pricefix = (venue["venue"]["price"] === undefined) ? 0 : venue["venue"]["price"]["tier"]
+		return {
+			name: venue["venue"]["name"],
+			cuisine: venue["venue"]["categories"][0]["shortName"],
+			phone: venue["venue"]["contact"]["formattedPhone"],
+			address: venue["venue"]["location"]["formattedAddress"].join(", "),
+			rating: venue["venue"]["rating"],
+			price: pricefix
+
+		}
+	}
 
 	function renderResults (data) {
-		var venues = data["response"]["groups"]["0"]["items"]		
+		venues = data["response"]["groups"]["0"]["items"]	
 
 		
 
-		function parseVenue (venue) {
-			var pricefix = (venue["venue"]["price"] === undefined) ? 0 : venue["venue"]["price"]["tier"]
-			return {
-				name: venue["venue"]["name"],
-				phone: venue["venue"]["contact"]["formattedPhone"],
-				address: venue["venue"]["location"]["formattedAddress"],
-				rating: venue["venue"]["rating"],
-				price: pricefix
-
-			}
-		}
+		
 
 		function buildMarker (venue) {
 			this.name = venue["venue"]["name"]
@@ -37,11 +40,11 @@ function getResults(lat, lng){
 			this.picture = "http://i.imgur.com/15cYFQt.png"
 		}
 
-		function makeVenue (venues) {
-			var $newUl = $('<ul>').after($('<br>'));
+		function makeVenue (venues, index) {
+			var $newUl = $('<ul>', {id: index}).after($('<br>'));
 			$('<li>').append($('<h2>').text(venues.name)).append($('<button>', {action: pathname+'/add_favorite', class: "favorite"}).text("Add me to favorites")).appendTo($newUl);
 			$('<li>').text(venues.phone).appendTo($newUl);
-			$('<li>').text(venues.address.join(", ")).appendTo($newUl)
+			$('<li>').text(venues.address).appendTo($newUl)
 			$('<li>').text("Rating: " + venues.rating).appendTo($newUl);
 			$('<li>').text("Price: " + Array(venues.price+1).join("$")).appendTo($newUl);
 
@@ -51,7 +54,7 @@ function getResults(lat, lng){
 		$results.html('');
 
 		$(venues).each(function(index, venue) {
-			makeVenue(parseVenue(venue))
+			makeVenue(parseVenue(venue), index)
 			var markerInput = new buildMarker(venue)
 			var myLatlng = new google.maps.LatLng(markerInput.lat, markerInput.lng)
 			var contentString = markerInput.name
@@ -98,19 +101,26 @@ function getResults(lat, lng){
 			renderResults(data);
 			$('ul').find($('button')).on('click', function (event) {
 				event.preventDefault();
-				var name = $(this).parent().find($('h2')).text();
+				var index = $(this).parent().parent()[0].id
+				var venue = parseVenue(venues[index])
 				$.ajax({
-					url: pathname+'/add_favorite',
+					url: pathname+'/add_restaurant',
 					type: 'POST',
 					dataType: 'json',
-					data: {restaurant: name},
+					data: {restaurant: venue},
 					success: function(data){
-							if ($( "#favorites-wrapper:contains('"+data.favorite.restaurant+"')" )[0] === undefined) {
-							var $newFavoriteH4 = $('<h4>').text(data.favorite.restaurant);
-							var $confirmFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-ok"></span>')
-							var $voteFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-heart"></span>')
-							var $newFavoriteLi = $('<li>', {class: "col-xs-6 col-sm-3"}).append($newFavoriteH4, $voteFavorite, $confirmFavorite)
+							if ($( "#favorite-wrapper:contains('"+data.name+"')" )[0] === undefined) {
+							var $name = $('<li></li>').append($('<h4>').text(data.name));
+							var $cuisine = $('<li></li>').text(data.cuisine);
+							var $price = $('<li></li>').text(Array(data.price+1).join("$"));
+							var $rating = $('<li></li>').text(data.rating);
+							var $confirmFavorite = $('<span id="confirm" aria-hidden="true" class="glyphicon glyphicon-ok"></span>')
+							var $voteFavorite = $('<span id="favorite" aria-hidden="true" class="glyphicon glyphicon-heart"></span>')
+
+							var $newFavoriteUl = $('<ul>', {id: data.id}).append($name, $cuisine, $price, $rating, $voteFavorite, $confirmFavorite)
+							var $newFavoriteLi = $('<li>', {id: data.id, class: "col-xs-6 col-sm-3"}).append($newFavoriteUl)
 							$('#favorite-wrapper').append($newFavoriteLi)
+							toggleFavorite($voteFavorite)
 							console.log('trying to add stuff')
 						}
 					}
@@ -128,34 +138,59 @@ function getResults(lat, lng){
 			})
 		}
 	})
-}	
+}
+
+function toggleFavorite($dom) {
+	$($dom).on('click', function(){
+		var id = $(this).parent().parent()[0].id
+		var that = this
+		$.ajax({
+			url: pathname+'/toggle_favorite',
+			type: 'POST',
+			dataType: '',
+			data: {restaurant: id},
+			success: function (data) {
+				$(that).text(data.count)
+			}
+		})
+		.done(function() {
+			console.log("success");
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+		
+
+	})
+}
+
+toggleFavorite($('#favorite'))
+toggleFavorite($('#favorited'))
+
+// $('.fs').on('click', function(event){
+
+//   event.preventDefault();
+//   var searchDegree = 1000
+//   var lat = Math.round(handler.map.serviceObject.center.k*searchDegree)/searchDegree
+//   var lng = Math.round(handler.map.serviceObject.center.B*searchDegree)/searchDegree
+//   console.log(lat,lng)
 
 
+//   //fix this to grab lat,lng once map is generated
+//   getResults( lat, lng );
+// });	
 
-$('.fs').on('click', function(event){
-
-  event.preventDefault();
-  var searchDegree = 1000
-  var lat = Math.round(handler.map.serviceObject.center.k*searchDegree)/searchDegree
-  var lng = Math.round(handler.map.serviceObject.center.B*searchDegree)/searchDegree
-  console.log(lat,lng)
-
-
-  //fix this to grab lat,lng once map is generated
-  getResults( lat, lng );
-});	
+$('#search').on('submit', function (event) {
+	event.preventDefault();
+	debugger
+})
 
 
 searchForFriends();
 
-
-
-$('.search').on('submit', function (event) { 
-	event.preventDefault();
-	console.log("searching?");			
-		
-		
-	})
 
 console.log('search loaded')
 

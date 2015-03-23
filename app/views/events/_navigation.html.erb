@@ -16,11 +16,8 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
-                    <li>
-                        <a class="page-scroll" href="#about">About</a>
-                    </li>
                     <% if current_user %>
-                    <li class="dropdown" id="link_to_home">
+                    <li class="dropdown" id="user_nav">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <%= current_user.name %>
                         <span class="caret"></span>

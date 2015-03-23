@@ -15,6 +15,7 @@ $primary: #219AB3 !default;
 $dark: #520602 !default;
 $light: #FEF1DF !default;
 $accent: #ea5000 !default;
+$accent-transparent: rgba(82, 6, 2, 0.3) !default;
 $highlight: #FF6600 !default;
 
 $body-font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -37,7 +38,7 @@ h3, .h3,
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-  margin: 0 0 35px;
+  margin: 0 0 15px;
   font-family: $headline-font-family;
   font-weight: 700;
   letter-spacing: 1px;
@@ -51,7 +52,16 @@ h6, .h6 {
     display: inline-block;
   }
   &.list-group-item{
-    padding: 0 inherit;
+    background: $light  url(image-path("display/texture.png"));
+    border: 1px solid $accent-transparent;
+    padding: 10px;
+  }
+  .media-body{
+    padding: 5px;
+  }
+  h3 {
+    margin-bottom: 0;
+    margin-left: 25px;
   }
 }
 a {
@@ -104,9 +114,8 @@ a {
   width: 30px;
   height: 30px;
   text-align: center;
-  padding: 6px 0;
+  padding: 0 1px;
   font-size: 12px;
-  line-height: 1.42;
   border-radius: 15px;
   position: relative;
   bottom: 3px;
@@ -171,4 +180,5 @@ a {
    } 
   }
 }
+
 

@@ -40,7 +40,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem "paperclip", "~> 4.2"
 gem 'geocoder'
 gem 'gmaps4rails'
-gem 'yelp', require: 'yelp'
+# gem 'yelp', require: 'yelp'
+gem 'faker'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

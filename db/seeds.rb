@@ -32,6 +32,14 @@ eunice = User.create(
 	}
 )
 
+20.times { 
+	User.create({
+		name: Faker::Name.name,
+		email: Faker::Internet.email,
+		password: "password",
+		privacy: [true, false][rand(2)]
+	})
+}
 
 george.created_events.create({
 	name: "PartyHarty",
@@ -61,10 +69,10 @@ eunice.created_events.create({
 	when: Time.now
 	})
 
-# george.friend_ids=[2,3]
-# remina.friend_ids=[1,4]
-# ciara.friend_ids=[1,4]
-# eunice.friend_ids=[2,3]
+george.friend_ids=[2,3]
+remina.friend_ids=[1,4]
+ciara.friend_ids=[1,4]
+eunice.friend_ids=[2,3]
 
 
 [

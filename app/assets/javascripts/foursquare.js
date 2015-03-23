@@ -115,9 +115,9 @@ function getResults(lat, lng){
 							var $price = $('<li></li>').text(Array(data.price+1).join("$"));
 							var $rating = $('<li></li>').text(data.rating);
 							var $confirmFavorite = $('<span id="confirm" aria-hidden="true" class="glyphicon glyphicon-ok"></span>')
-							var $voteFavorite = $('<span id="favorite" aria-hidden="true" class="glyphicon glyphicon-heart"></span>')
+							var $voteFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-heart favorite"></span>')
 
-							var $newFavoriteUl = $('<ul>', {id: data.id}).append($name, $cuisine, $price, $rating, $voteFavorite, $confirmFavorite)
+							var $newFavoriteUl = $('<ul>', {id: data.id}).append($name, $cuisine, $price, $rating, $confirmFavorite, $voteFavorite)
 							var $newFavoriteLi = $('<li>', {id: data.id, class: "col-xs-6 col-sm-3"}).append($newFavoriteUl)
 							$('#favorite-wrapper').append($newFavoriteLi)
 							toggleFavorite($voteFavorite)
@@ -167,21 +167,31 @@ function toggleFavorite($dom) {
 	})
 }
 
-toggleFavorite($('#favorite'))
-toggleFavorite($('#favorited'))
+toggleFavorite($('.favorite'))
+toggleFavorite($('.favorited'))
 
 $('.fs').on('click', function(event){
 
   event.preventDefault();
   var searchDegree = 1000
-  var lat = Math.round(handler.map.serviceObject.center.k*searchDegree)/searchDegree
-  var lng = Math.round(handler.map.serviceObject.center.B*searchDegree)/searchDegree
+  var lat = center.k
+  var lng = center.B
   console.log(lat,lng)
 
 
   //fix this to grab lat,lng once map is generated
   getResults( lat, lng );
-});	
+});
+
+// $('form').on('submit', function (event) {
+// 	event.preventDefault();
+// 	var cuisine = $(this).find('select').val()
+// 	var price = $(this).find('input[name="price"]:checked').val()
+// 	var reservation = $(this).find('input[name="reservation"]:checked').val()
+
+
+
+// })
 
 // $('#search').on('submit', function (event) {
 // 	event.preventDefault();

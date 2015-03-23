@@ -1,7 +1,25 @@
 //JAVASCRIPT FOR DISPLAY AND HIDE ELEMENTS 'ON CLICK' ON EVENTS PAGE 
-
-
 $(function(){
+    $("#event-subnav").on("click", "button", function(e)
+        {   
+            setTimeout(function() {
+            google.maps.event.trigger(map, "resize");
+            bounds = new google.maps.LatLngBounds();
+            markers.forEach(function (marker) {
+                var myLatlng = new google.maps.LatLng(marker.Kf.Ca.k, marker.Kf.Ca.B);
+                bounds.extend(myLatlng);
+            })
+            handler.map.serviceObject.fitBounds(calibrate(bounds));
+            }, 1);
+            var $button = $(this)
+            var $target = $($button.data("target"));
+            $target.removeClass("hidden");
+            $target.siblings().addClass("hidden");
+            var $chatwindow = $("#chatwindow");
+            $chatwindow[0].scrollTop = $chatwindow[0].scrollHeight;
+    });
+
+
     $("#add-location").on("submit", function(e){
         e.preventDefault();
         // markers.forEach( function (marker) )
@@ -20,12 +38,14 @@ $(function(){
                     marker.setMap(null);
                 })
                 markers = []
+                searchMarkers = []
                 bounds = new google.maps.LatLngBounds()
                 data.forEach( function (invitee) {
                     buildMarker(invitee)
                     setRadius(invitee.lat, invitee.lng)
                 })
                 map.fitBounds(calibrate(bounds));
+                center = map.center
                 window.radius = measure (maxlat, maxlng, minlat, minlng)/1.5
                 console.log(radius)
                 form.reset();
@@ -44,22 +64,6 @@ $(function(){
         
     })
 
-    $("#event-subnav").on("click", "button", function(e)
-        {   
-            setTimeout(function() {
-            google.maps.event.trigger(map, "resize");
-            bounds = new google.maps.LatLngBounds();
-            markers.forEach(function (marker) {
-                var myLatlng = new google.maps.LatLng(marker.Kf.Ca.k, marker.Kf.Ca.B);
-                bounds.extend(myLatlng);
-            })
-            handler.map.serviceObject.fitBounds(calibrate(bounds));
-            }, 1);
-            var $button = $(this)
-            var $target = $($button.data("target"));
-            $target.removeClass("hidden");
-            $target.siblings().addClass("hidden");
-    });
 });
 
 //JAVASCRIPT FOR CHAT WINDOW STYLING
@@ -81,7 +85,7 @@ $(document).on('focus', '.panel-footer input.chat_input', function (e) {
         $this.parents('.panel').find('.panel-body').slideDown();
         $('#minim_chat_window').removeClass('panel-collapsed');
         $('#minim_chat_window').removeClass('glyphicon-plus').addClass('glyphicon-minus');
-    }
+    }   
 });
 $(document).on('click', '#new_chat', function (e) {
     var size = $( ".chat-window:last-child" ).css("margin-left");

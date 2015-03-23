@@ -158,6 +158,7 @@ function appendChat (user, serverMessage, timeofMessage, url){
   $wrapperDiv.append($colDiv, $avatarDiv);
 
   $chatwindow.append($wrapperDiv);
+  $chatwindow[0].scrollTop = $chatwindow[0].scrollHeight;
 }
 
 

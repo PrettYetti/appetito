@@ -14,6 +14,10 @@ class InvitesController < ApplicationController
     
   end
 
+  def create
+    
+  end
+
   def update
     @invite.update(invite_params)
     invitees = @invite.event.invites.map { |invite| {id: invite.user_id, lat: invite.latitude, lng: invite.longitude, name: invite.user.name}}

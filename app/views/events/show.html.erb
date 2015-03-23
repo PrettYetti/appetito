@@ -43,6 +43,9 @@
     <% @invitees.each do |invite| %>
     <%= render "rsvp", :invite => invite %>
     <% end %>
+    <div class="col-xs-12 col-sm-offset-1 col-sm-10">
+      <button class="btn btn-default">Invite Friends</button>
+    </div>
     </div>
 
     <div id="chat-container" class="hidden">

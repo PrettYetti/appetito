@@ -14,9 +14,9 @@
 $primary: #219AB3 !default;
 $dark: #520602 !default;
 $light: #FEF1DF !default;
+$lesslight: #FCD9A7 !default;
 $accent: #ea5000 !default;
-$accent-transparent: rgba(82, 6, 2, 0.3) !default;
-$highlight: #FC771D !default;
+$highlight: #F9893D !default;
 
 $body-font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
 $headline-font-family: "Slabo 13px","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -177,19 +177,22 @@ a {
 }
 .list-group-item {
   background: $light;
-  border: 1px solid $accent-transparent;
+  border: 1px solid $highlight;
   padding: 10px;
 }
 .panel-default {
   border: 1px solid $accent;
   > .panel-heading {
-  background-color: $highlight;
-  color: $dark;
+  background-color: $lesslight;
+  color: $accent;
+  }
+  > .panel-footer {
+  background-color: $light;
   }
 }
 .thumbnail {
-  background-color: $highlight;
-  border-color: $accent;
+  padding: 0;
+  border: 3px solid $accent;
 }
 .modal-content{
   background: $light;

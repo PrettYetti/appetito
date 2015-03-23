@@ -59,6 +59,9 @@ h6, .h6 {
     margin-left: 25px;
   }
 }
+.media-list{
+  background: $light;
+}
 a {
   color: $accent;
   -webkit-transition: all .2s ease-in-out;
@@ -77,6 +80,9 @@ a {
 }
 .paper {
   background: $light  url(image-path("display/texture.png"));
+}
+.dark {
+  background-color: $dark;
 }
 .accent-frame{
    border-top: 10px solid $accent;
@@ -161,6 +167,9 @@ a {
   width: auto;
   display: inline-block;
   margin-right: 10px;
+}
+.dropdown-toggle {
+  padding-bottom: 0;
 }
 .dropdown-menu {
   background-color: $dark;

@@ -126,10 +126,18 @@ a {
 }
 #bg2-intro{
   background: $dark url(image-path("display/bg2-intro.jpg")) no-repeat scroll center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
   min-height: 400px;
 }
 #bg3-intro{
   background: $dark url(image-path("display/bg3-intro.jpg")) no-repeat scroll center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
   min-height: 400px;
 }
 .intro {
@@ -184,29 +192,6 @@ a {
     }
   }
 }
-
-.btn-circle {
-  width: 70px;
-  height: 70px;
-  margin-top: 15px;
-  padding: 7px 16px;
-  border: 2px solid $accent;
-  border-radius: 35px;
-  font-size: 40px;
-  color: $accent;
-  background: transparent;
-  -webkit-transition: background .3s ease-in-out;
-  -moz-transition: background .3s ease-in-out;
-  transition: background .3s ease-in-out;
-
-  &:hover,
-  &:focus {
-    outline: none;
-    color: $accent;
-    background: transparentize($accent, 0.9);
-  }
-}
-
 .content-section {
   padding-top: 100px;
   padding-bottom: 100px;

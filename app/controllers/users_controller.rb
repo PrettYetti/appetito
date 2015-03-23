@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :add_friend, :remove_friend]
+  before_action :clear_notifications, only: [:show]
 
   # GET /users
   # GET /users.json
@@ -116,5 +117,12 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
+    end
+
+    def clear_notifications
+      current_user.notifications.each do |notification|
+        notification.notified = true
+        notification.save
+      end
     end
 end

@@ -135,6 +135,7 @@ a {
 }
 .form-control {
   padding-right: 30px;
+  border: 1px solid $lesslight;
 }
 .form-control + .glyphicon {
   position: absolute;
@@ -185,9 +186,11 @@ a {
   > .panel-heading {
   background-color: $lesslight;
   color: $accent;
+  border: 0;
   }
   > .panel-footer {
   background-color: $light;
+  border-color: $lesslight;
   }
 }
 .thumbnail {

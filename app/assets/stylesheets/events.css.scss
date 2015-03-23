@@ -56,7 +56,7 @@ $highlight: #F9893D !default;
   }
 .messages > time, .messages > .user_name {
     font-size: 11px;
-    color: #highlight;
+    color: $lesslight;
     font-style: italic;
     margin-left: 1%;
 }
@@ -128,6 +128,11 @@ img {
     left:0px;
     bottom:0;
 }
+#submitchat {
+  color: $accent;
+  background-color: $lesslight;
+}
+
 
 
 /* CALENDAR ICON */

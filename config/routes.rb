@@ -22,7 +22,9 @@ Rails.application.routes.draw do
     resources :invites
     get :chatlog, on: :member
     post :logchat, on: :member
-    post :add_favorite, on: :member
+    post :toggle_favorite, on: :member
+    post :add_restaurant, on: :member
+    get :foursquare, on: :member
   end
 
   root to: 'layouts#index'

@@ -2,13 +2,17 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  email           :string
-#  password_digest :string
-#  name            :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  privacy         :boolean          default("false")
+#  id                  :integer          not null, primary key
+#  email               :string
+#  password_digest     :string
+#  name                :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  privacy             :boolean          default("false")
+#  avatar_file_name    :string
+#  avatar_content_type :string
+#  avatar_file_size    :integer
+#  avatar_updated_at   :datetime
 #
 
 class User < ActiveRecord::Base
@@ -16,6 +20,7 @@ class User < ActiveRecord::Base
 	has_many :notifications
 	has_many :invites
 	has_many :events, through: :invites
+	has_many :favorites
 	has_and_belongs_to_many :friends, 
 	              class_name: "User", 
 	              join_table: :friendships, 

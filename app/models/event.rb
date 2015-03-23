@@ -19,7 +19,8 @@ class Event < ActiveRecord::Base
   has_many :notifications, dependent: :destroy
   has_many :invites, dependent: :destroy
   has_many :chatlogs, dependent: :destroy
-  has_many :favorites, dependent: :destroy
+  has_many :restaurants, dependent: :destroy
+  has_many :favorites
   has_many :users, through: :invites
 
   delegate :event_invites, :event_updates, to: :notifications

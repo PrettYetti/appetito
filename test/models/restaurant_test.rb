@@ -1,21 +1,22 @@
 # == Schema Information
 #
-# Table name: invites
+# Table name: restaurants
 #
 #  id         :integer          not null, primary key
-#  user_id    :integer
+#  name       :string
+#  cuisine    :string
+#  phone      :string
+#  address    :string
+#  rating     :float
+#  price      :integer
 #  event_id   :integer
-#  rsvp       :string           default("Undecided")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  location   :string
-#  latitude   :float
-#  longitude  :float
 #
 
 require 'test_helper'
 
-class InviteTest < ActiveSupport::TestCase
+class RestaurantTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

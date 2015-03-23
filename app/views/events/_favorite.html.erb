@@ -1,6 +1,16 @@
-
-<li class="col-xs-6 col-sm-3">
-  <h4><%= place.restaurant %></h4>
-  <span aria-hidden="true" class="glyphicon glyphicon-heart"></span>
-  <span aria-hidden="true" class="glyphicon glyphicon-ok"></span>
-</li>
+<% a = 0 %>
+	<li id= "<%= restaurant.id %>"class="col-xs-6 col-sm-3">
+		<ul>
+	  <li id="name"><h4><%= restaurant.name %></h4></li>
+		<li><%= restaurant.cuisine %></li>
+		<li><%= restaurant.price %></li>
+		<li><%= restaurant.rating %></li>
+	  <span id="confirm" aria-hidden="true" class="glyphicon glyphicon-ok"></span>
+	  <% if restaurant.favorites.find_by(user_id: current_user.id) == nil%> 
+	   <span id="favorite" aria-hidden="true" class="glyphicon glyphicon-heart"><%= restaurant.favorites.count %></span>
+	  <% else %>
+	  	<span id="favorited" aria-hidden="true" class="glyphicon glyphicon-heart"><%= restaurant.favorites.count %></span>
+	  <% end %> 
+	</ul>
+	</li>
+<% a += 1 %>

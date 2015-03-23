@@ -1,0 +1,33 @@
+# == Schema Information
+#
+# Table name: restaurants
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  cuisine    :string
+#  phone      :string
+#  address    :string
+#  rating     :float
+#  price      :integer
+#  event_id   :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  cuisine: MyString
+  phone: MyString
+  address: MyString
+  rating: 
+  price: 1
+
+two:
+  name: MyString
+  cuisine: MyString
+  phone: MyString
+  address: MyString
+  rating: 
+  price: 1

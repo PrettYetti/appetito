@@ -2,6 +2,7 @@
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
 
 <div class="row">
+	<img src="">
 <div class="col-xs-4">
 	<%= form_tag current_user.invites.find_by(event_id: @event.id), {method: :put, id: "add-location"} do %>
 		<%= text_field_tag(:'invite[location]',value =nil, options={placeholder: "Insert location here."}) %> 

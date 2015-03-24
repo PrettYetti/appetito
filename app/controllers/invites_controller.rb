@@ -20,9 +20,15 @@ class InvitesController < ApplicationController
 
   def update
     @invite.update(invite_params)
-    invitees = @invite.event.invites.map { |invite| {id: invite.user_id, lat: invite.latitude, lng: invite.longitude, name: invite.user.name}}
-    respond_to do |format|
-      format.json { render json: invitees }
+    if params[:invite][:location]
+      invitees = @invite.event.invites.map { |invite| {id: invite.user_id, lat: invite.latitude, lng: invite.longitude, name: invite.user.name}}
+      respond_to do |format|
+        format.json { render json: invitees }
+      end
+    elsif params[:invite][:rsvp]
+      respond_to do |format|
+        format.json { render json: @invite }
+      end
     end
   end
 

@@ -19,6 +19,37 @@ $(function(){
             $chatwindow[0].scrollTop = $chatwindow[0].scrollHeight;
     });
 
+    $('.rsvps').on('click', function (event) {
+        var id = $(this).parent().parent()[0].id
+        var rsvpTag = this.children[0]
+        var pathname = window.location.pathname
+        if (rsvpTag.classList.contains("glyphicon-ok")){
+            rsvp = "Attending"
+        } else if (rsvpTag.classList.contains("glyphicon-remove")) {
+            rsvp = "Not Attending"
+        } else { rsvp = "Maybe"}
+
+        $.ajax({
+            url: "/invites/"+id,
+            type: 'put',
+            dataType: 'json',
+            data: {invite: {rsvp: rsvp}},
+            success: function(data) {
+                //class change goes here.
+            }
+        })
+        .done(function() {
+            console.log("success");
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        
+    });
+
 
     $("#add-location").on("submit", function(e){
         e.preventDefault();

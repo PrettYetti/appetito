@@ -97,6 +97,7 @@ function getResults(lat, lng){
 			searchMarkers.forEach( function (marker) {
 				marker.setMap(null)
 			})
+			console.log("YOU LOAD")
 			searchMarkers = []
 			renderResults(data);
 			$('ul').find($('button')).on('click', function (event) {

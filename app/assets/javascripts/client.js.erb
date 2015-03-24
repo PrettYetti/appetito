@@ -117,7 +117,9 @@ jQuery(function() {
 
 // moved function down here
 function appendChat (user, serverMessage, timeofMessage, url){
-  var avatar_url = url || "http://localhost:3000/assets/users/default/default-b29b8be84633d061610458246d97fe53.png";
+  if (url == "users/default/default.png" ) {
+   var avatar_url = "/assets/users/default/default-b29b8be84633d061610458246d97fe53.png"
+  } else { var avatar_url = url }
   var $chatwindow = $("#chatwindow");
   var $userInput = $("#textbox")[0];
   var $submit = $("#submitchat")[0];

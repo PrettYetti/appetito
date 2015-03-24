@@ -17,8 +17,13 @@
 	map = handler.buildMap({
 	    provider: {
 	      disableDefaultUI: true,
-	      draggable: false,
-	      // scrollwheel: false,
+	      zoomControl: true,
+        zoomControlOptions: {
+            style: google.maps.ZoomControlStyle.SMALL,
+            position: google.maps.ControlPosition.LEFT_TOP
+        },
+	      // draggable: false,
+	      scrollwheel: false,
 	      panControl: false
 	      // pass in other Google Maps API options here
 	    },

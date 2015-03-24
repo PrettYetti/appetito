@@ -35,6 +35,7 @@ $(function(){
             dataType: 'json',
             data: {invite: {rsvp: rsvp}},
             success: function(data) {
+                console.log(data)
                 //class change goes here.
             }
         })

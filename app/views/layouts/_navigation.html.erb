@@ -23,9 +23,6 @@
                         <a class="page-scroll" href="#about">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#creators">Creators</a>
-                    </li>
-                    <li>
                         <a class="page-scroll" href="#signup">Sign Up</a>
                     </li>
                     <% if current_user %>
@@ -40,7 +37,7 @@
                         <% end %>
                       </a>
                       <ul class="dropdown-menu" role="menu">
-                        <li><%= link_to "My Homepage", user_path(current_user) %></li>
+                        <li><%= link_to "Profile", user_path(current_user) %></li>
                         <li><%= link_to "Events", events_path%></li>
                         <li><%= link_to "Logout", logout_users_path %></li>
                       </ul>

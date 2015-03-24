@@ -39,8 +39,25 @@
 <div id="bg2-intro">
 </div>
 
-    <!-- Creators -->
+    <!-- Sign Up-->
     <div class="dark accent-frame">
+    <section id="signup" class="container content-section">
+        <div class="row">
+            <div class="col-lg-offset-4 col-lg-4">
+                <%= button_to "Sign Up", new_user_path, {:class => "btn btn-default btn-lg btn-block btn-accent margin-10", :method => :get}  %>
+                <%= button_to "Guest Log In", new_user_path, {:class => "btn btn-default btn-lg btn-block btn-accent margin-10", :method => :get}  %>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Splash Graphic -->
+<div id="bg3-intro">
+</div>
+
+
+    <!-- Creators -->
+    <div class="accent-frame">
     <section id="creators" class="container content-section">
         <div class="row text-center">
             <div class="col-lg-offset-1 col-lg-5">
@@ -64,23 +81,6 @@
         </div>
     </section>
 </div>
-
-<!-- Splash Graphic -->
-<div id="bg3-intro">
-</div>
-
-    <!-- Sign Up-->
-    <div class="paper">
-    <section id="signup" class="container content-section">
-        <div class="row">
-            <div class="col-lg-offset-4 col-lg-4">
-                <%= button_to "Sign Up", new_user_path, {:class => "btn btn-default btn-lg btn-block margin-10", :method => :get}  %>
-                <%= button_to "Guest Log In", new_user_path, {:class => "btn btn-default btn-lg btn-block margin-10", :method => :get}  %>
-            </div>
-        </div>
-    </section>
-</div>
-
     
 
     <!-- Footer -->

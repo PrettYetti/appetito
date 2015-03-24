@@ -1,5 +1,9 @@
 <div class='col-sm-offset-4 col-sm-4'>
+    <div class="panel panel-default">
+    <div class="panel-heading">
 <h3>New Event</h3>
+</div>
+<div class="panel-body">
 <%= form_for(@event) do |form| %>
 	<strong>Host: <%= @event.creator.name %></strong>
 	<%= render form %>
@@ -9,9 +13,10 @@
 		<%= friend.name %><br>
 	<% end %>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-default" %>
   </div>
 <% end %>
-    <%= button_to 'Cancel', user_path(current_user.id), method: :get %>
+</div>
+</div>
 </div>
 

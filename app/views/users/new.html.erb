@@ -1,5 +1,8 @@
 <div class="col-sm-offset-4 col-sm-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
 <h1>New User</h1>
+</div>
 <%= form_for(@user) do |form| %>
 	<%= render form %>
 	<div class="actions">
@@ -8,3 +11,4 @@
 <% end %>
 
 <%= link_to 'Back', users_path %>
+</div>

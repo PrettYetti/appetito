@@ -5,11 +5,11 @@
 		<li><%= restaurant.cuisine %></li>
 		<li><%= '$' * restaurant.price %></li>
 		<li><%= restaurant.rating %></li>
-	  <span id="confirm" aria-hidden="true" class="glyphicon glyphicon-ok"></span>
+	  <span id="confirm" aria-hidden="true" class="glyphicon glyphicon-ok cursor"></span>
 	  <% if restaurant.favorites.find_by(user_id: current_user.id) == nil%> 
-	   <span aria-hidden="true" class="glyphicon glyphicon-heart favorite"><%= restaurant.favorites.count %></span>
+	   <span aria-hidden="true" class="glyphicon glyphicon-heart favorite cursor"><%= restaurant.favorites.count %></span>
 	  <% else %>
-	  	<span id="favorited" aria-hidden="true" class="glyphicon glyphicon-heart favorited"><%= restaurant.favorites.count %></span>
+	  	<span aria-hidden="true" class="glyphicon glyphicon-heart favorited cursor"><%= restaurant.favorites.count %></span>
 	  <% end %> 
 	</ul>
 	</li>

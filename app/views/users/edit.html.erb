@@ -1,10 +1,16 @@
 <div class=" col-sm-offset-4 col-sm-4">
-<h3><%= current_user == @user ? " Edit Your Profile" : "Edit User" %></h3>
-<%= form_for(@user) do |form| %>
-	<%= render form %>
-	<div class="actions">
-	    <%= form.submit "Update!" %>
-	  </div>
-<% end %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3><%= current_user == @user ? " Edit Your Profile" : "Edit User" %></h3>
+    </div>
+    <div class="panel-body">
+      <%= form_for(@user) do |form| %>
+        <%= render form %>
+        <div class="actions">
+           <%= form.submit "Edit", class: "btn btn-default" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
 

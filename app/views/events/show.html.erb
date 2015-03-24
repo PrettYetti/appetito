@@ -44,7 +44,7 @@
     <%= render "rsvp", :invite => invite %>
     <% end %>
     <div class="col-xs-12 col-sm-offset-1 col-sm-10">
-      <button class="btn btn-default">Invite Friends</button>
+      <button class="btn btn-default" data-toggle="modal" data-target="#friend-invite-modal">Invite Friends</button>
     </div>
     </div>
 
@@ -92,6 +92,31 @@
     </div>
 
   </div>
+
+  <div class="modal fade" id="friend-invite-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Select Friends to Invite</h4>
+      </div>
+      <div class="modal-body">
+        <ul class="media-list list-group">
+        <% current_user.friends.reject { |invited| @event.users.include?(invited) }.each do |friend| %>
+        <li class="media list-group-item">
+          <div class="media-left">
+            <%= image_tag friend.avatar.url(:thumb), class: "avatar" %>
+          </div>
+          <div class="media-body">
+            <%= friend.name %>
+          </div>
+        </li>
+        <% end %>
+      </ul> 
+      </div>
+    </div>
+  </div>
+</div>
     
 
 

@@ -3,7 +3,7 @@
   <div class="col-xs-6">
     <%= link_to events_path do %>
     <h3 class="inline-block">
-     <button class="btn btn-default btn-circle"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></button>
+     <button class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></button>
      <%= @event.name %></h3>
       <%end%>
       <% if current_user.id == @event.creator.id %>

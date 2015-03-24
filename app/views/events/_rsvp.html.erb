@@ -5,10 +5,16 @@
     <%= invite.user.name %>
   </div>
   <div class="col-xs-6">
-    <button class="btn btn-default btn-circle rsvps"><span class="glyphicon glyphicon-ok" aria-hidden="true"></button>
-    <button class="btn btn-default btn-circle maybe-button rsvps"><strong>?</strong></button>
-    <button class="btn btn-default btn-circle rsvps"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button>
-  </div>
+    <% if invite.user == current_user %>
+    <button class="btn btn-default rsvps"><span class="glyphicon glyphicon-ok" aria-hidden="true"></button>
+    <button class="btn btn-default rsvps"><strong>?</strong></button>
+    <button class="btn btn-default rsvps"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button>
+    <% else %>
+    <button class="btn btn-default btn-light"><span class="glyphicon glyphicon-ok" aria-hidden="true"></button>
+    <button class="btn btn-default btn-light"><strong>?</strong></button>
+    <button class="btn btn-default btn-light"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button>
+    <% end %>
+   </div>
 </div>
 
 

@@ -116,6 +116,11 @@ a {
   background-color: $accent;
   border: 1px solid $lesslight;
 }
+.btn-light {
+  color: $lesslight;
+  background-color: $light;
+  border: 1px solid $lesslight;
+}
 .btn-circle {
   width: 30px;
   height: 30px;

@@ -17,9 +17,9 @@
           <% end %>
         
 
-        
-          <h3 class="pull-right"><%= @event.when.to_formatted_s(:long_ordinal) %><h3>
-        
+          <% if @event.when %>
+            <h3 class="pull-right"><%= @event.when.to_formatted_s(:long_ordinal) %><h3>
+          <% end %>
 
       <%end%>
     </div>

@@ -88,6 +88,9 @@ a {
    border-top: 10px solid $accent;
    border-bottom: 1px solid $accent;
 }
+.accent-border-top {
+  border-top: 1px solid $accent;
+}
 .avatar_div {
     position: relative;
     padding-left: 0px;
@@ -183,6 +186,25 @@ a {
   display: inline-block;
   margin-right: 10px;
 }
+#subnav {
+  >.panel-heading {
+    min-height: 50px;
+    margin-bottom: 0;
+  }
+  >.panel-body {
+    background-color: $lesslight;
+    padding-top: 0;
+  }
+}
+.subnav-icon {
+  height: 35px;
+  width: auto;
+  display: inline-block;
+  margin-top: 10px;
+}
+.subnav-button:hover{
+  cursor: pointer;
+}
 .dropdown-toggle {
   padding-bottom: 0;
 }
@@ -230,6 +252,12 @@ a {
 }
 .modal-content{
   background: $light;
+}
+#invite-friends-button {
+  margin-top: -5px;
+}
+#rsvp-button-container{
+  padding-top: 15px;
 }
 
 

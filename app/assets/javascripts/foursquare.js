@@ -51,12 +51,13 @@ function getResults(lat, lng){
 			$('<li>').text("Price: " + Array(venues.price+1).join("$")).appendTo($newUl);
 
 			$newUl.appendTo($('#results'));
+			return $newUl
 		}
 		var $results = $('#results');
 		$results.html('');
 
 		$(venues).each(function(index, venue) {
-			makeVenue(parseVenue(venue), index)
+			var $searchUl = makeVenue(parseVenue(venue), index)
 			var markerInput = new buildMarker(venue)
 			var myLatlng = new google.maps.LatLng(markerInput.lat, markerInput.lng)
 			var contentString = markerInput.name
@@ -79,6 +80,8 @@ function getResults(lat, lng){
 			google.maps.event.addListener(marker, 'mouseout', function () {
 				infowindow.close();
 			})
+
+			toggleSearchInfowindow($searchUl, marker)
 			searchMarkers.push(marker)
 		});
 
@@ -198,6 +201,16 @@ function toggleConfirm($dom) {
 			console.log("complete");
 		});
 		
+	})
+}
+
+function toggleSearchInfowindow($dom, marker) {
+	$dom.on('mouseover', function () {
+		google.maps.event.trigger(marker, 'mouseover');
+	})
+
+	$dom.on('mouseout', function () {
+		google.maps.event.trigger(marker, 'mouseout');
 	})
 }
 

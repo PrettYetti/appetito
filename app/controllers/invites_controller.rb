@@ -21,7 +21,8 @@ class InvitesController < ApplicationController
   def update
     @invite.update(invite_params)
     if params[:invite][:location]
-      invitees = @invite.event.invites.map { |invite| {id: invite.user_id, lat: invite.latitude, lng: invite.longitude, name: invite.user.name}}
+      located = @invite.event.invites.where("location IS NOT NULL")
+      invitees = located.map { |invite| {id: invite.user_id, lat: invite.latitude, lng: invite.longitude, name: invite.user.name}}
       respond_to do |format|
         format.json { render json: invitees }
       end

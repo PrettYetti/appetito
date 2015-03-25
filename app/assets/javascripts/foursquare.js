@@ -9,7 +9,12 @@ function getResults(lat, lng, cuis, prc, reservation){
 	var clientSecret = "&client_secret=LQ2UIGEDAP0O5CFMQEMEYEM1KORYH4ISVPXLRSHGYNU1LMOZ";
 	var version = "&v=20130815";
 	var limit = "&limit=20";
-	var locale = "&ll="+lat+","+lng+"&radius="+window.radius;
+	var rad
+	if (window.radius == 0) {
+		rad = ""
+	} else ( rad = "&radius="+window.radius )
+
+	var locale = "&ll="+lat+","+lng + rad;
 	var cuisine = "&query="+ cuis;
 	var price = (prc) ? "&price="+ prc : ""
 	var photo = "&venuePhoto=1"

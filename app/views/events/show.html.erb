@@ -117,11 +117,11 @@
   </div>
 
     <div id="favorite-container" class="hidden">
-      <ul id="favorite-wrapper" class="col-xs-12 col-sm-offset-1 col-sm-10">
+      <div id="favorite-wrapper">
         <% @event.restaurants.each do |restaurant| %>
         <%= render "favorite", {:restaurant => restaurant} %>
         <% end %>
-      </ul>
+      </div>
     </div>
   </div>
 

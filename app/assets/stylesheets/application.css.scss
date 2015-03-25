@@ -104,7 +104,7 @@ a {
    border: 1px solid $accent;
    font-size: 0.6em;
 }
-.btn-default {
+.btn-default{
   color: $accent;
   background-color: $lesslight;
   border: 1px solid $accent;
@@ -270,4 +270,8 @@ a {
 }
 #select-cuisine {
   height: 29px;
+}
+#results{
+  max-height: 350px;
+  overflow: scroll;
 }

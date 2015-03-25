@@ -1,10 +1,13 @@
 <% a = 0 %>
-	<li id= "<%= restaurant.id %>"class="col-xs-6 col-sm-3">
-		<ul>
-	  <li id="name"><h4><%= restaurant.name %></h4></li>
-		<li><%= restaurant.cuisine %></li>
-		<li><%= '$' * restaurant.price %></li>
-		<li><%= restaurant.rating %></li>
+<div class="col-xs-3">
+	<div id= "<%= restaurant.id %>"class="panel panel-default">
+		<div class="panel-heading">
+	  <h4 id="name"><%= restaurant.name %></h4>
+		</div>
+		<div class="panel-body">
+		<p><%= restaurant.cuisine %></p>
+		<p><%= '$' * restaurant.price %></p>
+		<p><%= restaurant.rating %></p>
 
 		<% if restaurant.address == @event.location %>
 	  	<span aria-hidden="true" class="glyphicon glyphicon-ok confirmed cursor"></span>
@@ -16,6 +19,7 @@
 	  <% else %>
 	  	<span aria-hidden="true" class="glyphicon glyphicon-heart favorited cursor"><%= restaurant.favorites.count %></span>
 	  <% end %> 
-	</ul>
-	</li>
+	</div>
+</div>
+</div>
 <% a += 1 %>

@@ -18,6 +18,7 @@ jQuery(function() {
       success: function(data) {
         console.log(data);
         window.current_user = data.current_user
+        window.current_event = data.event
         window.avatars = data.invitee_avatars
         data.chatlog.forEach(function (chat) {
 

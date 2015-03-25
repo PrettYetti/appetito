@@ -45,7 +45,7 @@ class EventsController < ApplicationController
     invitees = @event.users
     invitee_avatars = invitees.map { |invitee| {avatar_url: invitee.avatar.url(:icon), id: invitee.id}}
     respond_to do |format|
-      format.json { render json: {chatlog: chatlog, current_user: current_user, invitees: invitees, invitee_avatars: invitee_avatars, avatar_url: current_user.avatar.url(:icon)}}
+      format.json { render json: {event: @event, chatlog: chatlog, current_user: current_user, invitees: invitees, invitee_avatars: invitee_avatars, avatar_url: current_user.avatar.url(:icon)}}
     end
   end
 
@@ -85,8 +85,10 @@ class EventsController < ApplicationController
 
   def add_restaurant
     restaurant = @event.restaurants.create(restaurant_params)
+    restaurant.favorites.create(user_id: current_user.id)
+    count = restaurant.favorites.count
     respond_to do |format|
-      format.json { render json: restaurant }
+      format.json { render json: {restaurant: restaurant, count: count} }
     end
 
   end

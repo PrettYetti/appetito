@@ -1,25 +1,24 @@
-<% a = 0 %>
 <div class="col-xs-3">
 	<div id= "<%= restaurant.id %>"class="panel panel-default">
 		<div class="panel-heading">
-	  <h4 id="name"><%= restaurant.name %></h4>
+		  <h4 id="name"><%= restaurant.name %></h4>
 		</div>
 		<div class="panel-body">
-		<p><%= restaurant.cuisine %></p>
-		<p><%= '$' * restaurant.price %></p>
-		<p><%= restaurant.rating %></p>
-
-		<% if restaurant.address == @event.location %>
-	  	<span aria-hidden="true" class="glyphicon glyphicon-ok confirmed cursor"></span>
-	  <% else %>
-	  	<span aria-hidden="true" class="glyphicon glyphicon-ok confirm cursor"></span>
-	  <% end %>
-	  <% if restaurant.favorites.find_by(user_id: current_user.id) == nil%> 
-	   <span aria-hidden="true" class="glyphicon glyphicon-heart favorite cursor"><%= restaurant.favorites.count %></span>
-	  <% else %>
-	  	<span aria-hidden="true" class="glyphicon glyphicon-heart favorited cursor"><%= restaurant.favorites.count %></span>
-	  <% end %> 
+			<p><%= restaurant.cuisine %></p>
+			<p><%= '$' * restaurant.price %></p>
+			<p><%= restaurant.rating %></p>
+			<% if current_user.id == @event.creator.id %>
+				<% if restaurant.address == @event.location %>
+			  	<span aria-hidden="true" class="glyphicon glyphicon-ok confirmed cursor"></span>
+			  <% else %>
+			  	<span aria-hidden="true" class="glyphicon glyphicon-ok confirm cursor"></span>
+			  <% end %>
+			<% end %>
+		  <% if restaurant.favorites.find_by(user_id: current_user.id) == nil%> 
+		   <span aria-hidden="true" class="glyphicon glyphicon-heart favorite cursor"><%= restaurant.favorites.count %></span>
+		  <% else %>
+		  	<span aria-hidden="true" class="glyphicon glyphicon-heart favorited cursor"><%= restaurant.favorites.count %></span>
+		  <% end %> 
+		</div>
 	</div>
 </div>
-</div>
-<% a += 1 %>

@@ -1,10 +1,11 @@
 
-<div id="<%= invite.user.id %>" class="col-xs-12 col-sm-offset-1 col-sm-10">
-  <div class="col-xs-6">
+<li class="media list-group-item">
+<div id="<%= invite.user.id %>" class="col-xs-12">
+  <div class="col-xs-6 col-md-4">
     <%= image_tag invite.user.avatar.url(:icon), class: "avatar" %>
     <%= invite.user.name %>
   </div>
-  <div class="col-xs-6">
+  <div id="rsvp-button-container" class="col-xs-6 col-md-4">
     <% if invite.user == current_user %>
     <button class="btn btn-default rsvps"><span class="glyphicon glyphicon-ok" aria-hidden="true"></button>
     <button class="btn btn-default rsvps"><strong>?</strong></button>
@@ -16,5 +17,6 @@
     <% end %>
    </div>
 </div>
+</li>
 
 

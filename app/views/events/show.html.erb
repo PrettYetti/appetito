@@ -1,122 +1,154 @@
-
 <div class="col-xs-12 col-sm-offset-1 col-sm-10">
-  <div class="col-xs-6">
-    <%= link_to events_path do %>
-    <h3 class="inline-block">
-     <button class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></button>
-     <%= @event.name %></h3>
-      <%end%>
-      <% if current_user.id == @event.creator.id %>
-              <%= link_to edit_event_path(@event) do %>
-                <button class="btn btn-default btn-circle-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></button>
-              <% end %>
-              <%= link_to @event, method: :delete do %>
-                <button class="btn btn-default btn-circle-sm"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button>
-              <% end %>
+  <div id="subnav" class="panel panel-default">
+    <div class="panel-heading">
+      <%= link_to events_path do %>
+        
+          <h3 class="inline-block">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <%= @event.name %>
+          </h3>
+          <% if current_user.id == @event.creator.id %>
+            <%= link_to edit_event_path(@event) do %>
+              <button class="btn btn-default btn-circle-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></button>
             <% end %>
+            <%= link_to @event, method: :delete do %>
+              <button class="btn btn-default btn-circle-sm"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button>
+            <% end %>
+          <% end %>
+        
+
+        
+          <h3 class="pull-right"><%= @event.when.to_formatted_s(:long_ordinal) %><h3>
+        
+
+      <%end%>
     </div>
+     
 
-    <div class="col-xs-6">
-      <h3><%= @event.when.to_formatted_s(:long_ordinal) %><h3>
-      </div>
-    </div>
+    <div class="panel-body text-center">
+      <div id="event-subnav">
 
-
-    <div id="event-subnav" class="col-xs-12 col-sm-offset-1 col-sm-10">
-      <div class="col-xs-3">
-        <button id="rsvp-button" class="btn btn-default btn-circle" data-target="#rsvp-container"><span class="glyphicon glyphicon-user" aria-hidden="true"></button>
-      </div>
-      <div class="col-xs-3">
-        <button id="chat-button" class="btn btn-default btn-circle" data-target="#chat-container"><span class="glyphicon glyphicon-comment" aria-hidden="true"></button>
-      </div>
-      <div class="col-xs-3">
-        <button id="map-button" class="btn btn-default btn-circle" data-target="#map-container"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></button>
-      </div>
-      <div class="col-xs-3">
-        <button id="favorite-button" class="btn btn-default btn-circle" data-target="#favorite-container"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></button>
-      </div>
-    </div>
-
-    <div id="toggle-container">
-      
-    <div id="rsvp-container">
-    <% @invitees.each do |invite| %>
-    <%= render "rsvp", :invite => invite %>
-    <% end %>
-    <div class="col-xs-12 col-sm-offset-1 col-sm-10">
-      <button class="btn btn-default" data-toggle="modal" data-target="#friend-invite-modal">Invite Friends</button>
-    </div>
-    </div>
-
-    <div id="chat-container" class="hidden">
-    <%= render "chat" %>
-    </div>
-    
-    <div id="map-container" class="hidden">
-      
-      <div class="col-xs-12 col-sm-offset-1 col-sm-10">
-      <%= render "map" %>
-      <div class="col-xs-6">
-
-
-      <%= form_tag foursquare_event_path, id: "search" do %>
-      <h4>Cuisine</h4>
-      <%= select_tag "cuisine", options_for_select([['Thai','Thai'], ['Mexican','Mexican'],['Italian','Italian']]) %>
-      <h4>Price</h4>
-      <%= radio_button_tag(:price, "1") %>
-      <%= label_tag(:price_tier1, "$") %>
-      <%= radio_button_tag(:price, "2") %>
-      <%= label_tag(:price_tier, "$$") %>
-      <%= radio_button_tag(:price, "3") %>
-      <%= label_tag(:price_tier3, "$$$") %>
-      <h4>Reservations?</h4>
-      <%= check_box_tag(:reservation, "true") %>
-      <%= label_tag(:reservation_yes, "Yes") %>
-      <button type='submit' class="fs btn btn-default">Find Restaurants</button>
-      <% end %>
-
-      </div>
-      <div id='results' class="col-xs-6"></div>
-      </div>
-      
-    </div>
-
-    <div id="favorite-container" class="hidden">
-    <ul id="favorite-wrapper" class="col-xs-12 col-sm-offset-1 col-sm-10">
-      <% @event.restaurants.each do |restaurant| %>
-      
-      <%= render "favorite", {:restaurant => restaurant} %>
-
-      <% end %>
-    </ul>
-    </div>
-
-  </div>
-
-  <div class="modal fade" id="friend-invite-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="exampleModalLabel">Select Friends to Invite</h4>
-      </div>
-      <div class="modal-body">
-        <ul class="media-list list-group">
-        <% current_user.friends.reject { |invited| @event.users.include?(invited) }.each do |friend| %>
-        <li class="media list-group-item">
-          <div class="media-left">
-            <%= image_tag friend.avatar.url(:thumb), class: "avatar" %>
+        <div class="subnav-button col-xs-3 accent-border-top" data-target="#rsvp-container">
+          <div id="rsvp-button">
+            <%= image_tag "display/icons/friends.svg", class: "subnav-icon" %>
           </div>
-          <div class="media-body">
-            <%= friend.name %>
+        </div>
+
+        <div class="subnav-button col-xs-3 accent-border-top" data-target="#chat-container">
+          <div id="chat-button">
+            <%= image_tag "display/icons/chat.svg", class: "subnav-icon" %>
           </div>
-        </li>
-        <% end %>
-      </ul> 
+        </div>
+
+        <div class="subnav-button col-xs-3 accent-border-top" data-target="#map-container">
+          <div id="map-button">
+            <%= image_tag "display/icons/location.svg", class: "subnav-icon" %>
+          </div>
+        </div>
+
+        <div class="subnav-button col-xs-3 accent-border-top" data-target="#favorite-container">
+          <div id="favorite-button">
+            <%= image_tag "display/icons/utensils.svg", class: "subnav-icon" %>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
+
+
+<div class="col-xs-12 col-sm-offset-1 col-sm-10">
+
+  <div id="toggle-container">
+
+    <div id="rsvp-container">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title inline-block">Invited</h3>
+           <button id="invite-friends-button" class="btn btn-default btn-sm pull-right" data-toggle="modal" data-target="#friend-invite-modal">Invite Friends</button>
+        </div>
+        <ul class="media-list list-group">
+          <% @invitees.each do |invite| %>
+          <%= render "rsvp", :invite => invite %>
+          <% end %>
+          </ul>
+      </div>
+    </div>
+
+    <div id="chat-container" class="hidden">
+      <%= render "chat" %>
+    </div>
+    
+    <div id="map-container" class="hidden">
+
+      <div>
+        <div class="panel panel-default">
+        <%= render "map" %>
+        <div class="col-xs-6">
+          <%= form_tag foursquare_event_path, id: "search" do %>
+          <%= select_tag "select-cuisine", options_for_select([['Thai','Thai'], ['Mexican','Mexican'],['Italian','Italian']], class: "form-control") %>
+          <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-default btn-sm">
+          <%= radio_button_tag(:price, "1") %>
+          $
+          </label>
+          <label class="btn btn-default btn-sm">
+          <%= radio_button_tag(:price, "2") %>
+          $$
+          </label>
+          <label class="btn btn-default btn-sm">
+          <%= radio_button_tag(:price, "3") %>
+          $$$
+          </label>
+          </div>
+          <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-default btn-sm">
+          <%= check_box_tag(:reservation, "true") %>Reservations
+          </label>
+          </div>
+          <button type='submit' class="fs btn btn-default btn-sm">Find Restaurants</button>
+          <% end %>
+        </div>
+        <div id='results' class="col-xs-6"></div>
+      </div>  
+    </div>
+    </div>
+  </div>
+
+    <div id="favorite-container" class="hidden">
+      <ul id="favorite-wrapper" class="col-xs-12 col-sm-offset-1 col-sm-10">
+        <% @event.restaurants.each do |restaurant| %>
+        <%= render "favorite", {:restaurant => restaurant} %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="modal fade" id="friend-invite-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="exampleModalLabel">Select Friends to Invite</h4>
+        </div>
+        <div class="modal-body">
+          <ul class="media-list list-group">
+            <% current_user.friends.reject { |invited| @event.users.include?(invited) }.each do |friend| %>
+            <li class="media list-group-item">
+              <div class="media-left">
+                <%= image_tag friend.avatar.url(:thumb), class: "avatar" %>
+              </div>
+              <div class="media-body">
+                <%= friend.name %>
+              </div>
+            </li>
+            <% end %>
+          </ul> 
+        </div>
+      </div>
+    </div>
+  </div>
     
 
 

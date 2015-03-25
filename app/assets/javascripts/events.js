@@ -1,6 +1,6 @@
 //JAVASCRIPT FOR DISPLAY AND HIDE ELEMENTS 'ON CLICK' ON EVENTS PAGE 
 $(function(){
-    $("#event-subnav").on("click", "button", function(e)
+    $("#event-subnav").on("click", ".subnav-button", function(e)
         {   
             setTimeout(function() {
             google.maps.event.trigger(map, "resize");

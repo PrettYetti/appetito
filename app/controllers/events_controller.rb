@@ -74,7 +74,7 @@ class EventsController < ApplicationController
 
   def toggle_confirm
     restaurant = Restaurant.find(params[:restaurant])
-    params[:event] = {location: restaurant.address, finalized: true}
+    params[:event] = {restaurant: restaurant.name, location: restaurant.address, finalized: true}
     @event.update(event_params)
 
     respond_to do |format|
@@ -159,7 +159,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:user_id, :name, :when, :location, :finalized, :cuisine)
+      params.require(:event).permit(:user_id, :name, :when, :location, :finalized, :restaurant)
     end
 
     def restaurant_params

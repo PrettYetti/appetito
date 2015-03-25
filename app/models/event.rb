@@ -7,12 +7,12 @@
 #  name       :string
 #  when       :datetime
 #  location   :string
-#  cuisine    :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  finalized  :boolean          default("false")
 #  latitude   :float
 #  longitude  :float
+#  restaurant :string
 #
 
 class Event < ActiveRecord::Base

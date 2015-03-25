@@ -42,31 +42,22 @@ eunice = User.create(
 }
 
 george.created_events.create({
-	name: "PartyHarty",
-	location: "someplace",
-	cuisine: "mexican",
+	name: "Happy Hour!",
 	when: Time.now
 	})
 
 ciara.created_events.create({
-	name: "HangerMeats",
-	location: "someplace",
-	cuisine: "chinese",
+	name: "Impromptu Dinner",
 	when: Time.now
 	})
 
 remina.created_events.create({
-	name: "Chumba Wumba",
-	location: "someplace",
-	cuisine: "American",
+	name: "Help me use this groupon!",
 	when: Time.now
 	})
 
 eunice.created_events.create({
-	name: "Tom's Bistro",
-	location: "someplace",
-	cuisine: "French",
-	when: Time.now
+	name: "Tom's Bistro",	when: Time.now
 	})
 
 george.friend_ids=[2,3]

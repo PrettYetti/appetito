@@ -6,15 +6,24 @@
     <%= invite.user.name %>
   </div>
   <div id="rsvp-button-container" class="col-xs-6 col-md-4">
-    <% if invite.user == current_user %>
-    <button class="btn btn-default rsvps"><span class="glyphicon glyphicon-ok" aria-hidden="true"></button>
-    <button class="btn btn-default rsvps"><strong>?</strong></button>
-    <button class="btn btn-default rsvps"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button>
-    <% else %>
-    <button class="btn btn-default btn-light"><span class="glyphicon glyphicon-ok" aria-hidden="true"></button>
-    <button class="btn btn-default btn-light"><strong>?</strong></button>
-    <button class="btn btn-default btn-light"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button>
-    <% end %>
+  	<% if invite.rsvp == "Attending" %>
+  		<% arsvp = "btn-inverse" %>
+  	<% elsif invite.rsvp == "Maybe" %>
+  		<% mrsvp = "btn-inverse" %>
+  	<% elsif invite.rsvp == "Not Attending" %>
+  		<% nrsvp = "btn-inverse" %>
+  	<% else %>
+  		<% arsvp = mrsvp = nrsvp = "" %>
+  	<% end %>
+	    <% if invite.user == current_user %>
+	    <button class="btn btn-default rsvps <%= arsvp %>"><span class="glyphicon glyphicon-ok" aria-hidden="true"></button>
+	    <button class="btn btn-default rsvps <%= mrsvp %>"><strong>?</strong></button>
+	    <button class="btn btn-default rsvps <%= nrsvp %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button>
+	    <% else %>
+	    <button class="btn btn-default btn-light <%= arsvp %>"><span class="glyphicon glyphicon-ok" aria-hidden="true"></button>
+	    <button class="btn btn-default btn-light <%= mrsvp %>"><strong>?</strong></button>
+	    <button class="btn btn-default btn-light <%= nrsvp %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button>
+	    <% end %>
    </div>
 </div>
 </li>

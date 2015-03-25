@@ -267,7 +267,7 @@ toggleConfirm($('.confirmed'))
 //   getResults( lat, lng );
 // });
 
-$('form').on('submit', function (event) {
+$('#search').on('submit', function (event) {
 	event.preventDefault();
 	var cuisine = $(this).find('select').val()
 	var price = $(this).find('input[name="price"]:checked').val()

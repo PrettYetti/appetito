@@ -3,33 +3,46 @@ window.onload = function () {
 console.log("fivesquare loaded")
 
 var pathname = window.location.pathname;
-function getResults(lat, lng){
+function getResults(lat, lng, cuis, prc, reservation){
 	var baseURL = "https://api.foursquare.com/v2/venues/explore";
 	var clientID = "?client_id=CSXMPXYF20VXWMX4Z0BTKHVT5VGRKA1E3ZAPKCE04ELOMX3W";
 	var clientSecret = "&client_secret=LQ2UIGEDAP0O5CFMQEMEYEM1KORYH4ISVPXLRSHGYNU1LMOZ";
-	var version = "&v=20130815&limit=20";
+	var version = "&v=20130815";
+	var limit = "&limit=20";
 	var locale = "&ll="+lat+","+lng+"&radius="+window.radius;
-	var cuisine = "&venuePhoto=1&section=food";
-	var pictures = ""
-	var compile = clientID + clientSecret + version + locale + cuisine+pictures;
+	var cuisine = "&query="+ cuis;
+	var price = (prc) ? "&price="+ prc : ""
+	var photo = "&venuePhoto=1"
+	var compile = clientID + clientSecret + version + limit + locale + cuisine + price + photo;
 	var map = handler.map.serviceObject;
 	console.log(compile)
 
 	function parseVenue (venue) {
 		var pricefix = (venue["venue"]["price"] === undefined) ? 0 : venue["venue"]["price"]["tier"]
+		var reservationfix = (venue["venue"]["reservations"] === undefined) ? "Not Available" : venue["venue"]["reservations"]["url"]
+
 		return {
 			name: venue["venue"]["name"],
 			cuisine: venue["venue"]["categories"][0]["shortName"],
 			phone: venue["venue"]["contact"]["formattedPhone"],
 			address: venue["venue"]["location"]["formattedAddress"].join(", "),
 			rating: venue["venue"]["rating"],
-			price: pricefix
-
+			price: pricefix,
+			reservations: reservationfix
 		}
 	}
 
 	function renderResults (data) {
+		if (reservation) {
+		venues = []
+			$(data["response"]["groups"]["0"]["items"]).each(function (index, venue) {
+				if (venue["venue"]["reservations"]) {
+					venues.push(venue)
+				}
+			})
+		} else {
 		venues = data["response"]["groups"]["0"]["items"]	
+		}
 
 		
 
@@ -46,10 +59,14 @@ function getResults(lat, lng){
 			var $newUl = $('<ul>', {id: index}).after($('<br>'));
 			$('<li>').append($('<h2>').text(venues.name)).append($('<button>', {action: pathname+'/add_favorite', class: "favorite"}).text("Add me to favorites")).appendTo($newUl);
 			$('<li>').text(venues.phone).appendTo($newUl);
-			$('<li>').text(venues.address).appendTo($newUl)
+			$('<li>').text(venues.address).appendTo($newUl);
 			$('<li>').text("Rating: " + venues.rating).appendTo($newUl);
 			$('<li>').text("Price: " + Array(venues.price+1).join("$")).appendTo($newUl);
-
+			if (venues.reservations == "Not Available") {
+				$('<li>').text("Reservations not available").appendTo($newUl);
+			} else { 
+				$('<li>').append($('<a>', {href: venues.reservations}).text("Make reservation")).appendTo($newUl);
+			}
 			$newUl.appendTo($('#results'));
 			return $newUl
 		}
@@ -101,7 +118,7 @@ function getResults(lat, lng){
 		success: function(data) {
 			searchMarkers.forEach( function (marker) {
 				marker.setMap(null)
-			})
+			});
 			searchMarkers = []
 			renderResults(data);
 			$('ul').find($('button')).on('click', function (event) {
@@ -237,28 +254,29 @@ toggleFavorite($('.favorited'))
 toggleConfirm($('.confirm'))
 toggleConfirm($('.confirmed'))
 
-$('.fs').on('click', function(event){
+// $('.fs').on('click', function(event){
 
-  event.preventDefault();
-  var searchDegree = 1000
-  var lat = center.k
-  var lng = center.B
-  console.log(lat,lng)
-
-
-  //fix this to grab lat,lng once map is generated
-  getResults( lat, lng );
-});
-
-// $('form').on('submit', function (event) {
-// 	event.preventDefault();
-// 	var cuisine = $(this).find('select').val()
-// 	var price = $(this).find('input[name="price"]:checked').val()
-// 	var reservation = $(this).find('input[name="reservation"]:checked').val()
+//   event.preventDefault();
+//   var searchDegree = 1000
+  // var lat = center.k
+  // var lng = center.B
+//   console.log(lat,lng)
 
 
+//   //fix this to grab lat,lng once map is generated
+//   getResults( lat, lng );
+// });
 
-// })
+$('form').on('submit', function (event) {
+	event.preventDefault();
+	var cuisine = $(this).find('select').val()
+	var price = $(this).find('input[name="price"]:checked').val()
+	var reservation = $(this).find('input[name="reservation"]:checked').val()
+	var lat = center.k
+	var lng = center.B
+
+	getResults(lat, lng, cuisine, price, reservation)
+})
 
 // $('#search').on('submit', function (event) {
 // 	event.preventDefault();

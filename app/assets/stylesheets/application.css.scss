@@ -259,5 +259,15 @@ a {
 #rsvp-button-container{
   padding-top: 15px;
 }
-
-
+#invite_location {
+  border: 1px solid $accent;
+}
+.input-group-btn {
+  border: 1px solid $accent;
+  >button {
+    border: 0;
+  }
+}
+#select-cuisine {
+  height: 29px;
+}

@@ -102,7 +102,6 @@ function getResults(lat, lng){
 			searchMarkers.forEach( function (marker) {
 				marker.setMap(null)
 			})
-			console.log("YOU LOAD")
 			searchMarkers = []
 			renderResults(data);
 			$('ul').find($('button')).on('click', function (event) {
@@ -115,20 +114,39 @@ function getResults(lat, lng){
 					dataType: 'json',
 					data: {restaurant: venue},
 					success: function(data){
-							if ($( "#favorite-wrapper:contains('"+data.name+"')" )[0] === undefined) {
-							var $name = $('<li></li>').append($('<h4>').text(data.name));
-							var $cuisine = $('<li></li>').text(data.cuisine);
-							var $price = $('<li></li>').text(Array(data.price+1).join("$"));
-							var $rating = $('<li></li>').text(data.rating);
-							var $confirmFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-ok favorite confirm cursor"></span>')
-							var $voteFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-heart favorite cursor"></span>')
+						if ($( "#favorite-wrapper:contains('"+data.name+"')" )[0] === undefined) {
 
-							var $newFavoriteUl = $('<ul>', {id: data.id}).append($name, $cuisine, $price, $rating, $confirmFavorite, $voteFavorite)
-							var $newFavoriteLi = $('<li>', {id: data.id, class: "col-xs-6 col-sm-3"}).append($newFavoriteUl)
-							$('#favorite-wrapper').append($newFavoriteLi)
+							var $newDivPanel = $('<div></div>', {id: data.restaurant.id, class: "panel panel-default"})
+							var $newDivPanelName = $('<div></div>', {class: "panel-heading" }).append($('<h4>').text(data.restaurant.name)).appendTo($newDivPanel);
+							var $newDivPanelBody = $('<div></div>', {class: "panel-body" }).appendTo($newDivPanel)
+							var $cuisine = $('<p></p>').text(data.restaurant.cuisine).appendTo($newDivPanelBody);
+							var $price = $('<p></p>').text(Array(data.restaurant.price+1).join("$")).appendTo($newDivPanelBody);
+							var $rating = $('<p></p>').text(data.restaurant.rating).appendTo($newDivPanelBody);
+							if ( current_user.id == current_event.creator_id ) {
+								var $confirmFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-ok favorite confirm cursor"></span>').appendTo($newDivPanelBody);
+								toggleConfirm($confirmFavorite)
+							}
+
+							var $voteFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-heart favorited cursor">'+data.count+'</span>').appendTo($newDivPanelBody);
+
+							var $newWrapper = $('<div></div>', {class: "col-xs-3"}).append($newDivPanel);
+
+							$('#favorite-wrapper').append($newWrapper)
 							toggleFavorite($voteFavorite)
-							toggleConfirm($confirmFavorite)
-							console.log('trying to add stuff')
+
+							// var $name = $('<li></li>').append($('<h4>').text(data.restaurant.name));
+							// var $cuisine = $('<li></li>').text(data.restaurant.cuisine);
+							// var $price = $('<li></li>').text(Array(data.restaurant.price+1).join("$"));
+							// var $rating = $('<li></li>').text(data.restaurant.rating);
+							// var $confirmFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-ok favorite confirm cursor"></span>')
+							// var $voteFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-heart favorite cursor"></span>')
+
+							// var $newFavoriteUl = $('<ul>', {id: data.restaurant.id}).append($name, $cuisine, $price, $rating, $confirmFavorite, $voteFavorite)
+							// var $newFavoriteLi = $('<li>', {id: data.restaurant.id, class: "col-xs-6 col-sm-3"}).append($newFavoriteUl)
+							// $('#favorite-wrapper').append($newFavoriteLi)
+							// toggleFavorite($voteFavorite)
+							// toggleConfirm($confirmFavorite)
+							// console.log('trying to add stuff')
 						}
 					}
 				})

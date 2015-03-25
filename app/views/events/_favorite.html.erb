@@ -4,9 +4,9 @@
 		  <h4 id="name"><%= restaurant.name %></h4>
 		</div>
 		<div class="panel-body">
-			<p><%= restaurant.cuisine %></p>
-			<p><%= '$' * restaurant.price %></p>
-			<p><%= restaurant.rating %></p>
+			<h5><%= restaurant.cuisine %></h5>
+			<h5><%= '$' * restaurant.price %></h5>
+			<h5><%= restaurant.rating %></h5>
 			<% if current_user.id == @event.creator.id %>
 				<% if restaurant.address == @event.location %>
 			  	<span aria-hidden="true" class="glyphicon glyphicon-ok confirmed cursor"></span>

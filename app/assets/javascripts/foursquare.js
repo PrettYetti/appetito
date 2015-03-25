@@ -146,7 +146,7 @@ function getResults(lat, lng, cuis, prc, reservation){
 
 							var $voteFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-heart favorited cursor">'+data.count+'</span>').appendTo($newDivPanelBody);
 
-							var $newWrapper = $('<div></div>', {class: "col-xs-3"}).append($newDivPanel);
+							var $newWrapper = $('<div></div>', {class: "col-xs-3 favorite-panel"}).append($newDivPanel);
 
 							$('#favorite-wrapper').append($newWrapper)
 							toggleFavorite($voteFavorite)

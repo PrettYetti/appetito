@@ -87,7 +87,7 @@
         <%= render "map" %>
         <div class="col-xs-6">
           <%= form_tag foursquare_event_path, id: "search" do %>
-          <%= select_tag "select-cuisine", options_for_select([['Thai','Thai'], ['Mexican','Mexican'],['Italian','Italian']], class: "form-control") %>
+          <%= select_tag "select-cuisine", options_for_select([['Thai','Thai'], ['Mexican','Mexican'],['Italian','Italian'], ['American','American'],['Korean','Korean'], ['Japanese','Japanese'],['French','French']], class: "form-control") %>
           <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-default btn-sm">
           <%= radio_button_tag(:price, "1") %>

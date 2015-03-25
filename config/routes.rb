@@ -19,10 +19,11 @@ Rails.application.routes.draw do
 
   resources :events do
     # get ':param' => :show, on: :member
-    resources :invites
+    # resources :invites
     get :chatlog, on: :member
     post :logchat, on: :member
     post :toggle_favorite, on: :member
+    put :toggle_confirm, on: :member
     post :add_restaurant, on: :member
     get :foursquare, on: :member
   end

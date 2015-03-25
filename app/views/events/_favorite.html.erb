@@ -5,7 +5,12 @@
 		<li><%= restaurant.cuisine %></li>
 		<li><%= '$' * restaurant.price %></li>
 		<li><%= restaurant.rating %></li>
-	  <span id="confirm" aria-hidden="true" class="glyphicon glyphicon-ok cursor"></span>
+
+		<% if restaurant.address == @event.location %>
+	  	<span aria-hidden="true" class="glyphicon glyphicon-ok confirmed cursor"></span>
+	  <% else %>
+	  	<span aria-hidden="true" class="glyphicon glyphicon-ok confirm cursor"></span>
+	  <% end %>
 	  <% if restaurant.favorites.find_by(user_id: current_user.id) == nil%> 
 	   <span aria-hidden="true" class="glyphicon glyphicon-heart favorite cursor"><%= restaurant.favorites.count %></span>
 	  <% else %>

@@ -11,6 +11,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  finalized  :boolean          default("false")
+#  latitude   :float
+#  longitude  :float
 #
 
 class Event < ActiveRecord::Base
@@ -22,6 +24,9 @@ class Event < ActiveRecord::Base
   has_many :restaurants, dependent: :destroy
   has_many :favorites
   has_many :users, through: :invites
+
+  geocoded_by :location   # can also be an IP address
+  after_validation :geocode
 
   delegate :event_invites, :event_updates, to: :notifications
 end

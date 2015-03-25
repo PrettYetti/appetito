@@ -9,9 +9,11 @@ function getResults(lat, lng){
 	var clientSecret = "&client_secret=LQ2UIGEDAP0O5CFMQEMEYEM1KORYH4ISVPXLRSHGYNU1LMOZ";
 	var version = "&v=20130815&limit=20";
 	var locale = "&ll="+lat+","+lng+"&radius="+window.radius;
-	var cuisine = "&section=food";
-	var compile = clientID + clientSecret + version + locale + cuisine;
+	var cuisine = "&venuePhoto=1&section=food";
+	var pictures = ""
+	var compile = clientID + clientSecret + version + locale + cuisine+pictures;
 	var map = handler.map.serviceObject;
+	console.log(compile)
 
 	function parseVenue (venue) {
 		var pricefix = (venue["venue"]["price"] === undefined) ? 0 : venue["venue"]["price"]["tier"]
@@ -115,13 +117,14 @@ function getResults(lat, lng){
 							var $cuisine = $('<li></li>').text(data.cuisine);
 							var $price = $('<li></li>').text(Array(data.price+1).join("$"));
 							var $rating = $('<li></li>').text(data.rating);
-							var $confirmFavorite = $('<span id="confirm" aria-hidden="true" class="glyphicon glyphicon-ok"></span>')
-							var $voteFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-heart favorite"></span>')
+							var $confirmFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-ok favorite confirm cursor"></span>')
+							var $voteFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-heart favorite cursor"></span>')
 
 							var $newFavoriteUl = $('<ul>', {id: data.id}).append($name, $cuisine, $price, $rating, $confirmFavorite, $voteFavorite)
 							var $newFavoriteLi = $('<li>', {id: data.id, class: "col-xs-6 col-sm-3"}).append($newFavoriteUl)
 							$('#favorite-wrapper').append($newFavoriteLi)
 							toggleFavorite($voteFavorite)
+							toggleConfirm($confirmFavorite)
 							console.log('trying to add stuff')
 						}
 					}
@@ -148,7 +151,7 @@ function toggleFavorite($dom) {
 		$.ajax({
 			url: pathname+'/toggle_favorite',
 			type: 'POST',
-			dataType: '',
+			dataType: 'json',
 			data: {restaurant: id},
 			success: function (data) {
 				$(that).text(data.count)
@@ -168,8 +171,40 @@ function toggleFavorite($dom) {
 	})
 }
 
+function toggleConfirm($dom) {
+	$($dom).on('click', function(){
+		var id = $(this).parent().parent()[0].id
+		var that = this
+		$.ajax({
+			url: pathname + '/toggle_confirm',
+			type: 'PUT',
+			dataType: 'json',
+			data: {restaurant: id},
+			success: function(data){
+				$('.confirmed').each(function () {
+					$(this).removeClass('confirmed').addClass('confirm')
+				})
+				$(that).removeClass('confirm').addClass('confirmed')
+				console.log(data)
+			}
+		})
+		.done(function() {
+			console.log("success");
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+		
+	})
+}
+
 toggleFavorite($('.favorite'))
 toggleFavorite($('.favorited'))
+toggleConfirm($('.confirm'))
+toggleConfirm($('.confirmed'))
 
 $('.fs').on('click', function(event){
 

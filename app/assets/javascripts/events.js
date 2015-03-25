@@ -20,6 +20,7 @@ $(function(){
     });
 
     $('.rsvps').on('click', function (event) {
+        var that = this
         var id = $(this).parent().parent()[0].id
         var rsvpTag = this.children[0]
         var pathname = window.location.pathname

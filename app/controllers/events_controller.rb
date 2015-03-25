@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   include EventsHelper
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :chatlog, :add_favorite, :logchat, :add_restaurant]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :chatlog, :toggle_confirm, :logchat, :add_restaurant]
 
   # GET /events
   # GET /events.json
@@ -68,6 +68,17 @@ class EventsController < ApplicationController
     favorite_count = restaurant.favorites.count
     respond_to do |format|
       format.json { render json: {count: favorite_count} }
+    end
+
+  end
+
+  def toggle_confirm
+    restaurant = Restaurant.find(params[:restaurant])
+    params[:event] = {location: restaurant.address, finalized: true}
+    @event.update(event_params)
+
+    respond_to do |format|
+      format.json { render json: @event }
     end
 
   end

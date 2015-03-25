@@ -11,6 +11,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  finalized  :boolean          default("false")
+#  latitude   :float
+#  longitude  :float
 #
 
 require 'test_helper'

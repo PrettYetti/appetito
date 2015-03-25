@@ -36,6 +36,10 @@ $(function(){
             dataType: 'json',
             data: {invite: {rsvp: rsvp}},
             success: function(data) {
+                $('.rsvps').each( function () {
+                    $(this).removeClass('btn-inverse')
+                })
+                $(that).addClass('btn-inverse')
                 console.log(data)
                 //class change goes here.
             }

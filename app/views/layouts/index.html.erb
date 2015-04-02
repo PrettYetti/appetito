@@ -45,7 +45,21 @@
         <div class="row">
             <div class="col-lg-offset-4 col-lg-4">
                 <%= button_to "Sign Up", new_user_path, {:class => "btn btn-default btn-lg btn-block btn-accent margin-10", :method => :get}  %>
-                <%= button_to "Guest Log In", new_user_path, {:class => "btn btn-default btn-lg btn-block btn-accent margin-10", :method => :get}  %>
+
+                <%= form_tag login_users_path do %>
+                 <div class="form-group">
+                  <%= hidden_field_tag :email, params[:email], value: "guest@email.com" %>
+                </div>
+                 <div class="form-group">
+                  <%= hidden_field_tag(:password, "", value: "password") %>
+                </div>
+                <%= button_tag "Guest Log In", class: "btn btn-default btn-lg btn-block btn-accent margin-10" %>
+                <% end %>
+
+               
+
+
+
             </div>
         </div>
     </section>

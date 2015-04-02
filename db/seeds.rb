@@ -32,6 +32,15 @@ eunice = User.create(
 	}
 )
 
+guest = User.create(
+	{
+		name: "Guest",
+		email: "guest@email.com",
+		password: "password",
+		privacy: true
+	}
+) 
+
 20.times { 
 	User.create({
 		name: Faker::Name.name,
@@ -64,11 +73,17 @@ george.friend_ids=[2,3]
 remina.friend_ids=[1,4]
 ciara.friend_ids=[1,4]
 eunice.friend_ids=[2,3]
+guest.friend_ids=[2,3,1]
 
 
 [
 	{
 		user_id: 1,
+		sender_id: 2,
+		event_id: 2
+	},
+	{
+		user_id: 5,
 		sender_id: 2,
 		event_id: 2
 	},
@@ -104,6 +119,10 @@ eunice.friend_ids=[2,3]
 		sender_id: 2
 	},
 	{
+		user_id: 5,
+		sender_id: 4
+	},
+	{
 		user_id: 4,
 		sender_id: 1
 	}
@@ -117,8 +136,20 @@ eunice.friend_ids=[2,3]
 		location: "3 East 14th street, New York, NY 10003"
 	},
 	{
+		user_id: 5,
+		event_id: 1,
+		rsvp: "Attending",
+		location: "3 East 14th street, New York, NY 10003"
+	},
+	{
 		user_id: 2,
 		event_id: 1,
+		rsvp: "Maybe",
+		location: "893 BROADWAY, FLATIRON DISTRICT, NEW YORK, NY 10003"
+	},
+	{
+		user_id: 5,
+		event_id: 2,
 		rsvp: "Maybe",
 		location: "893 BROADWAY, FLATIRON DISTRICT, NEW YORK, NY 10003"
 	},
@@ -153,6 +184,12 @@ eunice.friend_ids=[2,3]
 		location: "77-08 Woodside Ave, Queens, NY 11373"
 	},
 	{
+		user_id: 5,
+		event_id: 3,
+		rsvp: "Not Attending",
+		location: "77-08 Woodside Ave, Queens, NY 11373"
+	},
+	{
 		user_id: 3,
 		event_id: 3,
 		rsvp: "Attending",
@@ -172,6 +209,12 @@ eunice.friend_ids=[2,3]
 	},
 	{
 		user_id: 3,
+		event_id: 4,
+		rsvp: "Maybe",
+		location: "1 Front St, New York, NY 11201"
+	},
+	{
+		user_id: 5,
 		event_id: 4,
 		rsvp: "Maybe",
 		location: "1 Front St, New York, NY 11201"

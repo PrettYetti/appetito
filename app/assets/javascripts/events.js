@@ -6,7 +6,7 @@ $(function(){
             google.maps.event.trigger(map, "resize");
             bounds = new google.maps.LatLngBounds();
             markers.forEach(function (marker) {
-                var myLatlng = new google.maps.LatLng(marker.Kf.Ca.k, marker.Kf.Ca.B);
+                var myLatlng = new google.maps.LatLng(marker.Kf.Aa.k, marker.Kf.Aa.D);
                 bounds.extend(myLatlng);
             })
             handler.map.serviceObject.fitBounds(calibrate(bounds));

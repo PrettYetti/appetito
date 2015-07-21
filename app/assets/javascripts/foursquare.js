@@ -259,18 +259,6 @@ toggleFavorite($('.favorited'))
 toggleConfirm($('.confirm'))
 toggleConfirm($('.confirmed'))
 
-// $('.fs').on('click', function(event){
-
-//   event.preventDefault();
-//   var searchDegree = 1000
-  // var lat = center.k
-  // var lng = center.B
-//   console.log(lat,lng)
-
-
-//   //fix this to grab lat,lng once map is generated
-//   getResults( lat, lng );
-// });
 
 $('#search').on('submit', function (event) {
 	event.preventDefault();
@@ -278,15 +266,11 @@ $('#search').on('submit', function (event) {
 	var price = $(this).find('input[name="price"]:checked').val()
 	var reservation = $(this).find('input[name="reservation"]:checked').val()
 	var lat = center.k
-	var lng = center.B
+	var lng = center.D
 
 	getResults(lat, lng, cuisine, price, reservation)
 })
 
-// $('#search').on('submit', function (event) {
-// 	event.preventDefault();
-// 	debugger
-// })
 
 
 searchForFriends();

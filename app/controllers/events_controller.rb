@@ -93,12 +93,6 @@ class EventsController < ApplicationController
 
   end
 
-  # def yelp
-  #   binding.pry
-  #   coordinates = params[:coordinates]
-  #   api(coordinates)
-  # end
-
   def foursquare
     baseURL = "https://api.foursquare.com/v2/venues/explore"
     clientID = "?client_id=CSXMPXYF20VXWMX4Z0BTKHVT5VGRKA1E3ZAPKCE04ELOMX3W"

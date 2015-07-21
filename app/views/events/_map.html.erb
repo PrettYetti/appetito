@@ -41,6 +41,7 @@
 	    markers = [];
 	    searchMarkers = [];
 	    bounds = new google.maps.LatLngBounds();
+	    console.log(bounds, "these are the bounds")
 	    maxlat = maxlng = minlat = minlng = undefined
 	    json.forEach(function (obj) {
 	    	
@@ -72,10 +73,10 @@
 
 	function calibrate(bounds) {
 		var calibration =0.0007
-		bounds.Ea.k -= calibration
-		bounds.Ea.j += calibration
-		bounds.va.j -= calibration
-		bounds.va.k += calibration
+		bounds.Ba.k -= calibration
+		bounds.Ba.j += calibration
+		bounds.ua.j -= calibration
+		bounds.ua.k += calibration
 		return bounds
 	}
 

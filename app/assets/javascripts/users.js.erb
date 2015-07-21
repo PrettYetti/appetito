@@ -1,5 +1,4 @@
-
-
+//friend searching functionality on the user's profile page
 var searchForFriends = function () {
   $('.search').find($('input')).on('keyup', function (event) {
     var input = $(this).val()
@@ -10,9 +9,6 @@ var searchForFriends = function () {
         dataType: 'json',
         data: {search: input},
         success: function (data) {
-          // loadArray.forEach( function (user) {
-          //   data.splice(data.indexOf(user), 1)
-          // })
           console.log(data)
 
           data.users.forEach(function (user) {
@@ -27,8 +23,7 @@ var searchForFriends = function () {
             })
           })
 
-          console.log(data)
-          // debugger
+          // console.log(data)
           $("#newfriend-list").children().remove();
           data.users.forEach( function( user ) {
             var $addFriend = $('<li>').text(user["name"]);

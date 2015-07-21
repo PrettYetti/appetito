@@ -23,86 +23,36 @@ Each person has a privacy setting. Depending on this setting you can either add 
 
 Search results appear instantly. And you can add or request friends in the modal.
 
-```javascript
-//friend searching functionality on the user's profile page
-var searchForFriends = function () {
-  $('.search').find($('input')).on('keyup', function (event) {
-    var input = $(this).val()
-    if ( input.length > 0) {
-      $.ajax({
-        url: '/users',
-        type: 'GET',
-        dataType: 'json',
-        data: {search: input},
-        success: function (data) {
-          console.log(data)
+### Notifications
 
-          data.users.forEach(function (user) {
-            user.type = "person";
-            if (data.current_user_id == user.id) {
-              data.users.splice(data.users.indexOf(user), 1)
-            }
-            data.friends.forEach(function (friend) {
-              if (friend.id == user.id) {
-                user.type = "friend";
-              }
-            })
-          })
+The notification system uses single table inheritance to separate friend requests, event invites, event updates, and invite rsvps into seperate models that are recorded in the same table.
 
-          // console.log(data)
-          $("#newfriend-list").children().remove();
-          data.users.forEach( function( user ) {
-            var $addFriend = $('<li>').text(user["name"]);
-            if (user.type === "friend") {
-              var $addFriendButton = $('<button>', {class: "btn btn-default btn-sm"}).text("Friends");
-            } else {  
-              var $addFriendButton = $('<button>', {action: user.id+'/add_friend', class: "btn btn-default btn-sm", method: 'POST'}).text("Add Friend");
-              friendRequest($addFriendButton);
-            }
-            $("#newfriend-list").append(($addFriend.append($addFriendButton)))
-          });
-        } 
-      })
-      .done(function() {
-        console.log("success");
-      })
-      .fail(function() {
-        console.log("error");
-      })
-      .always(function() {
-        console.log("complete");
-      });
-    }
-  });  
-};
+```ruby
+class Notification < ActiveRecord::Base
+	attr_accessor :message
+  belongs_to :user
+  belongs_to :event
 
-function friendRequest($dom) {
-  var that = $dom
-  $dom.on('click', function (e) {
-    e.preventDefault();
-    var action = that.attr('action')
-    $.ajax({
-      url: action,
-      type: 'POST',
-      dataType: 'json',
-      success: function (data) {
-        if (data.privacy) {
-          that.text("Request Sent")
-        } else { that.text("Friend")}
-      }
-    })
-    .done(function() {
-      console.log("success");
-    })
-    .fail(function() {
-      console.log("error");
-    })
-    .always(function() {
-      console.log("complete");
-    })
-  });
-};
+  after_update :check_accept_status
 
-
+  scope :friend_requests, -> { where(type: 'FriendRequest')}
+  scope :event_invites, -> { where(type: 'EventInvite')}
+  scope :event_updates, -> { where(type: 'EventUpdates')}
+  scope :invite_rsvps, -> { where(type: 'InviteRSVPs')}
+end
 
 ```
+
+### Events
+
+The events are the main focus of the app. Each user can see the events they are invited to and set their rsvp.
+
+Once invited they set their location and can immediately start searching for restaurants.
+
+Each invitee location that is set creates a marker in google maps and the bounds.
+
+Then a radius is created based on distance of the min/max of the map's longitude and latitude. The search results are bound to that radius relative to the center of the map.
+
+The app uses the Foursquare API where the search result is dictated by type of cuisine, price, and reservation status.As the user you can add the search results to a list of restaurants where other users can vote on a location.
+
+Each event also has a built in chat client using websocket.io and node.js which is deployed seperately.

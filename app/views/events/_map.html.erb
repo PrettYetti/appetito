@@ -41,6 +41,7 @@
 	    markers = [];
 	    searchMarkers = [];
 	    bounds = new google.maps.LatLngBounds();
+	    console.log(bounds, "these are the bounds")
 	    maxlat = maxlng = minlat = minlng = undefined
 	    json.forEach(function (obj) {
 	    	
@@ -54,7 +55,6 @@
 	    window.center = map.getCenter();
 	    console.log(radius)
 
-	    // window.radius = measure(bounds.Ea.k, bounds.va.k, bounds.Ea.j, bounds.va.j)
 	    //put ajax call here and access yelp API in ruby to hide secret
 	  }
 	);
@@ -72,10 +72,10 @@
 
 	function calibrate(bounds) {
 		var calibration =0.0007
-		bounds.Ea.k -= calibration
-		bounds.Ea.j += calibration
-		bounds.va.j -= calibration
-		bounds.va.k += calibration
+		bounds.Ba.k -= calibration
+		bounds.Ba.j += calibration
+		bounds.ua.j -= calibration
+		bounds.ua.k += calibration
 		return bounds
 	}
 

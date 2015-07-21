@@ -156,19 +156,6 @@ function getResults(lat, lng, cuis, prc, reservation){
 							$('#favorite-wrapper').append($newWrapper)
 							toggleFavorite($voteFavorite)
 
-							// var $name = $('<li></li>').append($('<h4>').text(data.restaurant.name));
-							// var $cuisine = $('<li></li>').text(data.restaurant.cuisine);
-							// var $price = $('<li></li>').text(Array(data.restaurant.price+1).join("$"));
-							// var $rating = $('<li></li>').text(data.restaurant.rating);
-							// var $confirmFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-ok favorite confirm cursor"></span>')
-							// var $voteFavorite = $('<span aria-hidden="true" class="glyphicon glyphicon-heart favorite cursor"></span>')
-
-							// var $newFavoriteUl = $('<ul>', {id: data.restaurant.id}).append($name, $cuisine, $price, $rating, $confirmFavorite, $voteFavorite)
-							// var $newFavoriteLi = $('<li>', {id: data.restaurant.id, class: "col-xs-6 col-sm-3"}).append($newFavoriteUl)
-							// $('#favorite-wrapper').append($newFavoriteLi)
-							// toggleFavorite($voteFavorite)
-							// toggleConfirm($confirmFavorite)
-							// console.log('trying to add stuff')
 						}
 					}
 				})
@@ -259,18 +246,6 @@ toggleFavorite($('.favorited'))
 toggleConfirm($('.confirm'))
 toggleConfirm($('.confirmed'))
 
-// $('.fs').on('click', function(event){
-
-//   event.preventDefault();
-//   var searchDegree = 1000
-  // var lat = center.k
-  // var lng = center.B
-//   console.log(lat,lng)
-
-
-//   //fix this to grab lat,lng once map is generated
-//   getResults( lat, lng );
-// });
 
 $('#search').on('submit', function (event) {
 	event.preventDefault();
@@ -278,15 +253,11 @@ $('#search').on('submit', function (event) {
 	var price = $(this).find('input[name="price"]:checked').val()
 	var reservation = $(this).find('input[name="reservation"]:checked').val()
 	var lat = center.k
-	var lng = center.B
+	var lng = center.D
 
 	getResults(lat, lng, cuisine, price, reservation)
 })
 
-// $('#search').on('submit', function (event) {
-// 	event.preventDefault();
-// 	debugger
-// })
 
 
 searchForFriends();
